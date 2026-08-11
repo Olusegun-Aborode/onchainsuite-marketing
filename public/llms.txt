@@ -1,0 +1,29 @@
+# OnchainSuite
+
+> The behavior-triggered retention platform for Web3. OnchainSuite turns what wallets do on-chain into automated, multi-channel messaging. Think "Klaviyo for on-chain behavior."
+
+## What it does
+- Reads public on-chain activity across Ethereum, Solana, Base, and Polygon and normalizes it into clean, queryable events.
+- Lets protocol and dApp growth teams build automations that fire the moment a wallet acts (deposits, unstakes, goes quiet, etc.).
+- Reaches users through in-app push (wallet address only, no email required) and email (for wallets that opt in via a privacy-preserving identity link). Telegram and Discord are on the roadmap. No SMS.
+- Ships an SDK and API so teams can be live in minutes.
+
+## Who it's for
+Protocol, dApp, and Web3 growth/marketing teams that can see on-chain behavior but have no way to act on it with today's email tools.
+
+## Pricing
+Usage-based, no rigid tiers and no free plan: a small base fee plus two drivers — tracked wallets and email subscribers (10 sends bundled each). Reference points: ~$45/mo (small), ~$140/mo (growing), ~$660/mo (mid), ~$3,300/mo (large); larger is custom. Founding rates apply during early access.
+
+## Key differentiators vs traditional tools (Klaviyo, Customer.io, Braze)
+- Triggers on on-chain behavior (the wallet action itself), not just email opens/clicks.
+- Reaches wallets that have no email, via in-app push.
+- Unifies on-chain and off-chain behavior in one retention loop.
+
+## Links
+- Website: https://www.onchainsuite.com
+- Pricing: https://www.onchainsuite.com/pricing
+- Get early access: https://www.onchainsuite.com/early-access
+- Legal: https://www.onchainsuite.com/legal
+
+## Company
+OnchainSuite Ltd, a company registered in England and Wales. Contact: info@onchainsuite.com
