@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Score how much of your wallet base you can actually message across verified email, wallet inbox, push, and socials, weighted by durability. Free, no signup.",
   alternates: { canonical: "/tools/wallet-reachability-score" },
-  openGraph: { title: "Wallet reachability score · Onchain Suite", description: "What share of your holders you can actually reach today.", url: "/tools/wallet-reachability-score", type: "website" },
+  openGraph: { title: "Wallet reachability score · OnchainSuite", description: "What share of your holders you can actually reach today.", url: "/tools/wallet-reachability-score", type: "website" },
 };
 
 const themeVars = { "--acc": ACCENT, "--acc-h": ACCENT_HOVER, "--ok": OK, minHeight: "100vh", background: "#FBFBFC", overflowX: "clip", color: "#010F31" } as CSSProperties;

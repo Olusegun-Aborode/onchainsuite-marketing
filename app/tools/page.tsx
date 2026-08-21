@@ -89,7 +89,7 @@ export default function ToolsHub() {
         <div className="ocs-why-grid" style={{ borderTop: "1px solid #DEE0E3", paddingTop: 36 }}>
           {[
             { h: "Why we publish the maths", p: "A calculator that hides its formula is a lead form. Every input, weight and benchmark on these pages is stated on the page so you can argue with it." },
-            { h: "Where the benchmarks come from", p: "Aggregated, anonymised medians across protocols using Onchain Suite, refreshed quarterly. Directional guidance, never a projection of your results." },
+            { h: "Where the benchmarks come from", p: "Aggregated, anonymised medians across protocols using OnchainSuite, refreshed quarterly. Directional guidance, never a projection of your results." },
             { h: "Nothing leaves your browser", p: "Inputs are calculated locally and never sent to us. Use real numbers." },
           ].map((c) => (
             <div key={c.h}>

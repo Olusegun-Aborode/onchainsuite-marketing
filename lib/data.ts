@@ -14,14 +14,14 @@ export const DOCS_URL = "https://onchainsuite-9506e41f.mintlify.app";
 export const APP_URL = "https://app.onchainsuite.com";
 export const CONTACT_EMAIL = "info@onchainsuite.com";
 
-// Company + legal facts. Items in [brackets] are PLACEHOLDERS to complete before
-// the legal pages are published, and the whole set should be reviewed by a UK
-// data-protection solicitor. Centralised here so they are filled in exactly once.
+// Company + legal facts. Verified against Companies House (company 17370357).
+// The ICO reference is still a placeholder (separate registration to complete).
 export const COMPANY = {
   legalName: "OnchainSuite Ltd",
   shortName: "OnchainSuite",
-  number: "[Company No. — Companies House]",
-  office: "[Registered office address, United Kingdom]",
+  number: "17370357",
+  office: "31 Nash Square, Birmingham, United Kingdom, B42 2EX",
+  incorporated: "30 July 2026",
   ico: "[ICO registration reference]",
   jurisdiction: "England and Wales",
   privacyEmail: "privacy@onchainsuite.com",
@@ -31,7 +31,23 @@ export const COMPANY = {
 } as const;
 
 // Single source of truth for the "last updated" stamp on every policy page.
-export const LEGAL_UPDATED = "30 June 2026";
+export const LEGAL_UPDATED = "11 August 2026";
+
+// Credibility layer. `trusted` = teams working with OnchainSuite; `builtOn` =
+// infrastructure we deliver on. Swap the text wordmarks for real logo SVGs when
+// you have them (drop files in /public and render <img> instead of the name).
+export const PARTNERS = {
+  trusted: [
+    { name: "Yaugahaus", href: "https://www.yaugahaus.com" },
+    { name: "Vault777", href: "https://app.vault777.com" },
+    { name: "Surgence", href: "https://www.surgence.io" },
+    { name: "Datum Labs", href: "https://www.datumlab.xyz" },
+  ],
+  builtOn: [
+    { name: "AWS SES", href: "https://aws.amazon.com/ses/" },
+    { name: "Azure Communication Services", href: "https://azure.microsoft.com/en-us/products/communication-services" },
+  ],
+};
 
 export const DOCS = {
   home: DOCS_URL,

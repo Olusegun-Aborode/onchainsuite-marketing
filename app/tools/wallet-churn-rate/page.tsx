@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Churn measured on wallets, not accounts. Enter one period and see what it compounds to over a year, the average wallet lifespan, and lifetime value. Free, no signup.",
   alternates: { canonical: "/tools/wallet-churn-rate" },
-  openGraph: { title: "Wallet churn rate calculator · Onchain Suite", description: "See what a period's wallet churn compounds to over a year.", url: "/tools/wallet-churn-rate", type: "website" },
+  openGraph: { title: "Wallet churn rate calculator · OnchainSuite", description: "See what a period's wallet churn compounds to over a year.", url: "/tools/wallet-churn-rate", type: "website" },
 };
 
 const themeVars = { "--acc": ACCENT, "--acc-h": ACCENT_HOVER, "--ok": OK, minHeight: "100vh", background: "#FBFBFC", overflowX: "clip", color: "#010F31" } as CSSProperties;

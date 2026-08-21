@@ -515,6 +515,9 @@ export default function SiteHeader() {
           <Link href="/pricing" className="ocs-navlink" onClick={closeAll}>
             Pricing
           </Link>
+          <Link href="/team" className="ocs-navlink" onClick={closeAll}>
+            Team
+          </Link>
         </div>
 
         {/* right side */}
@@ -592,6 +595,9 @@ export default function SiteHeader() {
           <div style={{ height: 1, background: "#DCE7F5", margin: "8px 12px" }} />
           <Link href="/pricing" className="ocs-menu-item" onClick={closeAll} style={{ fontSize: 15, fontWeight: 600, color: "#1A1A17" }}>
             Pricing
+          </Link>
+          <Link href="/team" className="ocs-menu-item" onClick={closeAll} style={{ fontSize: 15, fontWeight: 600, color: "#1A1A17" }}>
+            Team
           </Link>
         </div>
       )}

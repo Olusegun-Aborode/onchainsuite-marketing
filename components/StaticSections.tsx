@@ -9,12 +9,14 @@ import {
   OK,
   PRICING_PROFILES,
   FOOTER_LEGAL,
+  COMPANY,
   TESTIMONIALS,
 } from "@/lib/data";
 import { COMPETITORS } from "@/lib/compare";
 import Reveal from "./Reveal";
 import SdkCard from "./SdkCard";
 import BrandMark from "./BrandMark";
+import OnchainLogo from "./BrandIcon";
 import FooterAsk from "./FooterAsk";
 import LearnMore from "./LearnMore";
 
@@ -657,7 +659,7 @@ export function SiteFooter() {
         <div className="ocs-foot-ask" style={{ padding: "56px 0 44px", borderBottom: "1px solid #DEE0E3", alignItems: "start" }}>
           <div>
             <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 12, letterSpacing: ".08em", textTransform: "uppercase", color: "#767B83" }}>Ask the docs</div>
-            <h3 style={{ margin: "14px 0 10px", fontSize: 32, lineHeight: 1.1, letterSpacing: "-1px", fontWeight: 600, color: "#010F31" }}>Ask anything about Onchain Suite</h3>
+            <h3 style={{ margin: "14px 0 10px", fontSize: 32, lineHeight: 1.1, letterSpacing: "-1px", fontWeight: 600, color: "#010F31" }}>Ask anything about OnchainSuite</h3>
             <p style={{ margin: 0, maxWidth: "44ch", fontSize: 15, lineHeight: 1.6, color: "#585D65" }}>Answers drawn from our docs, changelog and comparison pages. Cited, never invented.</p>
           </div>
           <FooterAsk />
@@ -698,8 +700,9 @@ export function SiteFooter() {
         {/* Legal row */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, paddingTop: 26, flexWrap: "wrap" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
-            <a href="/#top" style={{ display: "flex", alignItems: "center" }}>
-              <img src="/onchain-suite-horizontal-dark.svg" alt="Onchain Suite" style={{ height: 24, width: "auto", display: "block" }} />
+            <a href="/#top" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <OnchainLogo size={22} gradientId="ocsLogoFooter" />
+              <span style={{ fontWeight: 700, fontSize: 15.5, color: "#010F31" }}>OnchainSuite</span>
             </a>
             {FOOTER_LEGAL.map((l) => (
               <a key={l.label} href={l.href} className="ocs-foot-link" style={{ fontSize: 13, color: "#767B83" }}>{l.label}</a>
@@ -712,8 +715,8 @@ export function SiteFooter() {
         </div>
 
         <p style={{ margin: "22px 0 0", maxWidth: "88ch", fontSize: 13, lineHeight: 1.6, color: "#767B83" }}>
-          Onchain Suite is a product of Onchain Suite Labs Ltd, company number 14892307, registered at 20 Farringdon
-          Street, London EC4A 4AB. Onchain Suite reads public blockchain data; it never holds custody of funds or
+          {COMPANY.legalName} is registered in {COMPANY.jurisdiction}, company number {COMPANY.number}, registered
+          office {COMPANY.office}. OnchainSuite reads public blockchain data; it never holds custody of funds or
           private keys.
         </p>
       </div>
@@ -721,7 +724,7 @@ export function SiteFooter() {
       {/* Oversized cropped wordmark floor */}
       <div style={{ overflow: "hidden", marginTop: 34, lineHeight: 0.78 }} aria-hidden="true">
         <div style={{ fontSize: "15.6vw", fontWeight: 600, letterSpacing: "-0.055em", color: "#E4E7EA", whiteSpace: "nowrap", textAlign: "center", marginBottom: "-0.26em", userSelect: "none" }}>
-          Onchain Suite
+          OnchainSuite
         </div>
       </div>
 

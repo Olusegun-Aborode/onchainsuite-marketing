@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Compare blended and per-channel cost of acquiring a transacting wallet, activation rate, and LTV-to-CPA payback across your channels. Free, no signup.",
   alternates: { canonical: "/tools/cost-per-acquisition" },
-  openGraph: { title: "Cost per acquisition calculator · Onchain Suite", description: "Blended and per-channel cost of one acquired wallet.", url: "/tools/cost-per-acquisition", type: "website" },
+  openGraph: { title: "Cost per acquisition calculator · OnchainSuite", description: "Blended and per-channel cost of one acquired wallet.", url: "/tools/cost-per-acquisition", type: "website" },
 };
 
 const themeVars = { "--acc": ACCENT, "--acc-h": ACCENT_HOVER, "--ok": OK, minHeight: "100vh", background: "#FBFBFC", overflowX: "clip", color: "#010F31" } as CSSProperties;

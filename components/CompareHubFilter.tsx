@@ -47,7 +47,7 @@ export default function CompareHubFilter() {
                 <span style={{ fontFamily: mono, fontSize: 11, letterSpacing: ".08em", textTransform: "uppercase", color: "#767B83", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{c.category}</span>
                 <span style={{ flex: "none", fontSize: 11, color: "#585D65", background: "#F5F6F7", border: "1px solid #DEE0E3", borderRadius: 2, padding: "3px 8px", whiteSpace: "nowrap" }}>{c.status}</span>
               </div>
-              <h3 style={{ margin: "16px 0 8px", fontSize: 22, fontWeight: 600, letterSpacing: "-0.3px", color: "#010F31" }}>Onchain Suite vs {c.name}</h3>
+              <h3 style={{ margin: "16px 0 8px", fontSize: 22, fontWeight: 600, letterSpacing: "-0.3px", color: "#010F31" }}>OnchainSuite vs {c.name}</h3>
               <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: "#585D65" }}>{c.blurb}</p>
             </div>
             <div style={{ marginTop: 18, display: "flex", alignItems: "center", gap: 6, fontSize: 13.5, fontWeight: 600, color: "#1727E0" }}>Read the comparison {arrow}</div>

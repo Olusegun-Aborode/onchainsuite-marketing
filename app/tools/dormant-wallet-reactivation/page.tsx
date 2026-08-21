@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Put a number on the revenue recoverable from wallets that went quiet. Reachable share, reactivation rate, revenue per wallet, months retained, campaign cost. Free, no signup.",
   alternates: { canonical: "/tools/dormant-wallet-reactivation" },
-  openGraph: { title: "Dormant wallet reactivation calculator · Onchain Suite", description: "Revenue recoverable from wallets that stopped showing up.", url: "/tools/dormant-wallet-reactivation", type: "website" },
+  openGraph: { title: "Dormant wallet reactivation calculator · OnchainSuite", description: "Revenue recoverable from wallets that stopped showing up.", url: "/tools/dormant-wallet-reactivation", type: "website" },
 };
 
 const themeVars = { "--acc": ACCENT, "--acc-h": ACCENT_HOVER, "--ok": OK, minHeight: "100vh", background: "#FBFBFC", overflowX: "clip", color: "#010F31" } as CSSProperties;
