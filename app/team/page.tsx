@@ -2,6 +2,7 @@ import { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { ACCENT, ACCENT_HOVER, OK, PARTNERS } from "@/lib/data";
 import SiteHeader from "@/components/SiteHeader";
+import TrustedBy from "@/components/TrustedBy";
 import { SiteFooter } from "@/components/StaticSections";
 
 export const metadata: Metadata = {
@@ -69,12 +70,7 @@ export default function TeamPage() {
 
       {/* Credibility */}
       <section style={{ ...wrap, padding: "56px 40px 0" }} data-pad>
-        <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: ".1em", textTransform: "uppercase", color: "#767B83", marginBottom: 20 }}>Trusted by teams building on-chain</div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "20px 40px", alignItems: "center" }}>
-          {PARTNERS.trusted.map((p) => (
-            <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" className="ocs-wordmark" style={{ fontSize: 20, fontWeight: 600, letterSpacing: "-0.3px", color: "#767B83", textDecoration: "none" }}>{p.name}</a>
-          ))}
-        </div>
+        <TrustedBy align="left" size={52} />
         <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: ".1em", textTransform: "uppercase", color: "#767B83", margin: "40px 0 18px" }}>Built on</div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "16px 32px", alignItems: "center" }}>
           {PARTNERS.builtOn.map((p) => (

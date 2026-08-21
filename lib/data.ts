@@ -38,10 +38,11 @@ export const LEGAL_UPDATED = "11 August 2026";
 // you have them (drop files in /public and render <img> instead of the name).
 export const PARTNERS = {
   trusted: [
-    { name: "Yaugahaus", href: "https://www.yaugahaus.com" },
-    { name: "Vault777", href: "https://app.vault777.com" },
-    { name: "Surgence", href: "https://www.surgence.io" },
-    { name: "Datum Labs", href: "https://www.datumlab.xyz" },
+    { name: "Yaugahaus", href: "https://www.yaugahaus.com", logo: "/logos/yauga.jpg" },
+    { name: "Vault777", href: "https://app.vault777.com", logo: "/logos/vault777.jpg" },
+    { name: "W3GM", href: "", logo: "/logos/w3gm.jpg" },
+    { name: "Surgence", href: "https://www.surgence.io", logo: "/logos/surgence.jpg" },
+    { name: "Datum Labs", href: "https://www.datumlab.xyz", logo: "/logos/datum-labs.jpg" },
   ],
   builtOn: [
     { name: "AWS SES", href: "https://aws.amazon.com/ses/" },
