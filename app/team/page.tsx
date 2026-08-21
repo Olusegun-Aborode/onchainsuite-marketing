@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 import type { Metadata } from "next";
-import { ACCENT, ACCENT_HOVER, OK, PARTNERS } from "@/lib/data";
+import { ACCENT, ACCENT_HOVER, OK } from "@/lib/data";
 import SiteHeader from "@/components/SiteHeader";
 import TrustedBy from "@/components/TrustedBy";
 import { SiteFooter } from "@/components/StaticSections";
@@ -57,26 +57,9 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Advisors */}
-      <section style={{ ...wrap, padding: "56px 40px 0" }} data-pad>
-        <div style={{ background: "#F5F6F7", border: "1px solid #DEE0E3", borderRadius: 6, padding: 36 }}>
-          <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: ".1em", textTransform: "uppercase", color: "#767B83", marginBottom: 12 }}>Advisors</div>
-          <h2 style={{ margin: "0 0 10px", fontSize: 26, letterSpacing: "-0.5px", fontWeight: 600, color: "#010F31" }}>We are assembling our advisory board.</h2>
-          <p style={{ margin: 0, maxWidth: "60ch", fontSize: 15.5, lineHeight: 1.65, color: "#585D65" }}>We are bringing on advisors across DeFi, growth and security to sharpen the product and open doors. Announcements soon. If you have built or scaled a Web3 protocol and want to help,{" "}
-            <a href="mailto:info@onchainsuite.com" style={{ color: "#1727E0", fontWeight: 600 }}>get in touch</a>.
-          </p>
-        </div>
-      </section>
-
       {/* Credibility */}
       <section style={{ ...wrap, padding: "56px 40px 0" }} data-pad>
         <TrustedBy align="left" size={52} />
-        <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: ".1em", textTransform: "uppercase", color: "#767B83", margin: "40px 0 18px" }}>Built on</div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "16px 32px", alignItems: "center" }}>
-          {PARTNERS.builtOn.map((p) => (
-            <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" className="ocs-wordmark" style={{ fontSize: 16, fontWeight: 500, color: "#767B83", textDecoration: "none" }}>{p.name}</a>
-          ))}
-        </div>
       </section>
 
       {/* Company facts */}
