@@ -23,7 +23,7 @@ export default function TrustedBy({
           letterSpacing: ".12em",
           textTransform: "uppercase",
           color: "#8A93A6",
-          marginBottom: 20,
+          marginBottom: 28,
         }}
       >
         {label}
@@ -32,7 +32,7 @@ export default function TrustedBy({
         style={{
           display: "flex",
           flexWrap: "wrap",
-          gap: "18px 22px",
+          gap: "22px 40px",
           justifyContent: align === "center" ? "center" : "flex-start",
           alignItems: "center",
         }}

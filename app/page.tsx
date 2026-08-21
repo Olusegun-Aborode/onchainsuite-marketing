@@ -33,7 +33,7 @@ export default function Home() {
     <div style={themeVars}>
       <SiteHeader />
       <Hero />
-      <section style={{ maxWidth: 1180, margin: "0 auto", padding: "16px 32px 24px" }} data-pad>
+      <section style={{ maxWidth: 1180, margin: "0 auto", padding: "72px 32px 64px" }} data-pad>
         <TrustedBy align="center" label="Trusted by" />
       </section>
       <Problem />
