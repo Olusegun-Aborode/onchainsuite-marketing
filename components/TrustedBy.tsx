@@ -37,38 +37,19 @@ export default function TrustedBy({
           alignItems: "center",
         }}
       >
-        {PARTNERS.trusted.map((p) => {
-          const tile = (
-            <>
-              <img
-                src={p.logo}
-                alt={`${p.name} logo`}
-                width={size}
-                height={size}
-                loading="lazy"
-                style={{ width: size, height: size, borderRadius: size * 0.24, display: "block", border: "1px solid rgba(1,15,49,.08)" }}
-              />
-              <span style={{ fontSize: 13.5, fontWeight: 500, color: "#585D65", letterSpacing: "-0.1px" }}>{p.name}</span>
-            </>
-          );
-          const inner = { display: "flex", alignItems: "center", gap: 10, textDecoration: "none" } as const;
-          return p.href ? (
-            <a
-              key={p.name}
-              href={p.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ocs-trust-item"
-              style={inner}
-            >
-              {tile}
-            </a>
-          ) : (
-            <span key={p.name} className="ocs-trust-item" style={inner}>
-              {tile}
-            </span>
-          );
-        })}
+        {PARTNERS.trusted.map((p) => (
+          <span key={p.name} className="ocs-trust-item" style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <img
+              src={p.logo}
+              alt={`${p.name} logo`}
+              width={size}
+              height={size}
+              loading="lazy"
+              style={{ width: size, height: size, borderRadius: size * 0.24, display: "block", border: "1px solid rgba(1,15,49,.08)" }}
+            />
+            <span style={{ fontSize: 13.5, fontWeight: 500, color: "#585D65", letterSpacing: "-0.1px" }}>{p.name}</span>
+          </span>
+        ))}
       </div>
       <style>{`
         .ocs-trust-item{transition:transform .15s ease,opacity .15s ease;opacity:.94}
