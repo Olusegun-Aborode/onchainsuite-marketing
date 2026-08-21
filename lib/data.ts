@@ -42,7 +42,6 @@ export const PARTNERS = {
     { name: "Vault777", href: "https://app.vault777.com", logo: "/logos/vault777.jpg" },
     { name: "W3GM", href: "", logo: "/logos/w3gm.jpg" },
     { name: "Surgence", href: "https://www.surgence.io", logo: "/logos/surgence.jpg" },
-    { name: "Datum Labs", href: "https://www.datumlab.xyz", logo: "/logos/datum-labs.jpg" },
   ],
   builtOn: [
     { name: "AWS SES", href: "https://aws.amazon.com/ses/" },
@@ -241,11 +240,11 @@ export const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: "How can you message a wallet with no personal data?",
-    a: "In-app push needs only the wallet address, so it reaches 100% of connected wallets through a drop-in SDK, no email or extra identifier required. Email is available when a wallet has linked an address privately through our zero-knowledge identity bridge.",
+    a: "In-app push needs only the wallet address, so it reaches connected wallets through a drop-in SDK, no email or extra identifier required. Email becomes available only when a wallet owner opts in and privately links an address, which stays under their control.",
   },
   {
     q: "How does identity resolution work?",
-    a: "Wallet-to-channel mapping is automatic. Where a wallet has opted to link a personal channel, it happens through our zero-knowledge privacy bridge, so you never stitch CSVs by hand and you never hold data a wallet hasn't chosen to share.",
+    a: "Wallet-to-channel mapping is automatic for in-app push. A personal channel like email is added only when the wallet owner opts in and privately links it, so you never stitch CSVs by hand and you never hold data a wallet hasn't chosen to share.",
   },
   {
     q: "Do you ever move funds or write to the chain?",
@@ -338,23 +337,25 @@ export const INTEGRATIONS = [
 
 export const CHANNELS = [
   { name: "In-app push", badge: "SHIPS FIRST", badgeColor: "#15803D", badgeBg: "#E8F6EE", accentIcon: true, desc: "Wallet address only. Reaches 100% of connected wallets via a drop-in SDK." },
-  { name: "Email", badge: "LIVE", badgeColor: "#15803D", badgeBg: "#E8F6EE", accentIcon: false, desc: "Live today, on wallets that have linked an address privately via ZK." },
+  { name: "Email", badge: "OPT-IN", badgeColor: "#15803D", badgeBg: "#E8F6EE", accentIcon: false, desc: "For wallets whose owners have opted in and privately linked an address." },
   { name: "Telegram", badge: "ROADMAP", badgeColor: "#9A6B12", badgeBg: "#FBF1DD", accentIcon: false, desc: "A bot that posts to the protocol's group, on the roadmap." },
   { name: "Discord", badge: "ROADMAP", badgeColor: "#9A6B12", badgeBg: "#FBF1DD", accentIcon: false, desc: "Channel posts and DMs to members, on the roadmap." },
 ];
 
 export const COMPARISON_ROWS = [
-  { cap: "Identity resolution", old: "Manual wallet-to-email mapping", neu: "Automatic, ZK-privacy bridge" },
+  { cap: "Identity resolution", old: "Manual wallet-to-email mapping", neu: "Automatic, privacy-first opt-in" },
   { cap: "On-chain analytics", old: "Dune queries + CSV export", neu: "Real-time normalised events" },
   { cap: "Activation", old: "Generic, no on-chain triggers", neu: "Behaviour-triggered, multi-channel" },
   { cap: "Data flow", old: "Manual CSV stitching", neu: "Unified real-time pipeline" },
   { cap: "Time to first campaign", old: "Hours to days", neu: "Minutes" },
 ];
 
-export const TESTIMONIALS = [
-  { quote: "OnchainSuite is the first tool that actually does something when a wallet goes quiet, instead of just charting it.", name: "Growth Lead", role: "DeFi protocol" },
-  { quote: "We forked a Play and shipped a win-back flow before lunch. The first-mile insight sold the whole team.", name: "Founder", role: "Liquid staking" },
-  { quote: "Finally a marketing stack that speaks wallets, not just emails. The MCP queries feel like cheating.", name: "Head of Growth", role: "NFT marketplace" },
+// Honest audience framing for a pre-launch product: who this is for and the
+// pain it removes, stated in our own voice. No fabricated customer quotes.
+export const AUDIENCES = [
+  { who: "Growth leads at DeFi protocols", pain: "You can watch a wallet go quiet but have no way to act on it. OnchainSuite turns that signal into a win-back flow that runs on its own." },
+  { who: "Founders of early protocols", pain: "Get the retention loop Web2 always had, without building identity, analytics, and messaging infrastructure yourself first." },
+  { who: "Heads of growth at consumer and NFT apps", pain: "Reach wallets by what they actually do on-chain, across chains, without stitching CSVs or mapping addresses by hand." },
 ];
 
 // Usage-based pricing model (from the business plan): a small base fee plus
@@ -397,7 +398,7 @@ export const INCLUDED_FEATURES: string[] = [
   "Behaviour-triggered automations and on-demand campaigns",
   "Intelligence: MCP plus a SQL engine over normalised on-chain data",
   "Protocol Normalisation across Ethereum, Solana, Base, and Polygon",
-  "Wallet-first identity with a zero-knowledge privacy bridge",
+  "Wallet-first identity with privacy-first, opt-in channel linking",
   "Sub-10-minute first-mile cohort report",
 ];
 
@@ -412,7 +413,7 @@ export const PRICING_FAQ: { q: string; a: string }[] = [
   },
   {
     q: "What is an email subscriber?",
-    a: "An emailable contact a wallet has linked privately through the zero-knowledge identity bridge. Each subscriber bundles 10 sends per month, so your sending capacity scales automatically with your list.",
+    a: "An emailable contact a wallet owner has opted in and privately linked. Each subscriber bundles 10 sends per month, so your sending capacity scales automatically with your list.",
   },
   {
     q: "Is there a free plan?",

@@ -10,7 +10,7 @@ import {
   PRICING_PROFILES,
   FOOTER_LEGAL,
   COMPANY,
-  TESTIMONIALS,
+  AUDIENCES,
 } from "@/lib/data";
 import { COMPETITORS } from "@/lib/compare";
 import Reveal from "./Reveal";
@@ -459,22 +459,13 @@ export function Testimonials() {
         </h2>
       </Reveal>
       <Reveal cards stagger style={{ marginTop: 32, display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, textAlign: "left" }}>
-        {TESTIMONIALS.map((t) => (
-          <div key={t.name} className="ocs-card-hover ocs-spotlight" style={{ border: "1px solid #DCE7F5", borderRadius: 18, background: "#fff", padding: 24, boxShadow: "0 1px 2px rgba(26,24,20,.04)" }}>
-            <p style={{ margin: 0, fontSize: 16, lineHeight: 1.55, color: "#1A1A17", textWrap: "pretty" }}>{t.quote}</p>
-            <div style={{ marginTop: 18, display: "flex", alignItems: "center", gap: 11 }}>
-              <span style={{ width: 34, height: 34, borderRadius: "50%", background: "#EAF1FB", border: "1px solid #DCE7F5", flex: "none" }} />
-              <div>
-                <div style={{ fontSize: 13.5, fontWeight: 700, color: "#1A1A17" }}>{t.name}</div>
-                <div style={{ fontSize: 12.5, color: "#8A93A6" }}>{t.role}</div>
-              </div>
-            </div>
+        {AUDIENCES.map((a) => (
+          <div key={a.who} className="ocs-card-hover ocs-spotlight" style={{ border: "1px solid #DCE7F5", borderRadius: 18, background: "#fff", padding: 24, boxShadow: "0 1px 2px rgba(26,24,20,.04)" }}>
+            <div style={{ fontSize: 15, fontWeight: 700, color: "#1A1A17", letterSpacing: "-.01em" }}>{a.who}</div>
+            <p style={{ margin: "10px 0 0", fontSize: 15, lineHeight: 1.6, color: "#3D4A63", textWrap: "pretty" }}>{a.pain}</p>
           </div>
         ))}
       </Reveal>
-      <p style={{ marginTop: 18, fontSize: 12, color: "#A6AFC0" }}>
-        Illustrative quotes · real customer stories at launch
-      </p>
     </section>
   );
 }

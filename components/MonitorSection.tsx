@@ -126,11 +126,11 @@ export default function MonitorSection() {
             }}
           >
             <span style={{ width: 7, height: 7, borderRadius: "50%", background: OK, animation: "ocsPulseDot 2.4s infinite" }} />
-            Normalising on-chain events in real time
+            Sample stream · how normalisation works
           </span>
           <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: "#A6AFC0" }}>
             <span style={{ color: "#1A1A17", fontWeight: 700 }}>{normCount.toLocaleString("en-US")}</span> events
-            normalised today
+            in this demo
           </span>
         </div>
 
