@@ -6,7 +6,6 @@ import Hero from "@/components/Hero";
 import MonitorSection from "@/components/MonitorSection";
 import AutomationsSection from "@/components/AutomationsSection";
 import IntelligenceSection from "@/components/IntelligenceSection";
-import LogoMarquee from "@/components/LogoMarquee";
 import FaqSection from "@/components/FaqSection";
 import CtaSection from "@/components/CtaSection";
 import {
@@ -34,10 +33,9 @@ export default function Home() {
     <div style={themeVars}>
       <SiteHeader />
       <Hero />
-      <section style={{ maxWidth: 1180, margin: "0 auto", padding: "8px 32px 8px" }} data-pad>
-        <TrustedBy align="center" />
+      <section style={{ maxWidth: 1180, margin: "0 auto", padding: "16px 32px 24px" }} data-pad>
+        <TrustedBy align="center" label="Trusted by" />
       </section>
-      <LogoMarquee />
       <Problem />
       <section style={{ maxWidth: 1180, margin: "0 auto", padding: "64px 32px 8px", textAlign: "center" }} data-pad>
         <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11.5, letterSpacing: ".12em", textTransform: "uppercase", color: ACCENT, fontWeight: 600 }}>How it works</div>
