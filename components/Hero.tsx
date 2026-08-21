@@ -239,9 +239,9 @@ export default function Hero() {
               textWrap: "pretty",
             }}
           >
-            With OnchainSuite protocols can respond directly to their user behaviour, on-chain and
-            offchain. Wallet activity, email opens, and clicks all become triggers, for an enriched
-            personalised user engagement at scale.
+            OnchainSuite helps Web3 apps keep their users. We notice what people do in your app, a
+            deposit, a big trade, or going quiet, and help you reach them by email or in-app message,
+            so they come back.
           </p>
           <div
             style={{
