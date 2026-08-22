@@ -7,7 +7,7 @@ import {
   INCLUDED_FEATURES,
   INTEGRATIONS,
   OK,
-  PRICING_PROFILES,
+  SUITE_TIERS,
   FOOTER_LEGAL,
   COMPANY,
   AUDIENCES,
@@ -470,19 +470,19 @@ export function Testimonials() {
   );
 }
 
-/* ---- Pricing (usage-based reference profiles) ---- */
-export function PricingProfiles() {
+/* ---- Suite tiers (pricing) ---- */
+export function SuiteTiers() {
   return (
     <Reveal cards stagger style={{ marginTop: 34, display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 16, textAlign: "left", alignItems: "stretch" }}>
-      {PRICING_PROFILES.map((p) => (
+      {SUITE_TIERS.map((t) => (
         <div
-          key={p.name}
-          className={p.featured ? "ocs-anim-border ocs-card-hover ocs-spotlight" : "ocs-card-hover ocs-spotlight"}
+          key={t.name}
+          className={t.featured ? "ocs-anim-border ocs-card-hover ocs-spotlight" : "ocs-card-hover ocs-spotlight"}
           style={{
-            ...(p.featured ? {} : { border: "1px solid #DCE7F5", background: "#fff" }),
+            ...(t.featured ? {} : { border: "1px solid #DCE7F5", background: "#fff" }),
             borderRadius: 18,
             padding: 24,
-            boxShadow: p.featured
+            boxShadow: t.featured
               ? `0 1px 2px rgba(26,24,20,.05),0 22px 50px -26px color-mix(in oklab,${ACCENT} 30%,transparent)`
               : "0 1px 2px rgba(26,24,20,.04)",
             display: "flex",
@@ -490,18 +490,18 @@ export function PricingProfiles() {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ fontSize: 15, fontWeight: 700, color: "#1A1A17" }}>{p.name}</span>
-            {p.featured && (
+            <span style={{ fontSize: 15, fontWeight: 700, color: "#1A1A17" }}>{t.name}</span>
+            {t.featured && (
               <span style={{ fontSize: 10.5, fontWeight: 600, color: "#fff", background: ACCENT, padding: "2px 8px", borderRadius: 999, fontFamily: "monospace" }}>
                 POPULAR
               </span>
             )}
           </div>
           <div style={{ marginTop: 12, fontSize: 28, fontWeight: 700, letterSpacing: "-.02em", color: "#1A1A17" }}>
-            {p.price}
-            <span style={{ fontSize: 14, fontWeight: 500, color: "#8A93A6" }}> /mo</span>
+            {t.price}
+            <span style={{ fontSize: 14, fontWeight: 500, color: "#8A93A6" }}> {t.period}</span>
           </div>
-          <div style={{ marginTop: 4, fontSize: 13, color: "#8A93A6" }}>{p.desc}</div>
+          <div style={{ marginTop: 8, fontSize: 13, color: "#8A93A6", lineHeight: 1.5, minHeight: 54 }}>{t.tagline}</div>
           <div
             style={{
               margin: "16px 0",
@@ -514,19 +514,17 @@ export function PricingProfiles() {
               flex: 1,
             }}
           >
-            <div style={{ display: "flex", justifyContent: "space-between", gap: 10, fontFamily: "'JetBrains Mono',monospace", fontSize: 11.5 }}>
-              <span style={{ color: "#8A93A6" }}>tracked wallets</span>
-              <span style={{ color: "#1A1A17", fontWeight: 600 }}>{p.wallets.toLocaleString("en-US")}</span>
-            </div>
-            <div style={{ display: "flex", justifyContent: "space-between", gap: 10, fontFamily: "'JetBrains Mono',monospace", fontSize: 11.5 }}>
-              <span style={{ color: "#8A93A6" }}>subscribers</span>
-              <span style={{ color: "#1A1A17", fontWeight: 600 }}>{p.subscribers.toLocaleString("en-US")}</span>
-            </div>
+            {t.allowances.map((a) => (
+              <div key={a.label} style={{ display: "flex", justifyContent: "space-between", gap: 10, fontFamily: "'JetBrains Mono',monospace", fontSize: 11.5 }}>
+                <span style={{ color: "#8A93A6" }}>{a.label}</span>
+                <span style={{ color: "#1A1A17", fontWeight: 600 }}>{a.value}</span>
+              </div>
+            ))}
           </div>
           <a
-            href={p.href}
-            {...(p.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            className={p.featured ? "ocs-btn-primary" : "ocs-btn-outline"}
+            href={t.href}
+            {...(t.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            className={t.featured ? "ocs-btn-primary" : "ocs-btn-outline"}
             style={{
               display: "block",
               textAlign: "center",
@@ -534,12 +532,12 @@ export function PricingProfiles() {
               fontWeight: 600,
               borderRadius: 11,
               padding: 10,
-              color: p.featured ? "#fff" : "#1A1A17",
-              background: p.featured ? ACCENT : "#fff",
-              border: p.featured ? "none" : "1px solid #DCE7F5",
+              color: t.featured ? "#fff" : "#1A1A17",
+              background: t.featured ? ACCENT : "#fff",
+              border: t.featured ? "none" : "1px solid #DCE7F5",
             }}
           >
-            {p.cta}
+            {t.cta}
           </a>
         </div>
       ))}
@@ -551,7 +549,7 @@ export function IncludedFeatures() {
   return (
     <section style={{ maxWidth: 1180, margin: "0 auto", padding: "16px 32px 40px", textAlign: "center" }} data-pad>
       <Reveal>
-        <div style={monoLabel}>Every plan</div>
+        <div style={monoLabel}>Every Suite tier</div>
         <h2
           style={{
             margin: "14px auto 0",
@@ -563,10 +561,10 @@ export function IncludedFeatures() {
             textWrap: "balance",
           }}
         >
-          Everything included, whatever your size.
+          Every capability, on every tier.
         </h2>
         <p style={{ margin: "14px auto 0", maxWidth: 540, fontSize: 16.5, lineHeight: 1.55, color: "#3D4A63", textWrap: "pretty" }}>
-          Pricing scales with usage, not features. Every protocol gets the full platform from day one.
+          Nothing is feature-gated. Tiers differ only on allowance depth, team seats and dedicated IP, so you get the full platform from day one.
         </p>
       </Reveal>
       <Reveal style={{ marginTop: 30, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px 28px", textAlign: "left", maxWidth: 820, marginLeft: "auto", marginRight: "auto" }} cards stagger>
@@ -594,39 +592,6 @@ export function IncludedFeatures() {
           </div>
         ))}
       </Reveal>
-    </section>
-  );
-}
-
-export function Pricing() {
-  return (
-    <section id="pricing" style={{ maxWidth: 1320, margin: "0 auto", padding: "56px 32px", textAlign: "center" }} data-pad>
-      <Reveal>
-        <div style={monoLabel}>Pricing</div>
-        <h2
-          style={{
-            margin: "14px auto 0",
-            maxWidth: 620,
-            fontSize: "clamp(26px,3.2vw,38px)",
-            lineHeight: 1.1,
-            letterSpacing: "-.025em",
-            fontWeight: 700,
-            textWrap: "balance",
-          }}
-        >
-          Usage-based pricing. Pay for what you use.
-        </h2>
-        <p style={{ margin: "16px auto 0", maxWidth: 540, fontSize: 17, lineHeight: 1.55, color: "#3D4A63", textWrap: "pretty" }}>
-          A small base fee plus the wallets you track and the subscribers you reach. In-app push to every connected
-          wallet is included, no rigid tiers and no SMS. Early-access teams lock in founding rates.
-        </p>
-      </Reveal>
-      <PricingProfiles />
-      <div style={{ marginTop: 24 }}>
-        <a href="/pricing" className="ocs-link-muted" style={{ fontSize: 14, fontWeight: 600, color: ACCENT }}>
-          See full pricing &amp; estimate calculator →
-        </a>
-      </div>
     </section>
   );
 }

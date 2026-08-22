@@ -116,7 +116,7 @@ export default function CtaSection() {
               </button>
             </form>
             <div style={{ fontSize: 13.5, color: "#8A93A6" }}>
-              Usage-based pricing · in-app push + email · founding rates for early teams
+              Suite from $0 · Send email-only · founding rates for early teams
             </div>
           </div>
         </div>

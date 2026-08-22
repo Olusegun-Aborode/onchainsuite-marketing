@@ -1,21 +1,21 @@
 import { CSSProperties } from "react";
 import type { Metadata } from "next";
-import { ACCENT, ACCENT_HOVER, OK, PRICING_FAQ } from "@/lib/data";
+import { ACCENT, ACCENT_HOVER, OK, PRICING_FAQ, SEND_POINTS, SEND_RATE_PER_1K } from "@/lib/data";
 import SiteHeader from "@/components/SiteHeader";
-import { IncludedFeatures, PricingProfiles, SiteFooter } from "@/components/StaticSections";
-import PricingCalculator from "@/components/PricingCalculator";
+import { IncludedFeatures, SuiteTiers, SiteFooter } from "@/components/StaticSections";
+import SendCalculator from "@/components/PricingCalculator";
 import FaqSection from "@/components/FaqSection";
 import CtaSection from "@/components/CtaSection";
 
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Usage-based pricing for OnchainSuite. A small base fee plus the wallets you track and the email subscribers you reach. In-app push included, no SMS.",
+    "OnchainSuite pricing: Suite in four tiers (PAYG, Launch, Growth, Pro) for teams with an on-chain audience, and Send, an email-only line at $4.50 per 1,000 subscribers.",
   alternates: { canonical: "/pricing" },
   openGraph: {
     title: "Pricing · OnchainSuite",
     description:
-      "Usage-based pricing: a small base fee plus the wallets you track and the email subscribers you reach. No rigid tiers, no SMS.",
+      "Two lines: Suite (wallet + email) in four tiers from $0, and Send (email only) at $4.50 per 1,000 subscribers a month.",
     url: "/pricing",
     type: "website",
   },
@@ -37,6 +37,16 @@ const monoLabel = {
   textTransform: "uppercase" as const,
   color: ACCENT,
   fontWeight: 600,
+};
+
+const h2Style = {
+  margin: "14px auto 0",
+  maxWidth: 620,
+  fontSize: "clamp(24px,3vw,34px)",
+  lineHeight: 1.12,
+  letterSpacing: "-.025em",
+  fontWeight: 700,
+  textWrap: "balance" as const,
 };
 
 export default function PricingPage() {
@@ -68,7 +78,7 @@ export default function PricingPage() {
           <h1
             style={{
               margin: "0 auto",
-              maxWidth: 760,
+              maxWidth: 780,
               fontSize: "clamp(34px,5vw,58px)",
               lineHeight: 1.04,
               letterSpacing: "-.03em",
@@ -76,55 +86,70 @@ export default function PricingPage() {
               textWrap: "balance",
             }}
           >
-            Usage-based pricing, priced by{" "}
-            <span className="ocs-grad-text">wallets and reach.</span>
+            Simple pricing, <span className="ocs-grad-text">two ways to buy.</span>
           </h1>
           <p
             style={{
               margin: "20px auto 0",
-              maxWidth: 580,
+              maxWidth: 620,
               fontSize: 18,
               lineHeight: 1.55,
               color: "#3D4A63",
               textWrap: "pretty",
             }}
           >
-            A small base fee plus two usage drivers: the on-chain wallets you track and the email subscribers you
-            reach. No rigid tiers, no SMS, no per-message fees on in-app push.
+            <strong style={{ color: "#1A1A17" }}>Suite</strong> pairs the wallet channel with email for teams acting on
+            on-chain behaviour, four tiers from $0. <strong style={{ color: "#1A1A17" }}>Send</strong> is email only, for
+            teams with no on-chain audience. Monthly billing, no annual lock-in.
           </p>
         </div>
       </section>
 
-      {/* estimate calculator */}
-      <div style={{ padding: "0 32px" }} data-pad>
-        <PricingCalculator />
-      </div>
-
-      {/* reference profiles */}
-      <section style={{ maxWidth: 1320, margin: "0 auto", padding: "48px 32px 8px", textAlign: "center" }} data-pad>
-        <div style={monoLabel}>Reference profiles</div>
-        <h2
-          style={{
-            margin: "14px auto 0",
-            maxWidth: 600,
-            fontSize: "clamp(24px,3vw,34px)",
-            lineHeight: 1.12,
-            letterSpacing: "-.025em",
-            fontWeight: 700,
-            textWrap: "balance",
-          }}
-        >
-          Where teams typically land.
-        </h2>
-        <p style={{ margin: "14px auto 0", maxWidth: 520, fontSize: 16.5, lineHeight: 1.55, color: "#3D4A63", textWrap: "pretty" }}>
-          Illustrative points on a continuous curve, not fixed packages. Your exact price comes from your own wallet
-          and subscriber counts.
+      {/* Suite tiers */}
+      <section style={{ maxWidth: 1320, margin: "0 auto", padding: "40px 32px 8px", textAlign: "center" }} data-pad>
+        <div style={monoLabel}>Suite · wallet + email</div>
+        <h2 style={h2Style}>Four tiers. Every capability on all of them.</h2>
+        <p style={{ margin: "14px auto 0", maxWidth: 560, fontSize: 16.5, lineHeight: 1.55, color: "#3D4A63", textWrap: "pretty" }}>
+          Pick a tier by the allowances you need. Usage above an allowance bills at list price, so overage is the
+          exception, not the plan.
         </p>
-        <PricingProfiles />
+        <SuiteTiers />
       </section>
 
       {/* everything included */}
       <IncludedFeatures />
+
+      {/* Send */}
+      <section style={{ maxWidth: 1320, margin: "0 auto", padding: "24px 32px 8px", textAlign: "center" }} data-pad>
+        <div style={monoLabel}>Send · email only</div>
+        <h2 style={h2Style}>No on-chain audience? Send is email only.</h2>
+        <p style={{ margin: "14px auto 0", maxWidth: 560, fontSize: 16.5, lineHeight: 1.55, color: "#3D4A63", textWrap: "pretty" }}>
+          The same email engine with the wallet channel switched off. One flat rate: ${SEND_RATE_PER_1K.toFixed(2)} per
+          1,000 subscribers a month, no tiers.
+        </p>
+        <SendCalculator />
+
+        <div style={{ margin: "28px auto 0", maxWidth: 720, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 10 }}>
+          {SEND_POINTS.map((p) => (
+            <div
+              key={p.subs}
+              style={{
+                border: "1px solid #DCE7F5",
+                background: "#fff",
+                borderRadius: 12,
+                padding: "10px 14px",
+                minWidth: 104,
+                textAlign: "center",
+              }}
+            >
+              <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: "#8A93A6" }}>
+                {p.subs.toLocaleString("en-US")} subs
+              </div>
+              <div style={{ marginTop: 4, fontSize: 16, fontWeight: 700, color: "#1A1A17" }}>{p.price}<span style={{ fontSize: 11, fontWeight: 500, color: "#8A93A6" }}>/mo</span></div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* pricing FAQ */}
       <FaqSection items={PRICING_FAQ} eyebrow="Pricing FAQ" title="Pricing, explained." />

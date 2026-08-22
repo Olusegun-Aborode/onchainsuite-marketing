@@ -115,7 +115,7 @@ export default function RootLayout({
                     "@type": "Offer",
                     price: "0",
                     priceCurrency: "USD",
-                    description: "Usage-based pricing with founding rates for early teams.",
+                    description: "Suite from $0 (PAYG), then Launch $49, Growth $349 and Pro $799 a month; Send email-only from $4.50 per 1,000 subscribers.",
                   },
                 },
               ],

@@ -23,7 +23,7 @@ export const MATRIX_CAPS = [
 ] as const;
 
 export const OCS_MATRIX: string[] = [
-  "Usage-based, from ~$45/mo",
+  "4 tiers, $0–$799/mo",
   "Yes",
   "Yes",
   "Yes",
@@ -118,7 +118,7 @@ export const COMPETITORS: Competitor[] = [
     them: ["Contact sales", "No", "No", "Yes", "Yes", "Web2 profiles", "No", "Yes", "Partial", "Yes", "No", "Yes", "Yes", "No"],
     faqs: [
       { q: "Can Braze message wallets?", a: "Not on its own. Braze targets known users on channels tied to Web2 identifiers. OnchainSuite reaches wallets directly with in-app push." },
-      { q: "Is OnchainSuite cheaper?", a: "Usually. Pricing is usage-based from about $45 a month with no enterprise minimum, versus Braze's contact-sales model." },
+      { q: "Is OnchainSuite cheaper?", a: "Usually. Suite starts at $0 (PAYG) or $49 a month on Launch, with no enterprise minimum, versus Braze's contact-sales model." },
       { q: "Does it scale for large protocols?", a: "Yes. Pricing scales with tracked wallets and subscribers, and the largest volumes move to custom." },
       { q: "How is on-chain data handled?", a: "We read cross-chain activity into clean events and segments, so you skip the data engineering." },
     ],
@@ -157,7 +157,7 @@ export const COMPETITORS: Competitor[] = [
     faqs: [
       { q: "Can EmailOctopus trigger on behaviour?", a: "Only basic list automations. There is no product-event or on-chain triggering." },
       { q: "Is OnchainSuite overkill next to it?", a: "If you only send newsletters, EmailOctopus is fine. If you want to retain wallets on on-chain behaviour, the two are not comparable." },
-      { q: "Does it cost a lot more?", a: "It is usage-based from about $45 a month, more than a newsletter tool because it does far more." },
+      { q: "Does it cost a lot more?", a: "Suite starts at $0 (PAYG) or $49 a month, more than a newsletter tool because it does far more. For email only, Send starts at $4.50 per 1,000 subscribers." },
     ],
   },
   {

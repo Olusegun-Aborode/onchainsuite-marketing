@@ -257,7 +257,7 @@ export const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: "What does it cost?",
-    a: "Usage-based, with no rigid tiers. You pay a small base fee plus the wallets you track and the email subscribers you reach, so pricing starts low (around $45/mo for a small protocol) and scales with use. Early-access teams lock in founding rates.",
+    a: "Two lines. Suite (wallet plus email) comes in four tiers: PAYG at $0 plus usage, then Launch $49, Growth $349 and Pro $799 a month. Send (email only) is $4.50 per 1,000 subscribers a month. Every Suite tier includes the full platform; tiers differ on allowances, seats and dedicated IP.",
   },
 ];
 
@@ -360,74 +360,131 @@ export const AUDIENCES = [
   { who: "Heads of growth at consumer and NFT apps", pain: "Reach wallets by what they actually do on-chain, across chains, without stitching CSVs or mapping addresses by hand." },
 ];
 
-// Usage-based pricing model (from the business plan): a small base fee plus
-// two usage drivers — tracked wallets and email subscribers (10 sends each).
-// Pricing is continuous (no rigid tiers); the calculator estimates a monthly
-// figure at a ~60% target margin and passes through the reference profiles.
-export const PRICE_BASE = 12; // small flat base fee, $/mo
-export const PRICE_PER_WALLET = 0.0595; // per tracked wallet, $/mo
-export const PRICE_PER_SUBSCRIBER = 0.00595; // per email subscriber, $/mo
-
-export function estimatePrice(trackedWallets: number, subscribers: number): number {
-  return Math.round(PRICE_BASE + trackedWallets * PRICE_PER_WALLET + subscribers * PRICE_PER_SUBSCRIBER);
-}
-
-// Reference profiles from the plan (illustrative points on a continuous curve).
-export type PricingProfile = {
+// Pricing (frozen per the finance SSOT, 20 Aug 2026). Two lines:
+//   Suite — four tiers for teams with an on-chain audience (wallet + email).
+//   Send  — an email-only curve for teams with no on-chain audience.
+// Capabilities are ungated at every Suite tier; tiers differ on allowance
+// depth, seats and dedicated IP only. Monthly billing, no annual discount.
+export type SuiteTier = {
   name: string;
-  desc: string;
-  subscribers: number;
-  wallets: number;
-  price: string;
+  price: string; // display, e.g. "$49"
+  period: string; // e.g. "/mo" or "+ usage"
+  tagline: string;
+  featured?: boolean;
   cta: string;
   href: string;
   external?: boolean;
-  featured?: boolean;
+  allowances: { label: string; value: string }[];
 };
 
-export const PRICING_PROFILES: PricingProfile[] = [
-  { name: "Small", desc: "A protocol getting started", subscribers: 500, wallets: 500, price: "~$45", cta: "Get early access", href: "/early-access" },
-  { name: "Growing", desc: "Scaling retention", subscribers: 1000, wallets: 2000, price: "~$140", cta: "Get early access", href: "/early-access", featured: true },
-  { name: "Mid", desc: "An established protocol", subscribers: 10000, wallets: 10000, price: "~$660", cta: "Get early access", href: "/early-access" },
-  { name: "Large", desc: "High-volume & ecosystems", subscribers: 50000, wallets: 50000, price: "~$3,300", cta: "Talk to us", href: `mailto:${CONTACT_EMAIL}?subject=OnchainSuite%20pricing`, external: true },
+export const SUITE_TIERS: SuiteTier[] = [
+  {
+    name: "PAYG", price: "$0", period: "+ usage",
+    tagline: "Every capability, metered at list price. Prepaid wallet, $10 minimum top-up.",
+    cta: "Get early access", href: "/early-access",
+    allowances: [
+      { label: "Contacts", value: "1,000" },
+      { label: "Automations", value: "3 max" },
+      { label: "Team seats", value: "2" },
+      { label: "Metered at", value: "list price" },
+    ],
+  },
+  {
+    name: "Launch", price: "$49", period: "/mo",
+    tagline: "Email and the wallet channel for a protocol getting started.",
+    cta: "Get early access", href: "/early-access",
+    allowances: [
+      { label: "Contacts", value: "2,500" },
+      { label: "Emails", value: "50,000" },
+      { label: "In-app push", value: "25,000" },
+      { label: "On-chain", value: "1,000" },
+      { label: "AI credits", value: "500" },
+      { label: "Team seats", value: "2" },
+    ],
+  },
+  {
+    name: "Growth", price: "$349", period: "/mo", featured: true,
+    tagline: "Adds Forms and a dedicated IP, with the wallet channel at campaign size.",
+    cta: "Get early access", href: "/early-access",
+    allowances: [
+      { label: "Contacts", value: "25,000" },
+      { label: "Emails", value: "250,000" },
+      { label: "In-app push", value: "250,000" },
+      { label: "On-chain", value: "10,000" },
+      { label: "AI credits", value: "8,000" },
+      { label: "Dedicated IP", value: "1" },
+      { label: "Team seats", value: "4" },
+    ],
+  },
+  {
+    name: "Pro", price: "$799", period: "/mo",
+    tagline: "Intelligence at working scale, running continuously across a large list.",
+    cta: "Get early access", href: "/early-access",
+    allowances: [
+      { label: "Contacts", value: "75,000" },
+      { label: "Emails", value: "750,000" },
+      { label: "In-app push", value: "1,000,000" },
+      { label: "On-chain", value: "25,000" },
+      { label: "AI credits", value: "16,000" },
+      { label: "Dedicated IP", value: "1" },
+      { label: "Team seats", value: "7" },
+    ],
+  },
 ];
 
-// What every protocol gets, regardless of size (usage-based, not feature-gated).
+// Send: email-only line, one rate, no tiers. $4.50 per 1,000 subscribers a
+// month (assumes ~6 sends each). Billed on list size.
+export const SEND_RATE_PER_1K = 4.5;
+
+export const SEND_POINTS: { subs: number; price: string }[] = [
+  { subs: 1000, price: "$4.50" },
+  { subs: 5000, price: "$22.50" },
+  { subs: 10000, price: "$45.00" },
+  { subs: 25000, price: "$112.50" },
+  { subs: 50000, price: "$225.00" },
+  { subs: 100000, price: "$450.00" },
+];
+
+export function estimateSend(subscribers: number): number {
+  return Math.round((subscribers / 1000) * SEND_RATE_PER_1K * 100) / 100;
+}
+
+// Included on every Suite tier — capabilities are never gated, only allowances,
+// seats and dedicated IP differ between tiers.
 export const INCLUDED_FEATURES: string[] = [
-  "In-app push to 100% of connected wallets, via a drop-in SDK",
-  "Email with 10 monthly sends bundled per subscriber",
-  "Protocol Plays library: fork-and-edit retention automations",
-  "Behaviour-triggered automations and on-demand campaigns",
-  "Intelligence: MCP plus a SQL engine over normalised on-chain data",
-  "Protocol Normalisation across Ethereum, Solana, Base, and Polygon",
+  "In-app push via a drop-in SDK, wallet address only",
+  "Email campaigns and behaviour-triggered automations",
+  "Audience segmentation and ONS+ list protection",
+  "Intelligence: ask your on-chain data in plain language, SQL underneath",
+  "Forms to capture and grow your list",
+  "Protocol Normalisation across the chains you use",
   "Wallet-first identity with privacy-first, opt-in channel linking",
-  "Sub-10-minute first-mile cohort report",
 ];
 
 export const PRICING_FAQ: { q: string; a: string }[] = [
   {
-    q: "How does pricing work?",
-    a: "Usage-based, with no rigid tiers. You pay a small base fee plus two usage drivers: the email subscribers you reach and the on-chain wallets you track. The price scales smoothly from the smallest project to the largest, so you only pay for what you actually use.",
+    q: "What is the difference between Suite and Send?",
+    a: "Suite is for teams with an on-chain audience: it pairs the wallet channel (in-app push) with email and comes in four tiers. Send is email only, for teams with no on-chain audience, the same email engine with the wallet channel switched off, priced as a simple per-subscriber curve.",
   },
   {
-    q: "What is a tracked wallet?",
-    a: "An on-chain wallet your protocol monitors for behaviour. Tracked wallets are the platform's core value, independent of email, so they are billed separately. In-app push reaches every connected wallet with no extra identifier.",
+    q: "How do the Suite tiers work?",
+    a: "Four tiers: PAYG ($0 plus usage), Launch ($49), Growth ($349) and Pro ($799) a month. Every tier includes the full platform, campaigns, automations, audience, Intelligence and Forms. Tiers differ only on allowance depth, team seats and dedicated IP, not on which features you get.",
   },
   {
-    q: "What is an email subscriber?",
-    a: "An emailable contact a wallet owner has opted in and privately linked. Each subscriber bundles 10 sends per month, so your sending capacity scales automatically with your list.",
+    q: "How is Send priced?",
+    a: "One rate, no tiers: $4.50 per 1,000 subscribers a month, billed on your list size and assuming around six sends per subscriber. A 10,000-contact list is $45 a month, a 50,000-contact list is $225.",
   },
   {
-    q: "Is there a free plan?",
-    a: "There is no separate free tier, but pricing starts low: a small protocol runs around $45 a month, and you only pay for the wallets and subscribers you use. Early-access teams lock in founding rates.",
+    q: "What is PAYG?",
+    a: "Pay as you go: every capability, metered at list price, with a prepaid wallet ($10 minimum top-up) and hard caps. It is the way to try the platform before committing to a monthly tier.",
   },
   {
-    q: "Which channels are included, and is there SMS?",
-    a: "In-app push and email are live today, included on every plan. Telegram and Discord are on the roadmap. There is no SMS; in-app push is the lowest-cost, highest-reach channel and leads the set.",
+    q: "What happens if I exceed an allowance?",
+    a: "Usage above a tier's allowance bills at list price. Allowances are sized to cover normal use, so overage is the exception rather than the plan. Move up a tier whenever it is cheaper than running over.",
   },
   {
-    q: "What about larger protocols?",
-    a: "Pricing is continuous, so it keeps scaling past the reference profiles. Larger protocols and ecosystems move to a custom agreement; talk to us for an exact quote from your wallet and subscriber counts.",
+    q: "Is there a free plan, and is there SMS?",
+    a: "No free tier: PAYG starts at $0 plus usage, so you only pay for what you send and track. In-app push and email are the channels today, with Telegram and Discord on the roadmap. There is no SMS; in-app push is the lowest-cost, highest-reach channel.",
   },
 ];
 

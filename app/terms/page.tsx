@@ -60,9 +60,10 @@ export default function TermsPage() {
 
       <h2>6. Fees</h2>
       <p>
-        Paid plans are usage-based (a base fee plus tracked wallets and email subscribers), billed as described at
-        sign-up or in an order. Fees are exclusive of VAT and other taxes, which you are responsible for. During early
-        access, pricing may be discounted or waived and is subject to the founding-rate terms provided to you.
+        We offer two lines: Suite (four tiers, PAYG, Launch, Growth and Pro) and Send (email only, priced per
+        subscriber). Your plan is billed monthly as described at sign-up or in an order, and usage above a plan&rsquo;s
+        allowance bills at list price. Fees are exclusive of VAT and other taxes, which you are responsible for. During
+        early access, pricing may be discounted or waived and is subject to the founding-rate terms provided to you.
       </p>
 
       <h2>7. Intellectual property</h2>
