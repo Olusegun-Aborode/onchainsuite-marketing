@@ -257,7 +257,7 @@ export const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: "What does it cost?",
-    a: "Two lines. Suite (wallet plus email) comes in four tiers: PAYG at $0 plus usage, then Launch $49, Growth $349 and Pro $799 a month. Send (email only) is $4.50 per 1,000 subscribers a month. Every Suite tier includes the full platform; tiers differ on allowances, seats and dedicated IP.",
+    a: "Two lines. Suite (wallet plus email) comes in four tiers: PAYG at $0 plus usage, then Launch $27, Growth $349 and Pro $1,622 a month. Send (email only) is $6 a month plus $2.60 per 1,000 subscribers. Forms and a dedicated IP start on Growth; tiers otherwise differ on allowances and seats.",
   },
 ];
 
@@ -367,7 +367,7 @@ export const AUDIENCES = [
 // depth, seats and dedicated IP only. Monthly billing, no annual discount.
 export type SuiteTier = {
   name: string;
-  price: string; // display, e.g. "$49"
+  price: string; // display, e.g. "$27"
   period: string; // e.g. "/mo" or "+ usage"
   tagline: string;
   featured?: boolean;
@@ -380,7 +380,7 @@ export type SuiteTier = {
 export const SUITE_TIERS: SuiteTier[] = [
   {
     name: "PAYG", price: "$0", period: "+ usage",
-    tagline: "Every capability, metered at list price. Prepaid wallet, $10 minimum top-up.",
+    tagline: "Every capability, no discount. Prepaid wallet, $10 minimum top-up. Hard caps stop it substituting for a plan; everything is metered at full list price.",
     cta: "Get early access", href: "/early-access",
     allowances: [
       { label: "Contacts", value: "1,000" },
@@ -390,8 +390,8 @@ export const SUITE_TIERS: SuiteTier[] = [
     ],
   },
   {
-    name: "Launch", price: "$49", period: "/mo",
-    tagline: "Email and the wallet channel for a protocol getting started.",
+    name: "Launch", price: "$27", period: "/mo",
+    tagline: "Email and the wallet channel. Campaigns, automations, audience and Intelligence at sample size. No Forms or dedicated IP.",
     cta: "Get early access", href: "/early-access",
     allowances: [
       { label: "Contacts", value: "2,500" },
@@ -399,12 +399,13 @@ export const SUITE_TIERS: SuiteTier[] = [
       { label: "In-app push", value: "25,000" },
       { label: "On-chain", value: "1,000" },
       { label: "AI credits", value: "500" },
+      { label: "ONS+", value: "250" },
       { label: "Team seats", value: "2" },
     ],
   },
   {
     name: "Growth", price: "$349", period: "/mo", featured: true,
-    tagline: "Adds Forms and a dedicated IP, with the wallet channel at campaign size.",
+    tagline: "Adds Forms and a dedicated IP, and takes the wallet channel from sample size to campaign size.",
     cta: "Get early access", href: "/early-access",
     allowances: [
       { label: "Contacts", value: "25,000" },
@@ -412,13 +413,14 @@ export const SUITE_TIERS: SuiteTier[] = [
       { label: "In-app push", value: "250,000" },
       { label: "On-chain", value: "10,000" },
       { label: "AI credits", value: "8,000" },
+      { label: "ONS+", value: "2,500" },
       { label: "Dedicated IP", value: "1" },
       { label: "Team seats", value: "4" },
     ],
   },
   {
-    name: "Pro", price: "$799", period: "/mo",
-    tagline: "Intelligence at working scale, running continuously across a large list.",
+    name: "Pro", price: "$1,622", period: "/mo",
+    tagline: "Intelligence at working scale. Enrichment, segmentation and on-chain triggers run continuously across a large list.",
     cta: "Get early access", href: "/early-access",
     allowances: [
       { label: "Contacts", value: "75,000" },
@@ -426,37 +428,37 @@ export const SUITE_TIERS: SuiteTier[] = [
       { label: "In-app push", value: "1,000,000" },
       { label: "On-chain", value: "25,000" },
       { label: "AI credits", value: "16,000" },
+      { label: "ONS+", value: "7,500" },
       { label: "Dedicated IP", value: "1" },
       { label: "Team seats", value: "7" },
     ],
   },
 ];
 
-// Send: email-only line, one rate, no tiers. $4.50 per 1,000 subscribers a
-// month (assumes ~6 sends each). Billed on list size.
-export const SEND_RATE_PER_1K = 4.5;
+// Send: email-only line, one plan, no tiers. $6 a month base plus $2.60 per
+// 1,000 subscribers (assumes ~6 sends each). Billed on list size.
+export const SEND_BASE = 6; // flat base, $/mo
+export const SEND_PER_1K = 2.6; // per 1,000 subscribers, $/mo
 
 export const SEND_POINTS: { subs: number; price: string }[] = [
-  { subs: 1000, price: "$4.50" },
-  { subs: 5000, price: "$22.50" },
-  { subs: 10000, price: "$45.00" },
-  { subs: 25000, price: "$112.50" },
-  { subs: 50000, price: "$225.00" },
-  { subs: 100000, price: "$450.00" },
+  { subs: 1000, price: "$8.60" },
+  { subs: 5000, price: "$19.00" },
+  { subs: 10000, price: "$32.00" },
+  { subs: 25000, price: "$71.00" },
+  { subs: 50000, price: "$136.00" },
+  { subs: 100000, price: "$266.00" },
 ];
 
 export function estimateSend(subscribers: number): number {
-  return Math.round((subscribers / 1000) * SEND_RATE_PER_1K * 100) / 100;
+  return Math.round((SEND_BASE + (subscribers / 1000) * SEND_PER_1K) * 100) / 100;
 }
 
-// Included on every Suite tier — capabilities are never gated, only allowances,
-// seats and dedicated IP differ between tiers.
+// On every paid Suite tier (Forms and a dedicated IP start on Growth).
 export const INCLUDED_FEATURES: string[] = [
   "In-app push via a drop-in SDK, wallet address only",
   "Email campaigns and behaviour-triggered automations",
   "Audience segmentation and ONS+ list protection",
   "Intelligence: ask your on-chain data in plain language, SQL underneath",
-  "Forms to capture and grow your list",
   "Protocol Normalisation across the chains you use",
   "Wallet-first identity with privacy-first, opt-in channel linking",
 ];
@@ -468,11 +470,11 @@ export const PRICING_FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How do the Suite tiers work?",
-    a: "Four tiers: PAYG ($0 plus usage), Launch ($49), Growth ($349) and Pro ($799) a month. Every tier includes the full platform, campaigns, automations, audience, Intelligence and Forms. Tiers differ only on allowance depth, team seats and dedicated IP, not on which features you get.",
+    a: "Four tiers: PAYG ($0 plus usage), Launch ($27), Growth ($349) and Pro ($1,622) a month. Every paid tier includes campaigns, automations, audience, ONS+ and Intelligence; Forms and a dedicated IP start on Growth. Tiers otherwise differ on allowance depth and team seats.",
   },
   {
     q: "How is Send priced?",
-    a: "One rate, no tiers: $4.50 per 1,000 subscribers a month, billed on your list size and assuming around six sends per subscriber. A 10,000-contact list is $45 a month, a 50,000-contact list is $225.",
+    a: "One plan, no tiers: $6 a month plus $2.60 per 1,000 subscribers, billed on your list size and assuming around six sends per subscriber. A 10,000-contact list is $32 a month, a 50,000-contact list is $136.",
   },
   {
     q: "What is PAYG?",

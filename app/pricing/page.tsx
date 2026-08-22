@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 import type { Metadata } from "next";
-import { ACCENT, ACCENT_HOVER, OK, PRICING_FAQ, SEND_POINTS, SEND_RATE_PER_1K } from "@/lib/data";
+import { ACCENT, ACCENT_HOVER, OK, PRICING_FAQ, SEND_POINTS, SEND_BASE, SEND_PER_1K } from "@/lib/data";
 import SiteHeader from "@/components/SiteHeader";
 import { IncludedFeatures, SuiteTiers, SiteFooter } from "@/components/StaticSections";
 import SendCalculator from "@/components/PricingCalculator";
@@ -10,12 +10,12 @@ import CtaSection from "@/components/CtaSection";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "OnchainSuite pricing: Suite in four tiers (PAYG, Launch, Growth, Pro) for teams with an on-chain audience, and Send, an email-only line at $4.50 per 1,000 subscribers.",
+    "OnchainSuite pricing: Suite in four tiers (PAYG $0, Launch $27, Growth $349, Pro $1,622) for teams with an on-chain audience, and Send, email-only from $6/mo plus $2.60 per 1,000 subscribers.",
   alternates: { canonical: "/pricing" },
   openGraph: {
     title: "Pricing · OnchainSuite",
     description:
-      "Two lines: Suite (wallet + email) in four tiers from $0, and Send (email only) at $4.50 per 1,000 subscribers a month.",
+      "Two lines: Suite (wallet + email) in four tiers from $0, and Send (email only) at $6/mo plus $2.60 per 1,000 subscribers.",
     url: "/pricing",
     type: "website",
   },
@@ -124,8 +124,8 @@ export default function PricingPage() {
         <div style={monoLabel}>Send · email only</div>
         <h2 style={h2Style}>No on-chain audience? Send is email only.</h2>
         <p style={{ margin: "14px auto 0", maxWidth: 560, fontSize: 16.5, lineHeight: 1.55, color: "#3D4A63", textWrap: "pretty" }}>
-          The same email engine with the wallet channel switched off. One flat rate: ${SEND_RATE_PER_1K.toFixed(2)} per
-          1,000 subscribers a month, no tiers.
+          The same email engine with the wallet channel switched off. One plan, no tiers: ${SEND_BASE} a month plus $
+          {SEND_PER_1K.toFixed(2)} per 1,000 subscribers.
         </p>
         <SendCalculator />
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ACCENT, estimateSend, SEND_RATE_PER_1K } from "@/lib/data";
+import { ACCENT, estimateSend, SEND_BASE, SEND_PER_1K } from "@/lib/data";
 
 const SUB_MAX = 100000;
 
@@ -9,8 +9,8 @@ function fmt(n: number) {
   return n.toLocaleString("en-US");
 }
 
-// Send is email-only and priced on a single curve: $4.50 per 1,000 subscribers
-// a month. This estimator reads a monthly figure straight off that rate.
+// Send is email-only and priced on a single curve: $6 a month plus $2.60 per
+// 1,000 subscribers. This estimator reads a monthly figure straight off that.
 export default function SendCalculator() {
   const [subs, setSubs] = useState(10000);
   const price = estimateSend(subs);
@@ -68,11 +68,11 @@ export default function SendCalculator() {
             Send · estimated
           </div>
           <div style={{ marginTop: 6, fontSize: 44, fontWeight: 700, letterSpacing: "-.03em", color: "#1A1A17", lineHeight: 1 }}>
-            ${fmt(price)}
+            ${price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             <span style={{ fontSize: 16, fontWeight: 500, color: "#8A93A6" }}> /mo</span>
           </div>
           <div style={{ marginTop: 8, fontSize: 12.5, color: "#8A93A6", lineHeight: 1.5 }}>
-            at ${SEND_RATE_PER_1K.toFixed(2)} per 1,000
+            ${SEND_BASE}/mo + ${SEND_PER_1K.toFixed(2)} per 1,000
           </div>
         </div>
       </div>

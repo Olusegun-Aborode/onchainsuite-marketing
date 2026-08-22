@@ -561,10 +561,10 @@ export function IncludedFeatures() {
             textWrap: "balance",
           }}
         >
-          Every capability, on every tier.
+          The core platform, on every tier.
         </h2>
         <p style={{ margin: "14px auto 0", maxWidth: 540, fontSize: 16.5, lineHeight: 1.55, color: "#3D4A63", textWrap: "pretty" }}>
-          Nothing is feature-gated. Tiers differ only on allowance depth, team seats and dedicated IP, so you get the full platform from day one.
+          Every paid tier includes the capabilities below. Forms and a dedicated IP start on Growth; higher tiers add allowance depth, team seats and scale.
         </p>
       </Reveal>
       <Reveal style={{ marginTop: 30, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px 28px", textAlign: "left", maxWidth: 820, marginLeft: "auto", marginRight: "auto" }} cards stagger>
