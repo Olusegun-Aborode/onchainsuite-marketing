@@ -5,23 +5,21 @@ import { LegalShell } from "@/components/Legal";
 export const metadata: Metadata = {
   title: "Sub-processors",
   description:
-    "The third-party sub-processors OnchainSuite uses to provide the service, their purpose, location, and transfer safeguards.",
+    "The categories of third-party sub-processor OnchainSuite uses to provide the service, their purpose, location, and transfer safeguards. Named vendors available on request.",
   alternates: { canonical: "/subprocessors" },
 };
 
-// Current sub-processors, from the vendor register in the finance SSOT.
-// Email runs on AWS SES only (Azure Communication Services was retired); the
-// application moved from Vercel/Render/Neon/Upstash to DigitalOcean on 20 Aug 2026,
-// while the marketing site still runs on Vercel. Keep in step with the register.
+// Sub-processors listed by category rather than by named vendor. The specific
+// vendors within each category are available to customers on request under NDA.
+// Kept in step with the vendor register in the finance SSOT.
 const SUBPROCESSORS = [
-  { name: "DigitalOcean, LLC", purpose: "Application hosting, database and cache (Postgres, Redis, queues)", location: "United States", safeguard: "UK IDTA / SCCs" },
-  { name: "Vercel Inc.", purpose: "Marketing website hosting and CDN", location: "United States", safeguard: "EU-US DPF (UK Extension) / SCCs" },
-  { name: "Amazon Web Services, Inc. (SES)", purpose: "Transactional and campaign email delivery", location: "United States", safeguard: "EU-US DPF (UK Extension) / SCCs" },
-  { name: "Kickbox (Cloud Manic, LLC)", purpose: "Email address verification and list hygiene", location: "United States", safeguard: "UK IDTA / SCCs" },
-  { name: "GoldRush (Covalent)", purpose: "Blockchain and wallet data indexing", location: "United States", safeguard: "UK IDTA / SCCs" },
-  { name: "OpenAI, L.L.C.", purpose: "Text embeddings for the Intelligence feature", location: "United States", safeguard: "EU-US DPF (UK Extension) / SCCs" },
-  { name: "DeepSeek", purpose: "Natural-language querying (LLM) for the Intelligence feature", location: "China", safeguard: "UK IDTA / SCCs with supplementary measures" },
-  { name: "Stripe, Inc.", purpose: "Billing and payment processing", location: "United States", safeguard: "EU-US DPF (UK Extension) / SCCs" },
+  { name: "Cloud infrastructure", purpose: "Application hosting, database and cache", location: "United States", safeguard: "UK IDTA / SCCs" },
+  { name: "Website hosting", purpose: "Marketing website and CDN", location: "United States", safeguard: "EU-US DPF (UK Extension) / SCCs" },
+  { name: "Email delivery", purpose: "Transactional and campaign email sending", location: "United States", safeguard: "EU-US DPF (UK Extension) / SCCs" },
+  { name: "Email verification", purpose: "List hygiene and deliverability checks", location: "United States", safeguard: "UK IDTA / SCCs" },
+  { name: "Blockchain data", purpose: "Wallet and on-chain data indexing", location: "United States", safeguard: "UK IDTA / SCCs" },
+  { name: "AI / LLM providers", purpose: "Intelligence: embeddings and natural-language querying", location: "United States, China", safeguard: "UK IDTA / SCCs with supplementary measures" },
+  { name: "Payments", purpose: "Billing and payment processing", location: "United States", safeguard: "EU-US DPF (UK Extension) / SCCs" },
 ];
 
 export default function SubprocessorsPage() {
@@ -34,14 +32,15 @@ export default function SubprocessorsPage() {
     >
       <h2>Current sub-processors</h2>
       <p>
-        OnchainSuite engages the sub-processors below to deliver the service, as permitted under our{" "}
-        <a href="/dpa">Data Processing Agreement</a>. Transfers outside the UK are safeguarded as described on our{" "}
+        OnchainSuite engages the categories of sub-processor below to deliver the service, as permitted under our{" "}
+        <a href="/dpa">Data Processing Agreement</a>. We list them by category; the specific vendors within each category
+        are available to customers on request under NDA. Transfers outside the UK are safeguarded as described on our{" "}
         <a href="/data-transfers">International Data Transfers</a> page.
       </p>
       <table>
         <thead>
           <tr>
-            <th>Sub-processor</th>
+            <th>Category</th>
             <th>Purpose</th>
             <th>Location</th>
             <th>Transfer safeguard</th>
