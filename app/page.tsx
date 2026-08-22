@@ -15,8 +15,6 @@ import {
   Problem,
   SdkSection,
   SiteFooter,
-  StatsBand,
-  Testimonials,
 } from "@/components/StaticSections";
 
 const themeVars = {
@@ -59,12 +57,10 @@ export default function Home() {
       <MonitorSection />
       <AutomationsSection />
       <IntelligenceSection />
-      <StatsBand />
       <Channels />
       <Comparison />
       <SdkSection />
       <Integrations />
-      <Testimonials />
       <FaqSection />
       <CtaSection />
       <SiteFooter />
