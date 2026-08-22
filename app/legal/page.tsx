@@ -44,12 +44,6 @@ export default function LegalPage() {
           data and the terms of using OnchainSuite. Last updated {LEGAL_UPDATED}.
         </p>
 
-        <p style={{ margin: "20px 0 0", padding: "12px 0 12px 16px", borderLeft: "3px solid #E3A857", background: "#FCF7EF", fontSize: 13.5, lineHeight: 1.6, color: "#7C5A2E" }}>
-          <strong style={{ color: "#7C5A2E" }}>Working drafts, pending legal review.</strong> These are structured
-          templates with items to complete, and should be reviewed by a UK data-protection solicitor before being
-          relied upon.
-        </p>
-
         <div style={{ margin: "26px 0 0", borderTop: "1px solid #DCE7F5" }}>
           {DOCS.map((d) => (
             <a key={d.href} href={d.href} className="ocs-idx-row" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "20px 14px", borderBottom: "1px solid #DCE7F5", textDecoration: "none" }}>

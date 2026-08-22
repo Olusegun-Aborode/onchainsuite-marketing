@@ -102,9 +102,9 @@ export default function PrivacyPage() {
       <h2>8. Retention</h2>
       <p>
         We keep personal data only as long as necessary for the purposes above, then delete or anonymise it. Prospect
-        and enquiry data is retained for up to [retention period, e.g. 24 months] from last contact; customer account
-        and billing records are kept for the life of the contract and for [statutory period, e.g. 6 years] afterwards
-        to meet legal obligations. Data we process on behalf of customers is retained per the{" "}
+        and enquiry data is retained for up to 24 months from last contact; customer account
+        and billing records are kept for the life of the contract and for 6 years afterwards
+        to meet legal and tax obligations. Data we process on behalf of customers is retained per the{" "}
         <a href="/dpa">DPA</a>.
       </p>
 

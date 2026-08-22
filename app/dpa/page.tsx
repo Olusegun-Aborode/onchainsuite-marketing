@@ -83,7 +83,7 @@ export default function DpaPage() {
       <h2>9. Return or deletion</h2>
       <p>
         On termination, and at the Customer&rsquo;s choice, we delete or return the personal data and delete existing
-        copies, unless retention is required by law. Routine deletion occurs within [e.g. 30–90 days] of termination.
+        copies, unless retention is required by law. Routine deletion occurs within 90 days of termination.
       </p>
 
       <h2>10. Audits</h2>

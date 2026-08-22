@@ -1,6 +1,7 @@
 import { CSSProperties, ReactNode } from "react";
 import { ACCENT, ACCENT_HOVER, OK, LEGAL_UPDATED } from "@/lib/data";
 import SiteHeader from "@/components/SiteHeader";
+import LegalDownload from "@/components/LegalDownload";
 import { SiteFooter } from "@/components/StaticSections";
 
 const themeVars = {
@@ -43,14 +44,11 @@ export function LegalShell({
         <div className="ocs-legal-eyebrow">{eyebrow}</div>
         <h1>{title}</h1>
         <p className="ocs-legal-summary">{summary}</p>
-        <p className="ocs-legal-meta">
-          Last updated: {LEGAL_UPDATED} · <a href="/legal">All legal documents</a>
-        </p>
-
-        <div className="ocs-legal-note" role="note">
-          <strong>Working draft, pending legal review.</strong> This document is a structured template. Items shown
-          in [square brackets] must be completed, and the whole set should be reviewed by a qualified UK
-          data-protection solicitor before it is relied upon. Remove this notice once reviewed.
+        <div className="ocs-legal-metarow">
+          <p className="ocs-legal-meta">
+            Last updated: {LEGAL_UPDATED} · <a href="/legal">All legal documents</a>
+          </p>
+          <LegalDownload />
         </div>
 
         <div className="ocs-legal-body">{children}</div>
@@ -77,15 +75,21 @@ export function LegalShell({
           text-transform: uppercase; color: var(--acc); font-weight: 600;
         }
         .ocs-legal-summary { margin: 16px 0 0; font-size: 17px; line-height: 1.6; color: #3D4A63; }
-        .ocs-legal-meta { margin: 12px 0 0; font-size: 13.5px; color: #5C677D; }
-        .ocs-legal-meta a, .ocs-legal a { color: var(--acc); font-weight: 600; }
-        .ocs-legal-note {
-          margin: 22px 0 8px; padding: 12px 0 12px 16px;
-          border-left: 3px solid #E3A857; background: #FCF7EF; color: #7C5A2E;
-          font-size: 13.5px; line-height: 1.6;
+        .ocs-legal-metarow {
+          margin: 12px 0 0; display: flex; align-items: center; justify-content: space-between;
+          gap: 16px; flex-wrap: wrap;
         }
-        .ocs-legal-note strong { color: #7C5A2E; }
-        .ocs-legal-body { margin-top: 12px; }
+        .ocs-legal-meta { margin: 0; font-size: 13.5px; color: #5C677D; }
+        .ocs-legal-meta a, .ocs-legal a { color: var(--acc); font-weight: 600; }
+        .ocs-legal-download {
+          display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+          padding: 8px 14px; border-radius: 8px; border: 1px solid #DCE7F5; background: #fff;
+          color: #1A1A17; font-size: 13.5px; font-weight: 600; font-family: inherit;
+          transition: border-color .15s ease, background .15s ease;
+        }
+        .ocs-legal-download:hover { border-color: var(--acc); background: #F0F7FF; color: var(--acc); }
+        .ocs-legal-download svg { color: var(--acc); }
+        .ocs-legal-body { margin-top: 20px; }
         .ocs-legal-body h2 {
           margin: 40px 0 0; font-size: 22px; font-weight: 700; letter-spacing: -.02em;
           color: #1A1A17; scroll-margin-top: 88px;
@@ -108,6 +112,13 @@ export function LegalShell({
         }
         .ocs-legal-foot-links { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 18px; }
         .ocs-legal-foot-links a { font-size: 14px; color: var(--acc); font-weight: 600; }
+        @media print {
+          header, footer, .ocs-legal-download, .ocs-legal-foot { display: none !important; }
+          .ocs-legal { max-width: 100% !important; padding: 0 24px !important; }
+          .ocs-legal-body p, .ocs-legal-body li { color: #111 !important; }
+          a { color: #111 !important; text-decoration: underline; }
+          @page { margin: 18mm; }
+        }
       `}</style>
       <SiteFooter />
     </div>
