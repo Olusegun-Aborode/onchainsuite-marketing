@@ -9,15 +9,19 @@ export const metadata: Metadata = {
   alternates: { canonical: "/subprocessors" },
 };
 
-// PLACEHOLDER list, confirm and complete each row with the vendors you actually
-// use, their processing location, and the transfer safeguard in place.
+// Current sub-processors, from the vendor register in the finance SSOT.
+// Email runs on AWS SES only (Azure Communication Services was retired); the
+// application moved from Vercel/Render/Neon/Upstash to DigitalOcean on 20 Aug 2026,
+// while the marketing site still runs on Vercel. Keep in step with the register.
 const SUBPROCESSORS = [
-  { name: "Vercel Inc.", purpose: "Website & application hosting / CDN", location: "United States", safeguard: "EU-US DPF (UK Extension) / SCCs" },
-  { name: "[Email delivery provider]", purpose: "Transactional & campaign email delivery", location: "[Country]", safeguard: "[DPF / IDTA / SCCs]" },
-  { name: "[Analytics provider]", purpose: "Website & product analytics", location: "[Country]", safeguard: "[DPF / IDTA / SCCs / cookieless]" },
-  { name: "[Scheduling provider, e.g. Cal.com]", purpose: "Demo call scheduling", location: "[Country]", safeguard: "[DPF / IDTA / SCCs]" },
-  { name: "[On-chain data provider]", purpose: "Blockchain data indexing / RPC", location: "[Country]", safeguard: "[DPF / IDTA / SCCs]" },
-  { name: "[Payments provider]", purpose: "Billing & payment processing", location: "[Country]", safeguard: "[DPF / IDTA / SCCs]" },
+  { name: "DigitalOcean, LLC", purpose: "Application hosting, database and cache (Postgres, Redis, queues)", location: "United States", safeguard: "UK IDTA / SCCs" },
+  { name: "Vercel Inc.", purpose: "Marketing website hosting and CDN", location: "United States", safeguard: "EU-US DPF (UK Extension) / SCCs" },
+  { name: "Amazon Web Services, Inc. (SES)", purpose: "Transactional and campaign email delivery", location: "United States", safeguard: "EU-US DPF (UK Extension) / SCCs" },
+  { name: "Kickbox (Cloud Manic, LLC)", purpose: "Email address verification and list hygiene", location: "United States", safeguard: "UK IDTA / SCCs" },
+  { name: "GoldRush (Covalent)", purpose: "Blockchain and wallet data indexing", location: "United States", safeguard: "UK IDTA / SCCs" },
+  { name: "OpenAI, L.L.C.", purpose: "Text embeddings for the Intelligence feature", location: "United States", safeguard: "EU-US DPF (UK Extension) / SCCs" },
+  { name: "DeepSeek", purpose: "Natural-language querying (LLM) for the Intelligence feature", location: "China", safeguard: "UK IDTA / SCCs with supplementary measures" },
+  { name: "Stripe, Inc.", purpose: "Billing and payment processing", location: "United States", safeguard: "EU-US DPF (UK Extension) / SCCs" },
 ];
 
 export default function SubprocessorsPage() {
@@ -54,7 +58,6 @@ export default function SubprocessorsPage() {
           ))}
         </tbody>
       </table>
-      <p>[Confirm this list against the vendors you actually use, and keep it current.]</p>
 
       <h2>Changes &amp; notifications</h2>
       <p>
