@@ -1,9 +1,9 @@
 import { CSSProperties } from "react";
 import type { Metadata } from "next";
-import { ACCENT, ACCENT_HOVER, OK, PRICING_FAQ, SEND_BASE, SEND_PER_1K } from "@/lib/data";
+import { ACCENT, ACCENT_HOVER, OK, PRICING_FAQ } from "@/lib/data";
 import SiteHeader from "@/components/SiteHeader";
-import { IncludedFeatures, SuiteTiers, SiteFooter } from "@/components/StaticSections";
-import SendCalculator from "@/components/PricingCalculator";
+import { IncludedFeatures, SiteFooter } from "@/components/StaticSections";
+import PricingExplorer from "@/components/PricingExplorer";
 import FaqSection from "@/components/FaqSection";
 
 export const metadata: Metadata = {
@@ -28,25 +28,6 @@ const themeVars = {
   background: "#FAFAF8",
   overflowX: "clip",
 } as CSSProperties;
-
-const monoLabel = {
-  fontFamily: "'JetBrains Mono',monospace",
-  fontSize: 11.5,
-  letterSpacing: ".12em",
-  textTransform: "uppercase" as const,
-  color: ACCENT,
-  fontWeight: 600,
-};
-
-const h2Style = {
-  margin: "14px auto 0",
-  maxWidth: 620,
-  fontSize: "clamp(24px,3vw,34px)",
-  lineHeight: 1.12,
-  letterSpacing: "-.025em",
-  fontWeight: 700,
-  textWrap: "balance" as const,
-};
 
 export default function PricingPage() {
   return (
@@ -104,30 +85,13 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Suite tiers */}
-      <section style={{ maxWidth: 1320, margin: "0 auto", padding: "40px 32px 8px", textAlign: "center" }} data-pad>
-        <div style={monoLabel}>Suite · wallet + email</div>
-        <h2 style={h2Style}>Four tiers. Every capability on all of them.</h2>
-        <p style={{ margin: "14px auto 0", maxWidth: 560, fontSize: 16.5, lineHeight: 1.55, color: "#3D4A63", textWrap: "pretty" }}>
-          Pick a tier by the allowances you need. Usage above an allowance bills at list price, so overage is the
-          exception, not the plan.
-        </p>
-        <SuiteTiers />
-      </section>
+      {/* Suite / Send explorer */}
+      <div style={{ padding: "36px 32px 8px" }} data-pad>
+        <PricingExplorer />
+      </div>
 
       {/* everything included */}
       <IncludedFeatures />
-
-      {/* Send */}
-      <section style={{ maxWidth: 1320, margin: "0 auto", padding: "24px 32px 8px", textAlign: "center" }} data-pad>
-        <div style={monoLabel}>Send · email only</div>
-        <h2 style={h2Style}>No on-chain audience? Send is email only.</h2>
-        <p style={{ margin: "14px auto 0", maxWidth: 560, fontSize: 16.5, lineHeight: 1.55, color: "#3D4A63", textWrap: "pretty" }}>
-          The same email engine with the wallet channel switched off. One plan, no tiers: ${SEND_BASE} a month plus $
-          {SEND_PER_1K.toFixed(2)} per 1,000 subscribers.
-        </p>
-        <SendCalculator />
-      </section>
 
       {/* pricing FAQ */}
       <FaqSection items={PRICING_FAQ} eyebrow="Pricing FAQ" title="Pricing, explained." />
