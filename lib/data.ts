@@ -325,6 +325,7 @@ export const FOOTER_COLS: { title: string; items: FooterLink[] }[] = [
 export const FOOTER_LEGAL: FooterLink[] = [
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
+  { label: "DPA", href: "/dpa" },
   { label: "Security", href: "/security" },
   { label: "Subprocessors", href: "/subprocessors" },
 ];
