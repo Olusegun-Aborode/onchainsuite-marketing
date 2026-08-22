@@ -1,11 +1,10 @@
 import { CSSProperties } from "react";
 import type { Metadata } from "next";
-import { ACCENT, ACCENT_HOVER, OK, PRICING_FAQ, SEND_POINTS, SEND_BASE, SEND_PER_1K } from "@/lib/data";
+import { ACCENT, ACCENT_HOVER, OK, PRICING_FAQ, SEND_BASE, SEND_PER_1K } from "@/lib/data";
 import SiteHeader from "@/components/SiteHeader";
 import { IncludedFeatures, SuiteTiers, SiteFooter } from "@/components/StaticSections";
 import SendCalculator from "@/components/PricingCalculator";
 import FaqSection from "@/components/FaqSection";
-import CtaSection from "@/components/CtaSection";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -128,34 +127,10 @@ export default function PricingPage() {
           {SEND_PER_1K.toFixed(2)} per 1,000 subscribers.
         </p>
         <SendCalculator />
-
-        <div style={{ margin: "28px auto 0", maxWidth: 720, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 10 }}>
-          {SEND_POINTS.map((p) => (
-            <div
-              key={p.subs}
-              style={{
-                border: "1px solid #DCE7F5",
-                background: "#fff",
-                borderRadius: 12,
-                padding: "10px 14px",
-                minWidth: 104,
-                textAlign: "center",
-              }}
-            >
-              <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: "#8A93A6" }}>
-                {p.subs.toLocaleString("en-US")} subs
-              </div>
-              <div style={{ marginTop: 4, fontSize: 16, fontWeight: 700, color: "#1A1A17" }}>{p.price}<span style={{ fontSize: 11, fontWeight: 500, color: "#8A93A6" }}>/mo</span></div>
-            </div>
-          ))}
-        </div>
       </section>
 
       {/* pricing FAQ */}
       <FaqSection items={PRICING_FAQ} eyebrow="Pricing FAQ" title="Pricing, explained." />
-
-      {/* closing CTA */}
-      <CtaSection />
 
       <SiteFooter />
     </div>
