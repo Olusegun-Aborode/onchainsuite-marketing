@@ -419,7 +419,7 @@ export default function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Show the nav's "Get early access" only after the hero CTA scrolls out of view.
+  // Show the nav's "Connect With Sales" only after the hero CTA scrolls out of view.
   // On pages without a hero CTA (no sentinel), show it immediately.
   useEffect(() => {
     const sentinel = document.getElementById("ocs-cta-sentinel");
@@ -543,7 +543,7 @@ export default function SiteHeader() {
               transition: "opacity .28s ease, transform .28s ease",
             }}
           >
-            Get early access
+            Connect With Sales
           </a>
           <button className="ocs-hamburger" aria-label="Menu" aria-expanded={mobileOpen} onClick={() => setMobileOpen((v) => !v)}>
             <span style={{ display: "flex", flexDirection: "column", gap: 4 }}>

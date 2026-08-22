@@ -381,7 +381,7 @@ export const SUITE_TIERS: SuiteTier[] = [
   {
     name: "PAYG", price: "$0", period: "+ usage",
     tagline: "Every capability, no discount. Prepaid wallet, $10 minimum top-up. Hard caps stop it substituting for a plan; everything is metered at full list price.",
-    cta: "Get early access", href: "/early-access",
+    cta: "Connect With Sales", href: "/early-access",
     allowances: [
       { label: "Contacts", value: "1,000" },
       { label: "Automations", value: "3 max" },
@@ -392,7 +392,7 @@ export const SUITE_TIERS: SuiteTier[] = [
   {
     name: "Launch", price: "$27", period: "/mo",
     tagline: "Email and the wallet channel. Campaigns, automations, audience and Intelligence at sample size. No Forms or dedicated IP.",
-    cta: "Get early access", href: "/early-access",
+    cta: "Connect With Sales", href: "/early-access",
     allowances: [
       { label: "Contacts", value: "2,500" },
       { label: "Emails", value: "50,000" },
@@ -406,7 +406,7 @@ export const SUITE_TIERS: SuiteTier[] = [
   {
     name: "Growth", price: "$349", period: "/mo", featured: true,
     tagline: "Adds Forms and a dedicated IP, and takes the wallet channel from sample size to campaign size.",
-    cta: "Get early access", href: "/early-access",
+    cta: "Connect With Sales", href: "/early-access",
     allowances: [
       { label: "Contacts", value: "25,000" },
       { label: "Emails", value: "250,000" },
@@ -421,7 +421,7 @@ export const SUITE_TIERS: SuiteTier[] = [
   {
     name: "Pro", price: "$1,622", period: "/mo",
     tagline: "Intelligence at working scale. Enrichment, segmentation and on-chain triggers run continuously across a large list.",
-    cta: "Get early access", href: "/early-access",
+    cta: "Connect With Sales", href: "/early-access",
     allowances: [
       { label: "Contacts", value: "75,000" },
       { label: "Emails", value: "750,000" },

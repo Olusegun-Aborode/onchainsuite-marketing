@@ -112,7 +112,7 @@ export default function CtaSection() {
                   boxShadow: `0 1px 2px rgba(0,0,0,.08),0 2px 8px color-mix(in oklab,${ACCENT} 20%,transparent)`,
                 }}
               >
-                Get early access
+                Connect With Sales
               </button>
             </form>
             <div style={{ fontSize: 13.5, color: "#8A93A6" }}>

@@ -78,7 +78,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         </h1>
         <p style={{ margin: "20px 0 0", fontSize: 18.5, lineHeight: 1.65, color: "#3D4A63", maxWidth: 700 }}>{c.intro}</p>
         <div style={{ marginTop: 24, display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
-          <a href="/early-access" className="ocs-btn-primary" style={{ fontSize: 15, fontWeight: 600, color: "#fff", background: ACCENT, padding: "12px 20px", borderRadius: 10, textDecoration: "none" }}>Get early access</a>
+          <a href="/early-access" className="ocs-btn-primary" style={{ fontSize: 15, fontWeight: 600, color: "#fff", background: ACCENT, padding: "12px 20px", borderRadius: 10, textDecoration: "none" }}>Connect With Sales</a>
           <a href="/tools/churn-calculator" style={{ fontSize: 15, fontWeight: 600, color: ACCENT, textDecoration: "none" }}>Size up churn cost →</a>
         </div>
 

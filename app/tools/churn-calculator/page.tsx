@@ -75,7 +75,7 @@ export default function ChurnCalculatorPage() {
         </ol>
         <p style={p}>
           OnchainSuite runs each of these as an automated Play, triggered by real on-chain behaviour.{" "}
-          <a href="/early-access" style={{ color: ACCENT, fontWeight: 600 }}>Get early access</a>.
+          <a href="/early-access" style={{ color: ACCENT, fontWeight: 600 }}>Connect With Sales</a>.
         </p>
 
         <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11.5, letterSpacing: ".12em", textTransform: "uppercase", color: ACCENT, fontWeight: 600, margin: "52px 0 0" }}>Related tools</div>

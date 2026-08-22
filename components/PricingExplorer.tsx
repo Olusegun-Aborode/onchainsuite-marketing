@@ -32,7 +32,6 @@ export default function PricingExplorer() {
             <span className="ocs-pex-item-sub">{n.sub}</span>
           </button>
         ))}
-        <a href="/early-access" className="ocs-pex-cta">Get early access</a>
       </aside>
 
       {/* panel */}
@@ -63,7 +62,7 @@ export default function PricingExplorer() {
           display: grid; grid-template-columns: 236px 1fr; gap: 30px;
           max-width: 1200px; margin: 8px auto 0; text-align: left; align-items: start;
         }
-        .ocs-pex-nav { position: sticky; top: 92px; display: flex; flex-direction: column; gap: 8px; }
+        .ocs-pex-nav { position: sticky; top: 92px; margin-top: 52px; display: flex; flex-direction: column; gap: 8px; }
         .ocs-pex-navlabel {
           font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em;
           text-transform: uppercase; color: #8A93A6; margin-bottom: 4px;
@@ -81,18 +80,13 @@ export default function PricingExplorer() {
         .ocs-pex-item-name { font-size: 16px; font-weight: 700; color: #1A1A17; letter-spacing: -.01em; }
         .ocs-pex-item.active .ocs-pex-item-name { color: ${ACCENT}; }
         .ocs-pex-item-sub { font-size: 12.5px; color: #8A93A6; }
-        .ocs-pex-cta {
-          margin-top: 6px; text-align: center; text-decoration: none; font-size: 14px; font-weight: 600;
-          color: #fff; background: ${ACCENT}; border-radius: 11px; padding: 11px 12px;
-        }
         .ocs-pex-h { margin: 0; font-size: clamp(22px,2.6vw,30px); line-height: 1.1; letter-spacing: -.025em; font-weight: 700; color: #1A1A17; }
         .ocs-pex-p { margin: 12px 0 0; max-width: 640px; font-size: 15.5px; line-height: 1.6; color: #3D4A63; }
         @media (max-width: 860px) {
           .ocs-pex { grid-template-columns: 1fr; gap: 20px; }
-          .ocs-pex-nav { position: static; top: auto; flex-direction: row; flex-wrap: wrap; }
+          .ocs-pex-nav { position: static; top: auto; margin-top: 0; flex-direction: row; flex-wrap: wrap; }
           .ocs-pex-navlabel { display: none; }
           .ocs-pex-item { flex: 1; min-width: 140px; }
-          .ocs-pex-cta { flex-basis: 100%; }
         }
       `}</style>
     </div>
