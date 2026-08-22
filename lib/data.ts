@@ -15,14 +15,15 @@ export const APP_URL = "https://app.onchainsuite.com";
 export const CONTACT_EMAIL = "info@onchainsuite.com";
 
 // Company + legal facts. Verified against Companies House (company 17370357).
-// The ICO reference is still a placeholder (separate registration to complete).
+// ICO registration applied for; swap icoApplication for the final ZA/ZB
+// reference once the ICO confirms it (expected within a few working days).
 export const COMPANY = {
   legalName: "OnchainSuite Ltd",
   shortName: "OnchainSuite",
   number: "17370357",
   office: "31 Nash Square, Birmingham, United Kingdom, B42 2EX",
   incorporated: "30 July 2026",
-  ico: "[ICO registration reference]",
+  icoApplication: "C2013999",
   jurisdiction: "England and Wales",
   privacyEmail: "privacy@onchainsuite.com",
   dpoEmail: "dpo@onchainsuite.com",

@@ -21,8 +21,9 @@ export default function PrivacyPage() {
       <p>
         This policy is issued by <strong>{COMPANY.legalName}</strong> (&ldquo;OnchainSuite&rdquo;, &ldquo;we&rdquo;,
         &ldquo;us&rdquo;), a company registered in {COMPANY.jurisdiction} (company number {COMPANY.number}), with its
-        registered office at {COMPANY.office}. We are registered with the UK Information Commissioner&rsquo;s Office
-        (ICO) under reference {COMPANY.ico}.
+        registered office at {COMPANY.office}. We have applied to register with the UK Information
+        Commissioner&rsquo;s Office (ICO) as a fee payer (application number {COMPANY.icoApplication}); this page
+        will show our registration reference once the ICO confirms it.
       </p>
       <p>
         For questions about this policy or your personal data, contact{" "}
