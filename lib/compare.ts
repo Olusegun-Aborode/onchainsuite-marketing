@@ -7,23 +7,23 @@ export type QA = { q: string; a: string };
 
 export const MATRIX_CAPS = [
   "Pricing",
-  "On-chain behaviour triggers",
-  "Wallet-native identity (no email)",
-  "In-app push to wallets",
+  "Journeys started by on-chain activity",
+  "Contacts with only a wallet, no email",
+  "In-app messages to wallets",
   "Email campaigns",
   "Segment on on-chain activity",
-  "Cross-chain (ETH / SOL / Base / Polygon)",
-  "Retention automations & journeys",
+  "Several chains read into one record",
+  "Automated customer journeys",
   "Telegram / Discord",
   "SMS",
   "Ads / acquisition attribution",
   "Analytics / dashboards",
   "SDK / API",
-  "Built for Web3",
+  "Built for blockchain companies",
 ] as const;
 
 export const OCS_MATRIX: string[] = [
-  "4 tiers, $0–$1,622/mo",
+  "From $39 to $1,622 a month",
   "Yes",
   "Yes",
   "Yes",
@@ -34,22 +34,22 @@ export const OCS_MATRIX: string[] = [
   "Roadmap",
   "No",
   "No",
-  "Basic",
+  "Lifecycle and retention",
   "Yes",
   "Yes",
 ];
 
 // Constant across every comparison: the OnchainSuite pillars and switch steps.
 export const OCS_HIGHLIGHTS = [
-  { icon: "bolt", title: "Triggers on-chain", desc: "A rule fires the moment a wallet deposits, unstakes, or goes quiet. No manual event wiring." },
-  { icon: "send", title: "Reaches wallets", desc: "In-app push needs only the address, so wallets with no email still hear from you. Email covers the rest." },
-  { icon: "wand", title: "Plays, not projects", desc: "Fork a win-back, onboarding, or whale-watch flow and ship it the same afternoon." },
+  { icon: "bolt", title: "Reads both lanes", desc: "What customers do in your app and what their wallets do on-chain go onto one record, with no export to prepare." },
+  { icon: "send", title: "Reaches wallets with no email", desc: "An in-app message needs only the wallet, so customers who never gave you an address still hear from you." },
+  { icon: "wand", title: "Loops that stop when the customer acts", desc: "A Loop waits, sends by email or in-app, and ends the moment the action is recorded on the contract." },
 ];
 
 export const MIGRATION_STEPS = [
-  { title: "Drop in the SDK", desc: "Create a workspace and add the SDK. You are live in minutes." },
-  { title: "We read the chains", desc: "Activity across Ethereum, Solana, Base, and Polygon comes back as clean triggers and segments." },
-  { title: "Turn on a Play", desc: "Fork a flow or write a rule. It runs on its own, across in-app push and email." },
+  { title: "Tell us where your community lives", desc: "A contract address, a project name or your website. We find the contracts and the holders." },
+  { title: "Bring in the records you already hold", desc: "Email lists, app accounts and wallets. You give up nothing you have already set up." },
+  { title: "Connect a channel and send", desc: "Verify a sending domain for email, or add the SDK for in-app, then start your first Loop." },
 ];
 
 export type Competitor = {
@@ -71,16 +71,16 @@ export const COMPETITORS: Competitor[] = [
     name: "Klaviyo",
     kind: "Ecommerce marketing",
     intro:
-      "Klaviyo runs email and SMS for ecommerce brands, keyed to store events like orders and carts. OnchainSuite does that same job for Web3, only the triggers come from the chain and the audience is wallets. When one deposits, unstakes, or goes quiet, you reach it by in-app push or email, even if it never gave you an address.",
+      "Klaviyo runs email and SMS for ecommerce brands, keyed to store events like orders and carts. OnchainSuite does that same job for blockchain companies, only the triggers come from the chain and the audience is wallets. When one deposits, unstakes, or goes quiet, you reach it by in-app push or email, even if it never gave you an address.",
     whyChoose:
       "Klaviyo has no wallet identity and no blockchain data. It cannot see a deposit or a wallet going cold, and it cannot message a wallet that never shared an email. That gap is exactly what OnchainSuite was built to close.",
     theyLike: ["Deep ecommerce integrations like Shopify", "Mature email and SMS automation", "Predictive analytics for stores", "A big template and flow library"],
     whenThem: "You run a Web2 store and your customers are email addresses, not wallets.",
-    together: "Keep Klaviyo for Web2 email and let OnchainSuite handle the on-chain triggers it cannot see. Segments sync between the two.",
+    together: "Keep Klaviyo for Web2 email and let OnchainSuite handle the on-chain triggers it cannot see.",
     them: ["Paid by contacts", "No", "No", "App push (Web2)", "Yes", "Web2 events", "No", "Yes", "No", "Yes", "Limited", "Yes", "Yes", "No"],
     faqs: [
-      { q: "Can Klaviyo track on-chain activity?", a: "No. Klaviyo reads web and store events. It has no wallet or blockchain source, so it cannot fire on a deposit, swap, or stake." },
-      { q: "Is OnchainSuite a Klaviyo replacement for Web3?", a: "For on-chain retention, yes. You can also run both and let OnchainSuite own the wallet-native side." },
+      { q: "Can Klaviyo track on-chain activity?", a: "No. Klaviyo reads web and store events. It has no wallet or blockchain source, so it cannot start a journey from a deposit, swap, or stake." },
+      { q: "Is OnchainSuite a Klaviyo replacement for blockchain companies?", a: "For on-chain retention, yes. You can also run both and let OnchainSuite own the wallet-native side." },
       { q: "Does OnchainSuite do SMS?", a: "No. We focus on in-app push and email." },
       { q: "Can it reach wallets with no email?", a: "Yes, through in-app push, which needs only the address. Email is for wallets that opt in." },
     ],
@@ -98,10 +98,10 @@ export const COMPETITORS: Competitor[] = [
     together: "If you are standardised on Customer.io, forward on-chain events into it. Or let OnchainSuite own the wallet-native side end to end.",
     them: ["From ~$100/mo", "No", "No", "Yes", "Yes", "Web2 events", "No", "Yes", "No", "Yes", "No", "Basic", "Yes", "No"],
     faqs: [
-      { q: "Does Customer.io read wallet data?", a: "No. It fires on events you send it. On-chain activity would be yours to capture and forward; OnchainSuite does that for you." },
-      { q: "Is OnchainSuite as flexible?", a: "For on-chain retention, yes, with wallet identity and prebuilt Plays. Customer.io stays broader for generic Web2 lifecycle messaging." },
+      { q: "Does Customer.io read wallet data?", a: "No. It acts on events you send it. On-chain activity would be yours to capture and forward; OnchainSuite does that for you." },
+      { q: "Is OnchainSuite as flexible?", a: "For on-chain retention, yes, with wallet identity and ready-made Loops. Customer.io stays broader for generic Web2 lifecycle messaging." },
       { q: "Can I message wallets with no email?", a: "Yes, by in-app push. Customer.io needs a known Web2 identifier and channel." },
-      { q: "How long is setup?", a: "Add the SDK and you are live in minutes. Chains are read into triggers automatically." },
+      { q: "How long is setup?", a: "Point OnchainSuite at your contracts and bring in the records you already hold. We read the chain into actions for you, so there is no pipeline for your engineers to build." },
     ],
   },
   {
@@ -109,7 +109,7 @@ export const COMPETITORS: Competitor[] = [
     name: "Braze",
     kind: "Enterprise engagement",
     intro:
-      "Braze runs cross-channel messaging for large consumer apps. OnchainSuite brings that always-on model to Web3, built around wallets and on-chain behaviour instead of Web2 profiles, and it stands up in an afternoon rather than a quarter.",
+      "Braze runs cross-channel messaging for large consumer apps. OnchainSuite brings that always-on model to blockchain companies, built around wallets and on-chain behaviour instead of Web2 profiles, and it does not need a data engineering project to start.",
     whyChoose:
       "Braze is powerful, but it is organised around Web2 identity and app SDKs. It has no wallet identity and no chain triggers. OnchainSuite gives protocol teams the same orchestration on an on-chain foundation, at a fraction of the setup.",
     theyLike: ["Orchestration that scales to millions", "Rich cross-channel journeys", "Strong analytics and experimentation", "A mature integrations ecosystem"],
@@ -118,8 +118,8 @@ export const COMPETITORS: Competitor[] = [
     them: ["Contact sales", "No", "No", "Yes", "Yes", "Web2 profiles", "No", "Yes", "Partial", "Yes", "No", "Yes", "Yes", "No"],
     faqs: [
       { q: "Can Braze message wallets?", a: "Not on its own. Braze targets known users on channels tied to Web2 identifiers. OnchainSuite reaches wallets directly with in-app push." },
-      { q: "Is OnchainSuite cheaper?", a: "Usually. Suite starts at $0 (PAYG) or $27 a month on Launch, with no enterprise minimum, versus Braze's contact-sales model." },
-      { q: "Does it scale for large protocols?", a: "Yes. Pricing scales with tracked wallets and subscribers, and the largest volumes move to custom." },
+      { q: "Is OnchainSuite cheaper?", a: "Usually. Suite starts at $39 a month on Launch, with no enterprise minimum, against Braze's contact-sales model." },
+      { q: "Does it scale for large protocols?", a: "Yes. Pricing scales with the contacts you bring in, from Launch to Pro." },
       { q: "How is on-chain data handled?", a: "We read cross-chain activity into clean events and segments, so you skip the data engineering." },
     ],
   },
@@ -128,7 +128,7 @@ export const COMPETITORS: Competitor[] = [
     name: "Dotdigital",
     kind: "Email marketing",
     intro:
-      "Dotdigital is a cross-channel email and automation suite for ecommerce and B2B teams. OnchainSuite covers the same retention job for Web3, driven by what wallets do on-chain and delivered to wallets rather than mailing-list contacts.",
+      "Dotdigital is a cross-channel email and automation suite for ecommerce and B2B teams. OnchainSuite covers the same retention job for blockchain companies, driven by what wallets do on-chain and delivered to wallets rather than mailing-list contacts.",
     whyChoose:
       "Dotdigital is a capable marketing suite, but it is entirely Web2. There is no wallet identity and no on-chain trigger. OnchainSuite is built to act on wallet behaviour Dotdigital cannot see.",
     theyLike: ["Solid email and cross-channel automation", "Ecommerce and CRM integrations", "Good deliverability tooling", "Established support and services"],
@@ -147,7 +147,7 @@ export const COMPETITORS: Competitor[] = [
     name: "EmailOctopus",
     kind: "Simple email",
     intro:
-      "EmailOctopus is a cheap, simple email tool built on Amazon SES. OnchainSuite sits in a different category, a retention platform for Web3, but teams often weigh a basic email tool against doing retention properly.",
+      "EmailOctopus is a cheap, simple email tool built on Amazon SES. OnchainSuite sits in a different category, a retention platform for blockchain companies, but teams often weigh a basic email tool against doing retention properly.",
     whyChoose:
       "EmailOctopus sends broadcasts and light automations. There is no event pipeline, no wallet identity, and no sense of what happens on-chain. If retention past the newsletter matters, OnchainSuite is the better fit.",
     theyLike: ["Very affordable", "Simple and quick to use", "Good for newsletters", "A clean, no-frills UI"],
@@ -157,7 +157,7 @@ export const COMPETITORS: Competitor[] = [
     faqs: [
       { q: "Can EmailOctopus trigger on behaviour?", a: "Only basic list automations. There is no product-event or on-chain triggering." },
       { q: "Is OnchainSuite overkill next to it?", a: "If you only send newsletters, EmailOctopus is fine. If you want to retain wallets on on-chain behaviour, the two are not comparable." },
-      { q: "Does it cost a lot more?", a: "Suite starts at $0 (PAYG) or $27 a month, more than a newsletter tool because it does far more. For email only, Send is $6 a month plus $2.60 per 1,000 subscribers." },
+      { q: "Does it cost a lot more?", a: "Suite starts at $39 a month, more than a newsletter tool because it reads your contracts as well as your list. For email only, Send is $6 a month plus $3.95 per 1,000 subscribers." },
     ],
   },
   {
@@ -183,7 +183,7 @@ export const COMPETITORS: Competitor[] = [
     name: "Brevo",
     kind: "SMB marketing CRM",
     intro:
-      "Brevo, once Sendinblue, bundles email, SMS, and a light CRM for small businesses. OnchainSuite handles retention for Web3 teams whose customers are wallets and whose triggers live on-chain.",
+      "Brevo, once Sendinblue, bundles email, SMS, and a light CRM for small businesses. OnchainSuite handles retention for blockchain companies whose customers are wallets and whose triggers live on-chain.",
     whyChoose:
       "Brevo is a generic Web2 email and SMS tool. It has no wallet identity and no on-chain events. OnchainSuite acts on wallet behaviour Brevo cannot see.",
     theyLike: ["An affordable all-in-one", "Email, SMS, and a basic CRM", "Easy for small teams", "A generous free tier"],
@@ -191,9 +191,9 @@ export const COMPETITORS: Competitor[] = [
     together: "Use Brevo for generic email and SMS, and OnchainSuite for on-chain wallet retention.",
     them: ["Free / from ~$9/mo", "No", "No", "Limited", "Yes", "Web2 CRM", "No", "Yes", "No", "Yes", "No", "Basic", "Yes", "No"],
     faqs: [
-      { q: "Does Brevo work for Web3?", a: "Only as a generic email and SMS tool. It cannot see or act on on-chain behaviour." },
+      { q: "Does Brevo work for blockchain companies?", a: "Only as a generic email and SMS tool. It cannot see or act on on-chain behaviour." },
       { q: "Why choose OnchainSuite?", a: "Because your customers are wallets and your triggers are on-chain, neither of which Brevo supports." },
-      { q: "Can it fully replace Brevo?", a: "For Web3 retention, yes. If you also need generic SMS marketing, keep a tool like Brevo alongside." },
+      { q: "Can it fully replace Brevo?", a: "For retention at a blockchain company, yes. If you also need generic SMS marketing, keep a tool like Brevo alongside." },
     ],
   },
   {
@@ -218,9 +218,9 @@ export const COMPETITORS: Competitor[] = [
   {
     slug: "addressable",
     name: "Addressable",
-    kind: "Web3 growth / ads",
+    kind: "On-chain growth and ads",
     intro:
-      "Addressable helps Web3 teams target ads and attribute acquisition by matching wallets to Web2 identities. OnchainSuite works the other half of the funnel, keeping and re-activating the users you already have.",
+      "Addressable helps blockchain companies target ads and attribute acquisition by matching wallets to Web2 identities. OnchainSuite works the other half of the funnel, keeping and re-activating the users you already have.",
     whyChoose:
       "Addressable is about finding and targeting new wallets through ads. OnchainSuite is about retaining and re-engaging existing ones through owned in-app and email channels triggered by on-chain behaviour.",
     theyLike: ["Wallet-based ad targeting", "Cross-channel acquisition attribution", "Campaign measurement for crypto", "A good fit for paid growth teams"],
@@ -238,7 +238,7 @@ export const COMPETITORS: Competitor[] = [
     name: "Galxe",
     kind: "Quests & credentials",
     intro:
-      "Galxe runs quests, campaigns, loyalty, and on-chain credentials for Web3 communities. OnchainSuite is the always-on layer beneath the campaigns, reacting to real wallet behaviour between them.",
+      "Galxe runs quests, campaigns, loyalty, and on-chain credentials for blockchain communities. OnchainSuite is the always-on layer beneath the campaigns, reacting to real wallet behaviour between them.",
     whyChoose:
       "Galxe drives engagement through quests, which are moments. OnchainSuite runs continuously in the background, reacting to what wallets actually do and keeping them warm between campaigns.",
     theyLike: ["A large quest and campaign ecosystem", "On-chain credentials and loyalty", "Strong distribution and reach", "A good fit for token and community launches"],

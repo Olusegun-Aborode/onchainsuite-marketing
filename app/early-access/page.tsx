@@ -1,92 +1,36 @@
-import { CSSProperties } from "react";
 import type { Metadata } from "next";
-import { ACCENT, ACCENT_HOVER, OK } from "@/lib/data";
-import SiteHeader from "@/components/SiteHeader";
+import SiteChrome from "@/components/ns/SiteChrome";
 import EarlyAccessForm from "@/components/EarlyAccessForm";
-import DemoVideo from "@/components/DemoVideo";
+import { LogoRow } from "@/components/ns/Blocks";
 
 export const metadata: Metadata = {
-  title: "Get early access",
-  description:
-    "Tell us about your protocol and book a call. OnchainSuite onboards a handful of Web3 teams each week.",
+  title: "Book a walkthrough",
+  description: "Book a thirty-minute walkthrough of OnchainSuite. Bring a problem your team already has and we will show you how that journey would run on your own data.",
   alternates: { canonical: "/early-access" },
-  openGraph: {
-    title: "Get early access · OnchainSuite",
-    description:
-      "Tell us about your protocol and book a 20-minute call. We onboard a handful of Web3 teams each week.",
-    url: "/early-access",
-    type: "website",
-  },
+  openGraph: { title: "Book a walkthrough · OnchainSuite", url: "/early-access", type: "website",
+    description: "A thirty-minute walkthrough of OnchainSuite, on a problem your team already has." },
 };
-
-const themeVars = {
-  "--acc": ACCENT,
-  "--acc-h": ACCENT_HOVER,
-  "--ok": OK,
-  background: "#FAFAF8",
-} as CSSProperties;
 
 export default function EarlyAccessPage() {
   return (
-    <div className="ocs-fixed-page" style={themeVars}>
-      <SiteHeader />
-
-      <main className="ocs-ea-main" style={{ flex: 1, minHeight: 0 }}>
-        <div
-          style={{
-            maxWidth: 1320,
-            margin: "0 auto",
-            height: "100%",
-            padding: "28px 32px 32px",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 48,
-            alignItems: "stretch",
-          }}
-          data-stack
-          data-pad
-        >
-          {/* Left: heading + accordion (scrolls internally; page stays fixed) */}
-          <div className="ocs-ea-col" style={{ minHeight: 0 }}>
-            <div
-              style={{
-                fontFamily: "'JetBrains Mono',monospace",
-                fontSize: 11.5,
-                letterSpacing: ".12em",
-                textTransform: "uppercase",
-                color: ACCENT,
-                fontWeight: 600,
-              }}
-            >
-              Early access
-            </div>
-            <h1
-              style={{
-                margin: "10px 0 0",
-                fontSize: "clamp(26px,3.4vw,38px)",
-                lineHeight: 1.06,
-                letterSpacing: "-.03em",
-                fontWeight: 700,
-                textWrap: "balance",
-              }}
-            >
-              Get early access to <span className="ocs-grad-text">OnchainSuite.</span>
-            </h1>
-            <p style={{ margin: "12px 0 22px", maxWidth: 460, fontSize: 15.5, lineHeight: 1.55, color: "#3D4A63", textWrap: "pretty" }}>
-              Tell us about your protocol and book a 20-minute call. We&apos;ll show you the platform on your own
-              on-chain data.
-            </p>
+    <SiteChrome>
+      <div className="wrap">
+        <section className="book">
+          <div className="book-l">
+            <h1 className="h1 load" style={{ animationDelay: ".08s" }}>See OnchainSuite on a problem your team already has.</h1>
+            <p className="sub load" style={{ animationDelay: ".16s" }}>Tell us a little about your company and pick a time. The walkthrough takes thirty minutes.</p>
+            <ol className="book-steps load" style={{ animationDelay: ".24s" }}>
+              <li><b>Bring the problem</b><span>Such as customers who signed up and never made a first deposit.</span></li>
+              <li><b>We check the data</b><span>Which contracts and records we support for it, and what we would read.</span></li>
+              <li><b>You see the journey</b><span>How that Loop or campaign would run in OnchainSuite, and which package fits.</span></li>
+            </ol>
+          </div>
+          <div className="book-r load" style={{ animationDelay: ".2s" }}>
             <EarlyAccessForm />
           </div>
-
-          {/* Right: demo video, centered and fixed */}
-          <div className="ocs-ea-demo" style={{ display: "flex", alignItems: "center", minHeight: 0 }}>
-            <div style={{ width: "100%" }}>
-              <DemoVideo />
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
+        </section>
+        <LogoRow label="Trusted by blockchain companies including" />
+      </div>
+    </SiteChrome>
   );
 }

@@ -39,7 +39,7 @@ export default function LtvCalculator() {
   return (
     <div style={{ border: "1px solid #DCE7F5", borderRadius: 20, background: "#fff", padding: "28px 26px", boxShadow: "0 1px 2px rgba(26,24,20,.04)" }}>
       <Row label="Revenue per wallet / month" hint="Average monthly revenue per active wallet" value={arpu} min={1} max={500} step={1} onChange={setArpu} fmt={usd} />
-      <Row label="Monthly churn rate" hint="Share of wallets that go inactive each month" value={churn} min={1} max={30} step={1} onChange={(v) => { setChurn(v); if (improved > v) setImproved(v); }} fmt={(v) => `${v}%`} />
+      <Row label="Monthly churn rate" hint="Share of wallets that leave and do not come back each month" value={churn} min={1} max={30} step={1} onChange={(v) => { setChurn(v); if (improved > v) setImproved(v); }} fmt={(v) => `${v}%`} />
       <Row label="Gross margin" hint="Share of revenue you keep" value={margin} min={20} max={100} step={1} onChange={setMargin} fmt={(v) => `${v}%`} />
       <Row label="Improved churn (with retention)" hint="Target churn after retention" value={improved} min={1} max={churn} step={1} onChange={setImproved} fmt={(v) => `${v}%`} />
 

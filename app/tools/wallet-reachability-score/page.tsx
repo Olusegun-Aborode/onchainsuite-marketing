@@ -1,8 +1,9 @@
 import { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { ACCENT, ACCENT_HOVER, OK, SITE_URL } from "@/lib/data";
-import SiteHeader from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/StaticSections";
+import SiteChrome from "@/components/ns/SiteChrome";
+import { CloseCta } from "@/components/ns/Blocks";
+import ToolArt from "@/components/ns/ToolArt";
 import ReachabilityScoreCalc from "@/components/ReachabilityScoreCalc";
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: { title: "Wallet reachability score · OnchainSuite", description: "What share of your holders you can actually reach today.", url: "/tools/wallet-reachability-score", type: "website" },
 };
 
-const themeVars = { "--acc": ACCENT, "--acc-h": ACCENT_HOVER, "--ok": OK, minHeight: "100vh", background: "#FBFBFC", overflowX: "clip", color: "#010F31" } as CSSProperties;
+const themeVars = { "--acc": ACCENT, "--acc-h": ACCENT_HOVER, "--ok": OK, background: "#FFFFFF", color: "#010F31" } as CSSProperties;
 const wrap = { maxWidth: 1200, margin: "0 auto" };
 const mono = "'JetBrains Mono',monospace";
 
@@ -44,9 +45,9 @@ const RELATED = [
 export default function ReachabilityPage() {
   const ld = { "@context": "https://schema.org", "@type": "WebApplication", name: "Wallet reachability score", applicationCategory: "BusinessApplication", operatingSystem: "Web", url: `${SITE_URL}/tools/wallet-reachability-score`, offers: { "@type": "Offer", price: "0", priceCurrency: "USD" } };
   return (
-    <div style={themeVars}>
-      <SiteHeader />
-      <section style={{ ...wrap, padding: "56px 40px 0" }} data-pad>
+    <SiteChrome>
+    <div className="wrap tool-page" style={themeVars}>
+      <section className="tool-hero" style={{ ...wrap, padding: "56px 40px 0" }} data-pad>
         <nav aria-label="Breadcrumb" style={{ fontSize: 13.5, color: "#767B83", display: "flex", gap: 8 }}>
           <a href="/tools" style={{ color: "#767B83", fontWeight: 500 }}>Tools</a>
           <span aria-hidden="true">/</span>
@@ -54,6 +55,7 @@ export default function ReachabilityPage() {
         </nav>
         <h1 style={{ margin: "20px 0 0", fontSize: "clamp(38px,5vw,56px)", lineHeight: 1.04, letterSpacing: "-1px", fontWeight: 600, maxWidth: "18ch", color: "#010F31" }}>Wallet reachability score</h1>
         <p style={{ margin: "20px 0 0", maxWidth: "58ch", fontSize: 17, lineHeight: 1.65, color: "#585D65" }}>You cannot retain a wallet you cannot reach. Score how much of your base is addressable today, weighted by how durable each channel really is.</p>
+        <ToolArt kind="reach" className="hero-art" />
       </section>
 
       <section style={{ ...wrap, padding: "36px 40px 0" }} data-pad>
@@ -118,7 +120,7 @@ export default function ReachabilityPage() {
         </div>
       </section>
 
-      <SiteFooter />
+      <CloseCta />
       <style>{`
         .ocs-article-grid { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:56px; align-items:start; }
         .ocs-article-side { position:sticky; top:88px; }
@@ -129,5 +131,6 @@ export default function ReachabilityPage() {
       `}</style>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
     </div>
+    </SiteChrome>
   );
 }

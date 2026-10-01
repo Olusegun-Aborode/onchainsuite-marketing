@@ -1,13 +1,10 @@
-import { CSSProperties, ReactNode } from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ACCENT, ACCENT_HOVER, OK } from "@/lib/data";
 import { COMPETITORS, MATRIX_CAPS, MIGRATION_STEPS, OCS_HIGHLIGHTS, OCS_MATRIX, competitorBySlug } from "@/lib/compare";
-import SiteHeader from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/StaticSections";
-import FaqSection from "@/components/FaqSection";
-import CtaSection from "@/components/CtaSection";
-import CompareCard from "@/components/CompareCard";
+import SiteChrome from "@/components/ns/SiteChrome";
+import { CloseCta, Faq } from "@/components/ns/Blocks";
+import VsLockup from "@/components/ns/VsLockup";
 
 export const dynamicParams = false;
 
@@ -20,154 +17,94 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const c = competitorBySlug(slug);
   if (!c) return {};
   return {
-    title: `OnchainSuite vs ${c.name}`,
-    description: `${c.name} vs OnchainSuite for Web3 retention: a full feature comparison, when to pick which, and FAQs.`,
+    title: `OnchainSuite and ${c.name} compared`,
+    description: `${c.name} and OnchainSuite for blockchain companies: feature by feature, when ${c.name} is the better call, and how to run both.`,
     alternates: { canonical: `/compare/${c.slug}` },
-    openGraph: {
-      title: `OnchainSuite vs ${c.name}`,
-      description: `How OnchainSuite compares to ${c.name} for on-chain retention and messaging.`,
-      url: `/compare/${c.slug}`,
-      type: "website",
-    },
+    openGraph: { title: `OnchainSuite and ${c.name} compared`, url: `/compare/${c.slug}`, type: "website",
+      description: `How OnchainSuite compares with ${c.name} for lifecycle and retention marketing at blockchain companies.` },
   };
 }
 
-const themeVars = { "--acc": ACCENT, "--acc-h": ACCENT_HOVER, "--ok": OK, minHeight: "100vh", background: "#FAFAF8", overflowX: "clip" } as CSSProperties;
-const mono = { fontFamily: "'JetBrains Mono',monospace", fontSize: 11.5, letterSpacing: ".12em", textTransform: "uppercase" as const, color: ACCENT, fontWeight: 600 };
-const h2 = { margin: "56px 0 0", fontSize: 25, fontWeight: 700, letterSpacing: "-.025em", color: "#1A1A17" } as CSSProperties;
-
-const HL_ICONS: Record<string, ReactNode> = {
-  bolt: <path d="M13 2 4.5 13.5H11l-1 8.5L19.5 10H13z" />,
-  send: <path d="M21 3 10.5 13.5M21 3 14 21l-3.5-7.5L3 10z" />,
-  wand: <path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z" />,
-};
-
-function Val({ v, us }: { v: string; us?: boolean }) {
-  if (v === "Yes")
-    return (
-      <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: us ? ACCENT : "#15803D", fontWeight: 600, fontSize: 13.5 }}>
-        <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5" /></svg>
-        Yes
-      </span>
-    );
-  if (v === "No") return <span style={{ color: "#A6AFC0", fontSize: 13.5 }}>No</span>;
-  if (v === "Roadmap") return <span style={{ color: ACCENT, fontWeight: 600, fontSize: 13.5 }}>Roadmap</span>;
-  return <span style={{ fontSize: 13.5, color: us ? "#1A1A17" : "#3D4A63", fontWeight: us ? 600 : 400 }}>{v}</span>;
+function Val({ v }: { v: string }) {
+  if (v === "Yes") return <span className="v yes"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="1.8" /></svg>Yes</span>;
+  if (v === "No") return <span className="v no">No</span>;
+  return <span className="v">{v}</span>;
 }
+
+const ICON: Record<string, string> = { bolt: "#i-layers", send: "#a-phone", wand: "#a-bolt" };
 
 export default async function ComparePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const c = competitorBySlug(slug);
   if (!c) notFound();
-
-  const others = COMPETITORS.filter((x) => x.slug !== c.slug);
+  const others = COMPETITORS.filter((x) => x.slug !== c.slug).slice(0, 3);
   const faqLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
+    "@context": "https://schema.org", "@type": "FAQPage",
     mainEntity: c.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
   };
-
   return (
-    <div style={themeVars}>
-      <SiteHeader />
-      <main style={{ maxWidth: 860, margin: "0 auto", padding: "76px 32px 8px" }} data-pad>
-        {/* Hero */}
-        <div style={mono}>Compare · {c.kind}</div>
-        <h1 style={{ margin: "16px 0 0", fontSize: "clamp(32px,4.6vw,54px)", lineHeight: 1.03, letterSpacing: "-.03em", fontWeight: 700, color: "#1A1A17" }}>
-          OnchainSuite vs <span className="ocs-grad-text">{c.name}</span>
-        </h1>
-        <p style={{ margin: "20px 0 0", fontSize: 18.5, lineHeight: 1.65, color: "#3D4A63", maxWidth: 700 }}>{c.intro}</p>
-        <div style={{ marginTop: 24, display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
-          <a href="/early-access" className="ocs-btn-primary" style={{ fontSize: 15, fontWeight: 600, color: "#fff", background: ACCENT, padding: "12px 20px", borderRadius: 10, textDecoration: "none" }}>Connect With Sales</a>
-          <a href="/tools/churn-calculator" style={{ fontSize: 15, fontWeight: 600, color: ACCENT, textDecoration: "none" }}>Size up churn cost →</a>
-        </div>
+    <SiteChrome>
+      <div className="wrap">
+        <section className="vs-hero">
+          <Link className="crumb load" href="/compare">← All comparisons</Link>
+          <div className="load" style={{ animationDelay: ".05s" }}><VsLockup slug={c.slug} name={c.name} size="lg" /></div>
+          <h1 className="h1 load" style={{ animationDelay: ".1s" }}>OnchainSuite and {c.name}</h1>
+          <p className="sub load" style={{ animationDelay: ".18s" }}>{c.intro}</p>
+          <div className="ctas load" style={{ animationDelay: ".26s" }}><Link className="btn solid lg" href="/early-access">Book a walkthrough</Link><Link className="btn lg" href="/pricing">See pricing</Link></div>
+        </section>
 
-        {/* Why choose */}
-        <h2 style={h2}>Why teams pick OnchainSuite over {c.name}</h2>
-        <p style={{ margin: "16px 0 0", fontSize: 16.5, lineHeight: 1.7, color: "#3D4A63" }}>{c.whyChoose}</p>
-
-        {/* Highlights — open, no boxes */}
-        <div style={{ marginTop: 34, display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 30 }} data-cards>
-          {OCS_HIGHLIGHTS.map((hl) => (
-            <div key={hl.title}>
-              <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke={ACCENT} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{HL_ICONS[hl.icon]}</svg>
-              <div style={{ margin: "12px 0 0", fontSize: 15.5, fontWeight: 700, color: "#1A1A17" }}>{hl.title}</div>
-              <div style={{ margin: "7px 0 0", fontSize: 14, lineHeight: 1.55, color: "#3D4A63" }}>{hl.desc}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Matrix — clean table, checkmarks not pills */}
-        <h2 style={h2}>Feature by feature</h2>
-        <div style={{ overflowX: "auto", marginTop: 18 }}>
-          <table style={{ width: "100%", minWidth: 560, borderCollapse: "collapse", fontSize: 14.5 }}>
-            <thead>
-              <tr>
-                <th style={{ textAlign: "left", padding: "0 12px 12px 0", borderBottom: "1px solid #C9D6EA", color: "#8A93A6", fontWeight: 600, fontSize: 12.5, width: "44%" }}>Capability</th>
-                <th style={{ textAlign: "left", padding: "0 12px 12px", borderBottom: "1px solid #C9D6EA", color: ACCENT, fontWeight: 700 }}>OnchainSuite</th>
-                <th style={{ textAlign: "left", padding: "0 12px 12px", borderBottom: "1px solid #C9D6EA", color: "#1A1A17", fontWeight: 700 }}>{c.name}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {MATRIX_CAPS.map((cap, i) => (
-                <tr key={cap}>
-                  <td style={{ padding: "13px 12px 13px 0", borderBottom: "1px solid #EAF1FB", color: "#3D4A63" }}>{cap}</td>
-                  <td style={{ padding: "13px 12px", borderBottom: "1px solid #EAF1FB" }}><Val v={OCS_MATRIX[i]} us /></td>
-                  <td style={{ padding: "13px 12px", borderBottom: "1px solid #EAF1FB" }}><Val v={c.them[i]} /></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Where X is strong — editorial, no boxes */}
-        <h2 style={h2}>Where {c.name} is strong</h2>
-        <div style={{ marginTop: 18, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "28px 48px" }} data-stack>
-          <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#1A1A17", marginBottom: 10 }}>What teams like about {c.name}</div>
-            <ul style={{ margin: 0, paddingLeft: 18 }}>
-              {c.theyLike.map((t) => (
-                <li key={t} style={{ margin: "8px 0 0", fontSize: 15, lineHeight: 1.55, color: "#3D4A63" }}>{t}</li>
-              ))}
-            </ul>
+        <section className="vs-why">
+          <div><h2 className="h2 rv">Why blockchain companies choose OnchainSuite over {c.name}. <span>{c.whyChoose}</span></h2></div>
+          <div className="vs-hl">
+            {OCS_HIGHLIGHTS.map((h) => (
+              <div key={h.title} className="rv"><svg aria-hidden="true"><use href={ICON[h.icon] ?? "#i-layers"} /></svg><p className="h4">{h.title}. <span>{h.desc}</span></p></div>
+            ))}
           </div>
-          <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#1A1A17", marginBottom: 10 }}>When {c.name} is the better call</div>
-            <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: "#3D4A63" }}>{c.whenThem}</p>
-            <div style={{ height: 1, background: "#DCE7F5", margin: "18px 0" }} />
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#1A1A17", marginBottom: 10 }}>Running both</div>
-            <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: "#3D4A63" }}>{c.together}</p>
+        </section>
+
+        <section className="cmp" aria-labelledby="fbf">
+          <div className="cmp-intro"><h2 className="h2 rv" id="fbf">OnchainSuite and {c.name}, side by side.</h2></div>
+          <div className="cmp-table two">
+            <div className="cmp-head" role="row"><div role="columnheader"></div><div role="columnheader"><b>OnchainSuite</b><span>From $39 a month</span></div><div role="columnheader"><b>{c.name}</b><span>{c.them[0]}</span></div></div>
+            {MATRIX_CAPS.map((cap, i) => i === 0 ? null : (
+              <div key={cap} className="cmp-row" role="row">
+                <div role="rowheader">{cap}</div>
+                <div role="cell"><Val v={OCS_MATRIX[i]} /></div>
+                <div role="cell"><Val v={c.them[i]} /></div>
+              </div>
+            ))}
           </div>
-        </div>
+        </section>
 
-        {/* Switching — numbered, open */}
-        <h2 style={h2}>Switching over</h2>
-        <div style={{ marginTop: 20, display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 30 }} data-cards>
-          {MIGRATION_STEPS.map((s, i) => (
-            <div key={s.title}>
-              <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 13, fontWeight: 600, color: ACCENT }}>0{i + 1}</div>
-              <div style={{ margin: "10px 0 0", fontSize: 15.5, fontWeight: 700, color: "#1A1A17" }}>{s.title}</div>
-              <div style={{ margin: "7px 0 0", fontSize: 14, lineHeight: 1.55, color: "#3D4A63" }}>{s.desc}</div>
-            </div>
-          ))}
-        </div>
-      </main>
+        <section className="vs-fair">
+          <div><h2 className="h2 rv">What teams like about {c.name}.</h2>
+            <ul className="checks rv">{c.theyLike.map((t) => <li key={t}>{t}</li>)}</ul></div>
+          <div className="vs-side">
+            <div className="rv"><p className="h4">{c.name} is the better call when <span>{c.whenThem.charAt(0).toLowerCase() + c.whenThem.slice(1)}</span></p></div>
+            <div className="rv"><p className="h4">Running both. <span>{c.together}</span></p></div>
+          </div>
+        </section>
 
-      <FaqSection items={c.faqs} eyebrow="FAQ" title={`OnchainSuite vs ${c.name}, answered`} />
+        <section className="vs-steps">
+          <div className="cmp-intro" style={{ paddingBottom: 0 }}><h2 className="h2 rv">You give up nothing you have already set up.</h2></div>
+          <ol className="steps3n">
+            {MIGRATION_STEPS.map((s, i) => <li key={s.title} className="rv"><i>0{i + 1}</i><b>{s.title}</b><span>{s.desc}</span></li>)}
+          </ol>
+        </section>
 
-      {/* Cross-links — vs cards */}
-      <section style={{ maxWidth: 1060, margin: "0 auto", padding: "8px 32px 8px" }} data-pad>
-        <div style={mono}>More comparisons</div>
-        <div style={{ marginTop: 18, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 18 }}>
-          {others.map((o) => (
-            <CompareCard key={o.slug} c={o} />
-          ))}
-        </div>
-      </section>
+        <Faq items={c.faqs} title={`OnchainSuite and ${c.name}, answered`} />
 
-      <CtaSection />
-      <SiteFooter />
+        <section className="vs-more">
+          <div className="cmp-intro" style={{ paddingBottom: 28 }}></div>
+          <div className="cgrid">
+            {others.map((o) => (
+              <Link key={o.slug} href={`/compare/${o.slug}`} className="ccard rv"><VsLockup slug={o.slug} name={o.name} /><b>OnchainSuite and {o.name}</b><span>{o.intro.split(/(?<=\.)\s/)[0]}</span><em>Read the comparison →</em></Link>
+            ))}
+          </div>
+        </section>
+        <CloseCta />
+      </div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
-    </div>
+    </SiteChrome>
   );
 }

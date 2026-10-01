@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const dynamic = "force-static";
 
-export const alt = "OnchainSuite · Retention for Web3, triggered by on-chain behaviour";
+export const alt = "OnchainSuite · Every wallet is a customer record";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -55,7 +55,7 @@ export default function OgImage() {
               maxWidth: 940,
             }}
           >
-            When your users act on-chain. Now you can act back.
+            Every wallet is a customer record.
           </div>
           <div
             style={{
@@ -65,7 +65,7 @@ export default function OgImage() {
               maxWidth: 880,
             }}
           >
-            The behavior-triggered retention platform for Web3.
+            Lifecycle and retention marketing that reads your app and your contracts.
           </div>
         </div>
 

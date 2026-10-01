@@ -1,8 +1,9 @@
 import { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { ACCENT, ACCENT_HOVER, OK } from "@/lib/data";
-import SiteHeader from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/StaticSections";
+import SiteChrome from "@/components/ns/SiteChrome";
+import { CloseCta } from "@/components/ns/Blocks";
+import ToolArt from "@/components/ns/ToolArt";
 import LtvCalculator from "@/components/LtvCalculator";
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: { title: "Wallet LTV Calculator · OnchainSuite", description: "Estimate wallet lifetime value and how retention raises it.", url: "/tools/ltv-calculator", type: "website" },
 };
 
-const themeVars = { "--acc": ACCENT, "--acc-h": ACCENT_HOVER, "--ok": OK, minHeight: "100vh", background: "#FAFAF8", overflowX: "clip" } as CSSProperties;
+const themeVars = { "--acc": ACCENT, "--acc-h": ACCENT_HOVER, "--ok": OK, background: "#FFFFFF" } as CSSProperties;
 const h2 = { margin: "48px 0 0", fontSize: 23, fontWeight: 700, letterSpacing: "-.02em", color: "#1A1A17" } as CSSProperties;
 const p = { margin: "14px 0 0", fontSize: 16, lineHeight: 1.7, color: "#3D4A63" } as CSSProperties;
 
@@ -26,17 +27,17 @@ const FAQ = [
 export default function LtvCalculatorPage() {
   const faqLd = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) };
   return (
-    <div style={themeVars}>
-      <SiteHeader />
+    <SiteChrome>
+    <div className="wrap tool-page" style={themeVars}>
       <main style={{ maxWidth: 720, margin: "0 auto", padding: "76px 32px 8px" }} data-pad>
-        <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11.5, letterSpacing: ".12em", textTransform: "uppercase", color: ACCENT, fontWeight: 600 }}>Free tool</div>
-        <h1 style={{ margin: "16px 0 0", fontSize: "clamp(30px,4vw,46px)", lineHeight: 1.04, letterSpacing: "-.03em", fontWeight: 700, color: "#1A1A17" }}>
+        <h1 style={{ margin: "0", fontSize: "clamp(30px,4vw,46px)", lineHeight: 1.04, letterSpacing: "-.03em", fontWeight: 700, color: "#1A1A17" }}>
           Wallet LTV calculator
         </h1>
         <p style={{ margin: "18px 0 26px", fontSize: 18, lineHeight: 1.6, color: "#3D4A63" }}>
           A wallet is worth its revenue for as long as it stays active. Set your numbers to estimate lifetime value, and
           see how much lower churn is worth.
         </p>
+        <ToolArt kind="ltv" className="hero-banner" />
         <LtvCalculator />
 
         <h2 style={h2}>What is wallet lifetime value?</h2>
@@ -67,18 +68,18 @@ export default function LtvCalculatorPage() {
         <ol style={{ margin: "16px 0 0", paddingLeft: 20 }}>
           <li style={{ margin: "10px 0 0", fontSize: 16, lineHeight: 1.65, color: "#3D4A63" }}><strong style={{ color: "#1A1A17" }}>Lower churn.</strong> Every point of churn you remove stretches the average lifespan and lifts LTV.</li>
           <li style={{ margin: "10px 0 0", fontSize: 16, lineHeight: 1.65, color: "#3D4A63" }}><strong style={{ color: "#1A1A17" }}>Grow revenue per wallet.</strong> Usage-based incentives and well-timed nudges move wallets to higher-value actions.</li>
-          <li style={{ margin: "10px 0 0", fontSize: 16, lineHeight: 1.65, color: "#3D4A63" }}><strong style={{ color: "#1A1A17" }}>Reactivate dormant wallets.</strong> A win-back Play brings cold wallets back into their active life instead of losing them.</li>
+          <li style={{ margin: "10px 0 0", fontSize: 16, lineHeight: 1.65, color: "#3D4A63" }}><strong style={{ color: "#1A1A17" }}>Reactivate dormant wallets.</strong> A win-back Loop brings cold wallets back into their active life instead of losing them.</li>
         </ol>
         <p style={p}>
-          OnchainSuite runs these as automated Plays, triggered by what wallets do on-chain.{" "}
-          <a href="/early-access" style={{ color: ACCENT, fontWeight: 600 }}>Connect With Sales</a>.
+          OnchainSuite runs these as Loops, started by what wallets do on-chain.{" "}
+          <a href="/early-access" style={{ color: ACCENT, fontWeight: 600 }}>Book a walkthrough</a>.
         </p>
 
         <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11.5, letterSpacing: ".12em", textTransform: "uppercase", color: ACCENT, fontWeight: 600, margin: "52px 0 0" }}>Related tools</div>
         <div style={{ marginTop: 14, borderTop: "1px solid #DCE7F5" }}>
           {[
-            { href: "/tools/churn-calculator", title: "Wallet churn cost calculator", desc: "What churn costs per year, and what retention could win back." },
-            { href: "/tools", title: "All tools", desc: "Every free calculator for Web3 growth teams." },
+            { href: "/tools/churn-calculator", title: "Wallet churn cost calculator", desc: "What churn costs per year, and how much acting earlier could keep." },
+            { href: "/tools", title: "All tools", desc: "Every free calculator for growth teams at blockchain companies." },
           ].map((t) => (
             <a key={t.href} href={t.href} className="ocs-idx-row" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "18px 14px", borderBottom: "1px solid #DCE7F5", textDecoration: "none" }}>
               <div>
@@ -91,9 +92,10 @@ export default function LtvCalculatorPage() {
         </div>
         <div style={{ height: 32 }} />
       </main>
-      <SiteFooter />
+      <CloseCta />
       <style>{`.ocs-idx-row{transition:background .15s ease;border-radius:10px}.ocs-idx-row:hover{background:#F1F6FE}.ocs-idx-row:hover .ocs-idx-title{color:var(--acc)}`}</style>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
     </div>
+    </SiteChrome>
   );
 }

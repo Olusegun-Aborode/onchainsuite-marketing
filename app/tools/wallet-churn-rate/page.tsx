@@ -1,8 +1,9 @@
 import { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { ACCENT, ACCENT_HOVER, OK, SITE_URL } from "@/lib/data";
-import SiteHeader from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/StaticSections";
+import SiteChrome from "@/components/ns/SiteChrome";
+import { CloseCta } from "@/components/ns/Blocks";
+import ToolArt from "@/components/ns/ToolArt";
 import WalletChurnRateCalc from "@/components/WalletChurnRateCalc";
 
 export const metadata: Metadata = {
@@ -13,11 +14,11 @@ export const metadata: Metadata = {
   openGraph: { title: "Wallet churn rate calculator · OnchainSuite", description: "See what a period's wallet churn compounds to over a year.", url: "/tools/wallet-churn-rate", type: "website" },
 };
 
-const themeVars = { "--acc": ACCENT, "--acc-h": ACCENT_HOVER, "--ok": OK, minHeight: "100vh", background: "#FBFBFC", overflowX: "clip", color: "#010F31" } as CSSProperties;
+const themeVars = { "--acc": ACCENT, "--acc-h": ACCENT_HOVER, "--ok": OK, background: "#FFFFFF", color: "#010F31" } as CSSProperties;
 const wrap = { maxWidth: 1200, margin: "0 auto" };
 
 const ARTICLE = [
-  { h: "Why wallet churn is not customer churn", p1: "A customer cancels; a wallet just stops. There is no cancellation event to count, so churn has to be defined as an absence of activity over a window you choose, and that choice changes the number more than anything else on this page.", p2: "Pick the window from your natural usage cycle. If a healthy wallet transacts weekly, a 30-day silence is churn. If it stakes and waits, 30 days is nothing and you will scare yourself with a number that means very little." },
+  { h: "Why wallet churn is not customer churn", p1: "A customer cancels; a wallet just stops. There is no cancellation event to count, so churn has to be defined as an absence of activity over a window you choose, and that choice changes the number more than anything else on this page.", p2: "Pick the window from your natural usage cycle. If a healthy wallet transacts weekly, a 30-day silence is a strong sign it has churned. If it stakes and waits, 30 days is nothing and you will scare yourself with a number that means very little." },
   { h: "The compounding is what hurts", p1: "A 6 percent monthly churn rate sounds survivable. Compounded, it means half your active base is gone in eleven months and 53 percent is gone within a year.", p2: "That is why the annual figure sits next to the monthly one above. Teams that only look at the monthly rate consistently underestimate how much acquisition they need to hold flat." },
   { h: "Churn and value are not evenly distributed", p1: "Wallet churn is usually worst in the long tail and mildest among your largest holders, which means a blended rate can look alarming while revenue barely moves, or look calm while your best cohort quietly leaves.", p2: "Run this per cohort: by size, by acquisition channel, by first action. The cohort with the worst churn and the highest revenue per wallet is where retention work pays for itself first." },
 ];
@@ -28,8 +29,8 @@ const BENCHMARKS = [
   { label: "Airdrop-acquired", value: "19.4%", bar: "97%" },
 ];
 const RELATED = [
-  { name: "Dormant wallet reactivation", blurb: "Revenue recoverable from the wallets this churn produced.", href: "/tools/dormant-wallet-reactivation" },
-  { name: "Wallet reachability score", blurb: "How much of your churned base you can still message.", href: "/tools/wallet-reachability-score" },
+  { name: "Dormant wallet reactivation", blurb: "Revenue you can still recover from wallets that went quiet before they churned.", href: "/tools/dormant-wallet-reactivation" },
+  { name: "Wallet reachability score", blurb: "How much of your base you can still message before it churns.", href: "/tools/wallet-reachability-score" },
   { name: "Cost per acquisition", blurb: "What replacing a churned wallet actually costs you.", href: "/tools/cost-per-acquisition" },
 ];
 const mono = "'JetBrains Mono',monospace";
@@ -37,10 +38,10 @@ const mono = "'JetBrains Mono',monospace";
 export default function WalletChurnRatePage() {
   const ld = { "@context": "https://schema.org", "@type": "WebApplication", name: "Wallet churn rate calculator", applicationCategory: "BusinessApplication", operatingSystem: "Web", url: `${SITE_URL}/tools/wallet-churn-rate`, offers: { "@type": "Offer", price: "0", priceCurrency: "USD" } };
   return (
-    <div style={themeVars}>
-      <SiteHeader />
+    <SiteChrome>
+    <div className="wrap tool-page" style={themeVars}>
 
-      <section style={{ ...wrap, padding: "56px 40px 0" }} data-pad>
+      <section className="tool-hero" style={{ ...wrap, padding: "56px 40px 0" }} data-pad>
         <nav aria-label="Breadcrumb" style={{ fontSize: 13.5, color: "#767B83", display: "flex", gap: 8 }}>
           <a href="/tools" style={{ color: "#767B83", fontWeight: 500 }}>Tools</a>
           <span aria-hidden="true">/</span>
@@ -48,6 +49,7 @@ export default function WalletChurnRatePage() {
         </nav>
         <h1 style={{ margin: "20px 0 0", fontSize: "clamp(38px,5vw,56px)", lineHeight: 1.04, letterSpacing: "-1px", fontWeight: 600, maxWidth: "16ch", color: "#010F31" }}>Wallet churn rate calculator</h1>
         <p style={{ margin: "20px 0 0", maxWidth: "56ch", fontSize: 17, lineHeight: 1.65, color: "#585D65" }}>Churn measured on wallets, not accounts. Enter one period and see what it compounds to over a year, and how long a wallet lasts at that rate.</p>
+        <ToolArt kind="churnrate" className="hero-art" />
       </section>
 
       <section style={{ ...wrap, padding: "36px 40px 0" }} data-pad>
@@ -67,7 +69,7 @@ export default function WalletChurnRatePage() {
             ))}
             <div style={{ background: "#FFFFFF", border: "1px solid #DEE0E3", borderLeft: "2px solid #FF6828", borderRadius: 6, padding: 24 }}>
               <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: ".1em", textTransform: "uppercase", color: "#767B83", marginBottom: 10 }}>The formula</div>
-              <p style={{ margin: "0 0 8px", fontFamily: mono, fontSize: 15, lineHeight: 1.7, color: "#010F31" }}>Churn = Wallets inactive ÷ Active wallets at start × 100</p>
+              <p style={{ margin: "0 0 8px", fontFamily: mono, fontSize: 15, lineHeight: 1.7, color: "#010F31" }}>Churn = Wallets that did not come back ÷ Active wallets at start × 100</p>
               <p style={{ margin: 0, fontFamily: mono, fontSize: 15, lineHeight: 1.7, color: "#010F31" }}>Annual = (1 − (1 − monthly churn)^12) × 100</p>
             </div>
           </div>
@@ -109,7 +111,7 @@ export default function WalletChurnRatePage() {
         </div>
       </section>
 
-      <SiteFooter />
+      <CloseCta />
       <style>{`
         .ocs-article-grid { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:56px; align-items:start; }
         .ocs-article-side { position:sticky; top:88px; }
@@ -124,5 +126,6 @@ export default function WalletChurnRatePage() {
       `}</style>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
     </div>
+    </SiteChrome>
   );
 }

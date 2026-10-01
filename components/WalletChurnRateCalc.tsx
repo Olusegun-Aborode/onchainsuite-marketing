@@ -53,7 +53,7 @@ export default function WalletChurnRateCalc() {
 
   const steps = [
     { label: "Active at start", value: num(start) },
-    { label: "Went inactive", value: "(" + num(lost) + ")" },
+    { label: "Did not come back", value: "(" + num(lost) + ")" },
     { label: "Still active at end", value: num(Math.max(start - lost, 0)) },
     { label: "New wallets acquired", value: "+" + num(gained) },
   ];
@@ -80,7 +80,7 @@ export default function WalletChurnRateCalc() {
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
           <Field label="Active wallets at start" value={start} onChange={setStart} />
-          <Field label="Wallets that went inactive" value={lost} onChange={setLost} />
+          <Field label="Wallets that did not come back" value={lost} onChange={setLost} />
           <Field label="New wallets acquired" value={gained} onChange={setGained} />
           <Field label="Monthly revenue per active wallet" value={arpw} onChange={setArpw} />
         </div>

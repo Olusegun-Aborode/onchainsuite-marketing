@@ -40,9 +40,9 @@ export default function ChurnCalculator() {
   return (
     <div style={{ border: "1px solid #DCE7F5", borderRadius: 20, background: "#fff", padding: "28px 26px", boxShadow: "0 1px 2px rgba(26,24,20,.04)" }}>
       <Row label="Active wallets" hint="Wallets currently active" value={wallets} min={500} max={200000} step={500} onChange={setWallets} fmt={num} />
-      <Row label="Monthly churn rate" hint="Share of wallets that go inactive each month" value={churn} min={1} max={30} step={1} onChange={setChurn} fmt={(v) => `${v}%`} />
+      <Row label="Monthly churn rate" hint="Share of wallets that leave and do not come back each month" value={churn} min={1} max={30} step={1} onChange={setChurn} fmt={(v) => `${v}%`} />
       <Row label="Revenue per wallet / month" hint="Average monthly revenue per active wallet" value={arpu} min={1} max={500} step={1} onChange={setArpu} fmt={usd} />
-      <Row label="Churn recovered with retention" hint="Share of churn win-back triggers reclaim" value={lift} min={5} max={50} step={1} onChange={setLift} fmt={(v) => `${v}%`} />
+      <Row label="Churn prevented by acting earlier" hint="Share of wallets you keep by reaching them before they leave" value={lift} min={5} max={50} step={1} onChange={setLift} fmt={(v) => `${v}%`} />
 
       <div style={{ marginTop: 26, paddingTop: 22, borderTop: "1px solid #DCE7F5", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14 }} data-stats>
         <div>
@@ -54,18 +54,18 @@ export default function ChurnCalculator() {
           <div style={{ fontSize: 26, fontWeight: 800, color: "#E0354F", marginTop: 4 }}>{usd(revLostYr)}</div>
         </div>
         <div>
-          <div style={{ fontSize: 12, color: "#8A93A6", fontWeight: 600 }}>Recoverable with retention</div>
+          <div style={{ fontSize: 12, color: "#8A93A6", fontWeight: 600 }}>Kept by acting earlier</div>
           <div style={{ fontSize: 26, fontWeight: 800, color: "#15803D", marginTop: 4 }}>{usd(recoveredRev)}</div>
         </div>
       </div>
 
       <div style={{ marginTop: 20 }}>
         <a href="/early-access" className="ocs-btn-primary" style={{ display: "inline-block", fontSize: 14.5, fontWeight: 600, color: "#fff", background: ACCENT, padding: "11px 18px", borderRadius: 10, textDecoration: "none" }}>
-          Recover this with OnchainSuite →
+          Keep this revenue with OnchainSuite →
         </a>
       </div>
       <p style={{ margin: "14px 0 0", fontSize: 12, color: "#8A93A6", lineHeight: 1.5 }}>
-        Estimates only. Revenue lost assumes a churned wallet forgoes ~12 months of its average revenue; recovery assumes retention triggers win back the share you set.
+        Estimates only. A churned wallet is gone for good, so revenue lost assumes it forgoes about 12 months of its average revenue. The kept figure assumes that reaching wallets while they are slipping stops the share you set from churning.
       </p>
     </div>
   );

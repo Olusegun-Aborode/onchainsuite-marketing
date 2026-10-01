@@ -1,16 +1,17 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./ns.css";
 import Spotlight from "@/components/Spotlight";
 import { SITE_URL } from "@/lib/data";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "OnchainSuite · Retention for Web3",
+    default: "OnchainSuite · Every wallet is a customer record",
     template: "%s · OnchainSuite",
   },
   description:
-    "The behavior-triggered retention platform for Web3. Turn what wallets do on-chain into automations and campaigns. Klaviyo for on-chain behaviour.",
+    "OnchainSuite joins what your customers do in your app with what their wallets do on-chain, so blockchain companies know who needs a message and can send it by email or in-app.",
   applicationName: "OnchainSuite",
   keywords: [
     "Web3 retention",
@@ -27,9 +28,9 @@ export const metadata: Metadata = {
   publisher: "OnchainSuite",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "OnchainSuite · retention for Web3, triggered by on-chain behaviour",
+    title: "OnchainSuite · Every wallet is a customer record",
     description:
-      "Build the rule once, and it fires the moment a wallet acts. The retention layer Web3 never had.",
+      "OnchainSuite joins what your customers do in your app with what their wallets do on-chain, so your growth team knows who needs a message.",
     url: SITE_URL,
     siteName: "OnchainSuite",
     type: "website",
@@ -37,9 +38,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "OnchainSuite · Retention for Web3",
+    title: "OnchainSuite · Every wallet is a customer record",
     description:
-      "Build the rule once, and it fires the moment a wallet acts. The retention layer Web3 never had.",
+      "OnchainSuite joins what your customers do in your app with what their wallets do on-chain, so your growth team knows who needs a message.",
   },
   robots: {
     index: true,
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#FAFAF8",
+  themeColor: "#FFFFFF",
   width: "device-width",
   initialScale: 1,
 };
@@ -75,7 +76,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap"
           rel="stylesheet"
         />
       </head>
@@ -94,7 +95,7 @@ export default function RootLayout({
                   url: SITE_URL,
                   logo: `${SITE_URL}/icon.svg`,
                   description:
-                    "The behavior-triggered retention platform for Web3.",
+                    "The lifecycle and retention platform for blockchain companies.",
                 },
                 {
                   "@type": "WebSite",
@@ -110,12 +111,12 @@ export default function RootLayout({
                   operatingSystem: "Web",
                   url: SITE_URL,
                   description:
-                    "Turn what wallets do on-chain into automations and campaigns. The retention layer Web3 never had.",
+                    "Lifecycle and retention marketing that reads both what customers do in your app and what their wallets do on-chain.",
                   offers: {
                     "@type": "Offer",
-                    price: "0",
+                    price: "6",
                     priceCurrency: "USD",
-                    description: "Suite from $0 (PAYG), then Launch $27, Growth $349 and Pro $1,622 a month; Send email-only from $6/mo plus $2.60 per 1,000 subscribers.",
+                    description: "Send from $6 a month plus $3.95 per 1,000 subscribers; Suite from $39 a month (Launch) to $1,622 a month (Pro).",
                   },
                 },
               ],
