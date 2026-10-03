@@ -6,10 +6,17 @@ const B = "#1727E0", O = "#FF6828", N = "#010F31", L = "#DEE0E3", T = "#585D65",
 const f = { fontFamily: "Instrument Sans, Inter, sans-serif" };
 const mono = { fontFamily: "Geist Mono, JetBrains Mono, monospace" };
 
-const ROWS = [
+const WALLET_ROWS = [
   { name: "Josh Miller", ini: "JM", av: "#3B6BFF", score: 82, color: G, stage: "Active", bg: "#E9F7F0" },
   { name: "0x9a2e…e41", ini: "?", av: "#9DA1A8", score: 38, color: R, stage: "At risk", bg: "#FDECEC", wallet: true },
   { name: "Sarah Bennett", ini: "S", av: "#B54FD8", score: 61, color: O, stage: "Watch", bg: "#FFF1EA" },
+];
+
+/* Mainstream companies on Send have no wallets, so their version shows people and an upgrade. */
+const PEOPLE_ROWS = [
+  { name: "Olivia Hughes", ini: "OH", av: "#3B6BFF", score: 82, color: G, stage: "Active", bg: "#E9F7F0" },
+  { name: "Daniel Price", ini: "DP", av: "#9DA1A8", score: 38, color: R, stage: "At risk", bg: "#FDECEC", wallet: true },
+  { name: "Megan Ward", ini: "MW", av: "#B54FD8", score: 61, color: O, stage: "Watch", bg: "#FFF1EA" },
 ];
 
 const STEPS = [
@@ -18,7 +25,9 @@ const STEPS = [
   { x: 244, w: 160, label: "Stops when they deposit", fill: "#E9F7F0", stroke: "#BFE8D3", color: G },
 ];
 
-export default function CloseArt() {
+export default function CloseArt({ mainstream = false }: { mainstream?: boolean }) {
+  const ROWS = mainstream ? PEOPLE_ROWS : WALLET_ROWS;
+  const steps = mainstream ? STEPS.map((x, i) => i === 1 ? { ...x, label: "Email" } : i === 2 ? { ...x, label: "Stops when they upgrade" } : x) : STEPS;
   return (
     <div className="tool-art close-art rv" aria-hidden="true">
       <svg viewBox="0 0 432 330" preserveAspectRatio="xMidYMid meet" style={f}>
@@ -33,7 +42,7 @@ export default function CloseArt() {
               {r.wallet && <rect x={22} y={y} width={388} height={36} rx={8} fill="#FFF7F7" className="pa-pulse" />}
               <circle cx={44} cy={y + 18} r={11} fill={r.av} />
               <text x={44} y={y + 22} fontSize={9} fill="#fff" textAnchor="middle" fontWeight={600}>{r.ini}</text>
-              <text x={62} y={y + 22} fontSize={12} fill={N} fontWeight={500} style={r.wallet ? mono : f}>{r.name}</text>
+              <text x={62} y={y + 22} fontSize={12} fill={N} fontWeight={500} style={r.name.startsWith("0x") ? mono : f}>{r.name}</text>
               <text x={196} y={y + 22} fontSize={12} fill={r.color} fontWeight={600} textAnchor="end">{r.score}</text>
               <rect x={206} y={y + 14} width={96} height={7} rx={3.5} fill="#ECEDEF" />
               <rect x={206} y={y + 14} width={(96 * r.score) / 100} height={7} rx={3.5} fill={r.color} className="ta-grow" style={{ animationDelay: `${0.35 + i * 0.15}s` }} />
@@ -47,7 +56,7 @@ export default function CloseArt() {
         <g className="ta-pop" style={{ animationDelay: "0.8s" }}>
           <rect x={16} y={234} width={400} height={80} rx={12} fill="#fff" stroke={L} />
           <text x={28} y={256} fontSize={12} fontWeight={600} fill={N}>Loop: reach them before they leave</text>
-          {STEPS.map((s, i) => (
+          {steps.map((s, i) => (
             <g key={s.label} className="ta-pop" style={{ animationDelay: `${1 + i * 0.2}s` }}>
               <rect x={s.x} y={270} width={s.w} height={30} rx={8} fill={s.fill} stroke={s.stroke} />
               <text x={i === 2 ? s.x + 30 : s.x + s.w / 2} y={289} fontSize={11} fill={s.color} fontWeight={500} textAnchor={i === 2 ? "start" : "middle"}>{s.label}</text>

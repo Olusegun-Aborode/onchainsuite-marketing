@@ -10,7 +10,7 @@ export const OK = "#2BC48A";
 export const SITE_URL = "https://www.onchainsuite.com";
 
 // External destinations
-export const DOCS_URL = "https://onchainsuite-9506e41f.mintlify.app";
+export const DOCS_URL = "https://docs.onchainsuite.com";
 export const APP_URL = "https://app.onchainsuite.com";
 export const CONTACT_EMAIL = "info@onchainsuite.com";
 

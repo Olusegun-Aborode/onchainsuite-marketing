@@ -15,12 +15,50 @@ export const NAV_LINKS = [
   { href: "/pricing", label: "Pricing" },
 ];
 
-const FOOT = [
-  { title: "Platform", items: [["Audience", "/platform/audience"], ["Segments", "/platform/segments"], ["Loops", "/platform/loops"], ["Intelligence MCP", "/platform/intelligence-mcp"], ["How we use data", "/platform/data"], ["Pricing", "/pricing"]] },
-  { title: "Resources", items: [["Compare", "/compare"], ["Free tools", "/tools"], ["Docs", DOCS_URL]] },
-  { title: "Company", items: [["Team", "/team"], ["Book a walkthrough", "/early-access"]] },
-  { title: "Legal", items: [["Terms", "/terms"], ["Privacy", "/privacy"], ["Data processing agreement", "/dpa"], ["Sub-processors", "/subprocessors"], ["Cookies", "/cookies"]] },
+/* Footer, laid out like Attio's: grouped columns, a "New" tag, an arrow on links that leave the site,
+   and a source tag on every link so analytics show which footer link people used. Integrations are
+   only the ones the docs describe; "Switching from" goes to each comparison page. */
+type FootLink = { label: string; href: string; tag?: string };
+const DOC = "https://docs.onchainsuite.com";
+const FOOT: { title: string; items: FootLink[] }[][] = [
+  [
+    { title: "Platform", items: [
+      { label: "Audience", href: "/platform/audience" }, { label: "Segments", href: "/platform/segments" }, { label: "Loops", href: "/platform/loops" },
+      { label: "Intelligence MCP", href: "/platform/intelligence-mcp", tag: "New" }, { label: "How we use data", href: "/platform/data" }, { label: "Pricing", href: "/pricing" },
+    ] },
+    { title: "Company", items: [
+      { label: "Team", href: "/team" }, { label: "Refer a team", href: "/refer", tag: "New" }, { label: "Become an agency partner", href: "/refer#partner-h" }, { label: "Book a walkthrough", href: "/early-access" },
+    ] },
+  ],
+  [
+    { title: "OnchainSuite for", items: [
+      { label: "Blockchain companies", href: "/for/blockchain-companies" }, { label: "Mainstream companies", href: "/for/mainstream-companies" },
+    ] },
+    { title: "Switching from", items: [
+      { label: "Klaviyo", href: "/compare/klaviyo" }, { label: "Customer.io", href: "/compare/customer-io" }, { label: "Braze", href: "/compare/braze" },
+      { label: "Brevo", href: "/compare/brevo" }, { label: "SendGrid", href: "/compare/sendgrid" }, { label: "Dotdigital", href: "/compare/dotdigital" }, { label: "EmailOctopus", href: "/compare/emailoctopus" },
+    ] },
+  ],
+  [
+    { title: "Integrations", items: [
+      { label: "In-app SDK", href: `${DOC}/integrations/in-app-notifications` }, { label: "Mobile push", href: `${DOC}/integrations/in-app-notifications` },
+      { label: "Server API", href: `${DOC}/integrations/server-api` }, { label: "Webhooks", href: `${DOC}/api/webhooks` }, { label: "Custom events", href: `${DOC}/integrations/custom-events` },
+      { label: "Forms", href: `${DOC}/integrations/forms` }, { label: "Wallet and contract data", href: `${DOC}/integrations/wallet-and-contract-data` },
+      { label: "CSV and JSON import", href: `${DOC}/audience/imports-and-exports` },
+    ] },
+  ],
+  [
+    { title: "Resources", items: [
+      { label: "Compare", href: "/compare" }, { label: "Free tools", href: "/tools" }, { label: "Docs", href: DOC }, { label: "Help centre", href: `${DOC}/help/faq` },
+      { label: "Troubleshooting", href: `${DOC}/help/troubleshooting` }, { label: "Hire an expert", href: "/pricing#cmp-h" }, { label: "Trust centre", href: "/platform/data" },
+    ] },
+    { title: "Legal", items: [
+      { label: "Terms", href: "/terms" }, { label: "Privacy", href: "/privacy" }, { label: "Data processing agreement", href: "/dpa" }, { label: "Sub-processors", href: "/subprocessors" }, { label: "Cookies", href: "/cookies" },
+    ] },
+  ],
 ];
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "");
+const tagged = (href: string, label: string) => { const [path, hash] = href.split("#"); return `${path}${path.includes("?") ? "&" : "?"}source=footer_${slug(label)}${hash ? "#" + hash : ""}`; };
 
 export function Logo({ dark = false }: { dark?: boolean }) {
   return (
@@ -52,10 +90,19 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
         <div className="wrap" style={{ border: 0 }}>
           <div className="foot">
             <div><Logo dark /></div>
-            {FOOT.map((c) => (
-              <div key={c.title}>
-                <h6>{c.title}</h6>
-                {c.items.map(([label, href]) => href.startsWith("http") ? <a key={href + label} href={href} target="_blank" rel="noreferrer">{label}</a> : <Link key={href + label} href={href}>{label}</Link>)}
+            {FOOT.map((col, ci) => (
+              <div key={ci} className="foot-col">
+                {col.map((g) => (
+                  <div key={g.title} className="foot-g">
+                    <h6>{g.title}</h6>
+                    {g.items.map((l) => {
+                      const inner = <>{l.label}{l.tag && <em className="foot-tag">{l.tag}</em>}</>;
+                      return l.href.startsWith("http")
+                        ? <a key={l.label} href={tagged(l.href, l.label)} target="_blank" rel="noreferrer">{inner}<span className="foot-ext" aria-hidden="true">↗</span></a>
+                        : <Link key={l.label} href={tagged(l.href, l.label)}>{inner}</Link>;
+                    })}
+                  </div>
+                ))}
               </div>
             ))}
           </div>

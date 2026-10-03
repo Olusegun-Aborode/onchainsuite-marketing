@@ -227,6 +227,10 @@ footer.dark{ padding:72px 0 0; }
 .foot h6{ margin:0 0 12px; font-size:13px; font-weight:500; color:#62666E; }
 .foot a{ display:block; font-size:13.5px; color:#C9CCD3; padding:4px 0; } .foot a:hover{ color:#fff; }
 .foot .logo{ color:#fff; }
+.foot-col{ display:grid; gap:32px; align-content:start; }
+.foot a{ display:flex; align-items:center; gap:7px; }
+.foot-tag{ font-style:normal; font-size:10.5px; font-weight:500; color:#fff; background:#1727E0; border-radius:999px; padding:1px 7px; line-height:16px; }
+.foot-ext{ font-size:11px; color:#62666E; }
 .legal{ border-top:1px solid var(--dark-line); padding:20px 56px 28px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:12.5px; color:#62666E; }
 
 @media (max-width:1000px){
@@ -807,6 +811,10 @@ footer.dark{ padding:72px 0 0; }
 .dl-lane p{ margin:0; font-size:14.5px; color:var(--soft); line-height:1.5; }
 .dl-lane ul{ list-style:none; margin:4px 0 0; padding:0; display:grid; gap:6px; }
 .dl-lane li{ font:400 12.5px var(--mono); padding:7px 10px; border-radius:8px; background:var(--panel); border:1px solid var(--line); }
+.dl-lane.off{ border-style:dashed; background:#FBFBFC; } .dl-lane.off li{ color:#9DA1A8; background:#fff; border-style:dashed; } .dl-lane-h .tag{ margin-left:auto; }
+.for-points{ grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:40px; }
+.for-points > div:not(:nth-child(3n+1)){ border-left:0; } .for-points > div:nth-child(2n){ border-left:1px solid var(--line); }
+@media (max-width:1000px){ .for-points{ grid-template-columns:1fr; margin-top:24px; } }
 .dl-join{ height:64px; } .dl-join svg{ width:100%; height:100%; display:block; }
 .dl-record{ margin:0 auto; max-width:760px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; border:1px solid #C9D0FF; border-radius:14px; padding:16px 18px; background:#fff; box-shadow:0 0 0 4px var(--accent-soft), 0 20px 40px -26px rgba(23,39,224,.4); }
 .dl-record .ava{ width:40px; height:40px; border-radius:50%; background:#3B6BFF; color:#fff; display:grid; place-items:center; font-weight:600; flex:none; }
@@ -937,3 +945,6 @@ footer.dark{ padding:72px 0 0; }
   .cfg-row{ flex-direction:column; align-items:stretch; } .step{ align-self:flex-start; }
   .cfg-levels{ grid-template-columns:1fr; }
 }
+
+.refer-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:40px; }
+@media (max-width:1000px){ .refer-grid{ grid-template-columns:1fr; margin-top:24px; } }

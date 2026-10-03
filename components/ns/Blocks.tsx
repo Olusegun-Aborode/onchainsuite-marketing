@@ -42,7 +42,7 @@ export function Faq({ items, title = "Questions we get asked" }: { items: { q: s
   );
 }
 
-export function CloseCta() {
+export function CloseCta({ mainstream = false }: { mainstream?: boolean } = {}) {
   return (
     <section className="close" id="cta" aria-labelledby="cta-h">
       <div className="close-grid">
@@ -50,7 +50,7 @@ export function CloseCta() {
           <h2 className="h2 rv" id="cta-h">Find out which of your customers are about to leave. <span>Book a thirty-minute walkthrough with our team.</span></h2>
           <div className="ctas rv"><Link className="btn solid lg" href="/early-access">Book a walkthrough</Link><Link className="btn lg" href="/pricing">See pricing</Link></div>
         </div>
-        <CloseArt />
+        <CloseArt mainstream={mainstream} />
       </div>
     </section>
   );

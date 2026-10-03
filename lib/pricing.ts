@@ -168,7 +168,7 @@ export const COMPARE_GROUPS: Group[] = [
 export const PRICING_FAQ = [
   {
     q: "What is the difference between Suite and Send?",
-    a: "Suite reads both lanes, what customers do in your app and what their wallets do on-chain, and sends by email and in-app. Send is campaigns and Loops by email without Suite's blockchain data features, priced on the size of your list.",
+    a: "Suite reads both lanes, what customers do in your app and what their wallets do on-chain, and sends by email and in-app. Send reads your product data and email results, runs campaigns and Loops by email and includes AI, but leaves out Suite's blockchain data features. It is priced on the size of your list.",
   },
   {
     q: "How do I choose a package?",

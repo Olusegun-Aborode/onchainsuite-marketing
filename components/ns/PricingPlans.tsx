@@ -34,7 +34,7 @@ export default function PricingPlans() {
       <p className="pp-line">
         {line === "suite"
           ? "Suite reads what customers do in your app and on-chain, and sends by email and in-app."
-          : "Send is campaigns and Loops by email, without Suite's blockchain data, priced on your list size."}
+          : "Send is campaigns, Loops and AI over your product and email data, without Suite's blockchain data, priced on your list size."}
       </p>
 
       {line === "suite" ? (
@@ -57,6 +57,7 @@ export default function PricingPlans() {
               <li>Email campaigns to the list you already hold</li>
               <li>Loops that run by email on their own</li>
               <li>Segments of your list</li>
+              <li>AI that answers questions and builds segments in plain English</li>
             </ul>
             <p className="upsell">Need to see what your customers do on-chain or reach a wallet in-app? That is Suite, from {usd(byId("launch").usd)} a month.</p>
             <Link className="btn solid lg" href="/early-access">Book a walkthrough</Link>

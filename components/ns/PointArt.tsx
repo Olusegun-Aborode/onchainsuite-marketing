@@ -217,6 +217,45 @@ const ART: Record<string, () => React.ReactElement> = {
     <path d="M84 54 C84 80 162 74 162 96 M240 54 C240 80 162 74 162 96" fill="none" stroke="#C9D0FF" strokeWidth={1.5} className="ta-dash" />
     <rect x={92} y={98} width={140} height={34} rx={17} fill={N} className="ta-float" /><text x={162} y={119} fontSize={11.5} fill="#fff" textAnchor="middle" fontWeight={600}>One answer</text>
   </g>),
+
+  /* ---------------- Mainstream companies (Send): no wallets ---------------- */
+  mImport: () => (<g style={f}>
+    {[["CSV", "customers.csv"], ["API", "Product events"], ["FORM", "Newsletter form"]].map(([k, l], i) => (
+      <g key={l} className="ta-pop" style={{ animationDelay: `${i * 0.15}s` }}>
+        <rect x={14} y={18 + i * 40} width={170} height={30} rx={8} fill="#fff" stroke={L} />
+        <rect x={21} y={25 + i * 40} width={30} height={16} rx={4} fill="#F0F4FF" /><text x={36} y={36.5 + i * 40} fontSize={8.5} fill={B} fontWeight={600} textAnchor="middle" style={mono}>{k}</text>
+        <text x={58} y={37 + i * 40} fontSize={11} fill={N} style={i === 0 ? mono : f}>{l}</text>
+        <path d={`M184 ${33 + i * 40} C205 ${33 + i * 40} 205 78 214 78`} fill="none" stroke="#C9D0FF" strokeWidth={1.4} className="ta-dash" />
+      </g>))}
+    <g className="ta-float"><rect x={214} y={50} width={96} height={56} rx={12} fill="url(#paGrad)" />
+      <text x={262} y={74} fontSize={11.5} fill="#fff" fontWeight={600} textAnchor="middle">One record</text><text x={262} y={91} fontSize={10} fill="#DCE3FF" textAnchor="middle">per customer</text></g>
+  </g>),
+  mSentence: () => (<g style={f}>
+    <rect x={14} y={16} width={296} height={30} rx={8} fill="#F0F4FF" stroke="#E4EAFF" />
+    <text x={26} y={35} fontSize={11.5} fill={N} className="ta-type">Signed up in May and never finished setup</text>
+    <path d="M160 52 V66" stroke={L} strokeWidth={1.5} /><path d="M155 62 l5 5 5-5" fill="none" stroke={L} strokeWidth={1.5} />
+    {[["Signed up", "in May"], ["Finished setup", "has NOT"]].map(([a, b], i) => (
+      <g key={a} className="ta-pop" style={{ animationDelay: `${1.2 + i * 0.25}s` }}>
+        <rect x={14} y={74 + i * 34} width={296} height={28} rx={7} fill={P} />
+        <rect x={22} y={79 + i * 34} width={110} height={18} rx={5} fill="#fff" stroke={L} /><text x={30} y={92 + i * 34} fontSize={10.5} fill={N}>{a}</text>
+        <rect x={140} y={79 + i * 34} width={110} height={18} rx={5} fill="#fff" stroke={i ? B : L} /><text x={148} y={92 + i * 34} fontSize={10.5} fill={i ? B : N}>{b}</text>
+      </g>))}
+  </g>),
+  mLoop: () => (<g style={f}>
+    <path d="M20 78 H300" stroke={L} strokeWidth={2} />
+    {[["Email", 60], ["Wait 3d", 140], ["Email", 220]].map(([l, x], i) => <g key={i}><rect x={(x as number) - 28} y={66} width={56} height={24} rx={6} fill="#fff" stroke={L} /><text x={x as number} y={82} fontSize={10.5} fill={N} textAnchor="middle">{l as string}</text></g>)}
+    <circle r={6} fill={B}><animateMotion dur="3.2s" repeatCount="indefinite" path="M20 78 H178" keyTimes="0;1" /></circle>
+    <g className="ta-pop" style={{ animationDelay: ".6s" }}><rect x={138} y={104} width={150} height={28} rx={14} fill="#E9F7F0" /><Check x={150} y={114} /><text x={168} y={122} fontSize={11} fill={G} fontWeight={600}>Finished setup, stop</text></g>
+    <line x1={180} x2={180} y1={92} y2={104} stroke={G} strokeWidth={1.5} strokeDasharray="2 2" />
+  </g>),
+  mQuestion: () => (<g style={f}>
+    <rect x={16} y={14} width={292} height={30} rx={10} fill={B} /><text x={28} y={33} fontSize={11} fill="#fff" className="ta-type">Who opened the launch email but never upgraded?</text>
+    <g className="ta-pop" style={{ animationDelay: "1.3s" }}>
+      <rect x={16} y={56} width={292} height={86} rx={10} fill="#fff" stroke={L} />
+      <text x={28} y={76} fontSize={20} fontWeight={600} fill={N}>642</text><text x={74} y={76} fontSize={10.5} fill={T}>customers match</text>
+      {[["Olivia Hughes", "Opened 2 Sep"], ["Daniel Price", "Opened 2 Sep"], ["Megan Ward", "Opened 1 Sep"]].map(([a, b], i) => <g key={a}><line x1={28} x2={296} y1={86 + i * 18} y2={86 + i * 18} stroke="#ECEDEF" /><text x={28} y={99 + i * 18} fontSize={10.5} fill={N}>{a}</text><text x={296} y={99 + i * 18} fontSize={10.5} fill={T} textAnchor="end">{b}</text></g>)}
+    </g>
+  </g>),
 };
 
 export default function PointArt({ kind }: { kind: string }) {
