@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "crypto CRM",
     "blockchain marketing",
     "on-chain triggers",
-    "Web3 email",
+    "blockchain email marketing",
     "protocol growth",
   ],
   authors: [{ name: "OnchainSuite" }],
