@@ -7,14 +7,15 @@ import { SITE_URL } from "@/lib/data";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "OnchainSuite · Every wallet is a customer record",
+    default: "OnchainSuite · Retention built on what your users do",
     template: "%s · OnchainSuite",
   },
   description:
-    "OnchainSuite joins what customers do in your app with what their wallets do on-chain, so your team knows who needs a message and can send it.",
+    "Retention software built on what your users do: on-chain for blockchain companies, in your product for everyone else.",
   applicationName: "OnchainSuite",
   keywords: [
-    "Web3 retention",
+    "blockchain retention",
+    "retention software",
     "on-chain automation",
     "wallet analytics",
     "crypto CRM",
@@ -28,9 +29,9 @@ export const metadata: Metadata = {
   publisher: "OnchainSuite",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "OnchainSuite · Every wallet is a customer record",
+    title: "OnchainSuite · Retention built on what your users do",
     description:
-      "OnchainSuite joins what your customers do in your app with what their wallets do on-chain, so your growth team knows who needs a message.",
+      "Retention software built on what your users do: on-chain for blockchain companies, in your product for everyone else.",
     url: SITE_URL,
     siteName: "OnchainSuite",
     type: "website",
@@ -38,9 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "OnchainSuite · Every wallet is a customer record",
+    title: "OnchainSuite · Retention built on what your users do",
     description:
-      "OnchainSuite joins what your customers do in your app with what their wallets do on-chain, so your growth team knows who needs a message.",
+      "Retention software built on what your users do: on-chain for blockchain companies, in your product for everyone else.",
   },
   robots: {
     index: true,

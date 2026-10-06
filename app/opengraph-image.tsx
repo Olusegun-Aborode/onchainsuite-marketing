@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const dynamic = "force-static";
 
-export const alt = "OnchainSuite · Every wallet is a customer record";
+export const alt = "OnchainSuite · Retention built on what your users do";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -55,7 +55,7 @@ export default function OgImage() {
               maxWidth: 940,
             }}
           >
-            Every wallet is a customer record.
+            Retention built on what your users do.
           </div>
           <div
             style={{
@@ -65,7 +65,7 @@ export default function OgImage() {
               maxWidth: 880,
             }}
           >
-            Lifecycle and retention marketing that reads your app and your contracts.
+            On-chain for blockchain companies. In your product for everyone else.
           </div>
         </div>
 

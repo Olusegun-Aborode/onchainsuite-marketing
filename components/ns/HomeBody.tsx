@@ -11,8 +11,8 @@ export default function HomeBody() {
   <section className="hero" id="hero">
     <div className="hero-copy" id="heroCopy">
       <a className="pill load" style={{ animationDelay: ".05s" }} href="#concept">Meet the Lifecycle Intelligence Engine <span>›</span></a>
-      <h1 className="h1 load" style={{ animationDelay: ".12s" }}>Every wallet is a customer record.</h1>
-      <p className="sub load" style={{ animationDelay: ".22s" }}>OnchainSuite joins what your customers do in your app with what their wallets do on-chain, so your growth team knows who needs a message.</p>
+      <h1 className="h1 load" style={{ animationDelay: ".12s" }}>Retention built on what your users do.</h1>
+      <p className="sub load" style={{ animationDelay: ".22s" }}>On-chain for blockchain companies.<br />In your product for everyone else.</p>
       <div className="ctas load" style={{ animationDelay: ".32s" }}><a className="btn lg" href="/pricing">See pricing</a><a className="btn solid lg" href="/early-access">Book a walkthrough</a></div>
     </div>
     <div className="hero-stage" id="heroStage">
