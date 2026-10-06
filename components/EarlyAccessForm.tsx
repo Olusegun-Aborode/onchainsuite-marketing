@@ -11,7 +11,7 @@ const FREE_EMAIL_DOMAINS = new Set([
 ]);
 
 const USE_CASES = [
-  "Churn win-back",
+  "Dormant win-back",
   "Lifecycle automations",
   "On-chain campaigns",
   "Audience & intelligence",
@@ -67,7 +67,7 @@ export default function EarlyAccessForm() {
     const e: Errors = {};
     if (step === 0) {
       if (!name.trim()) e.name = "Please enter your name.";
-      if (!protocol.trim()) e.protocol = "Please enter your protocol name.";
+      if (!protocol.trim()) e.protocol = "Please enter your company name.";
       const addr = email.trim().toLowerCase();
       if (!/.+@.+\..+/.test(addr)) e.email = "Enter a valid email address.";
       else if (FREE_EMAIL_DOMAINS.has(addr.split("@")[1])) e.email = "Please use your work email, not a personal one.";
@@ -138,8 +138,8 @@ export default function EarlyAccessForm() {
                   {i === 0 && (
                     <>
                       <Field label="Full name" id="ea-name" value={name} onChange={setName} placeholder="Ada Lovelace" error={errors.name} />
-                      <Field label="Protocol name" id="ea-protocol" value={protocol} onChange={setProtocol} placeholder="Aave, Lido, your protocol…" error={errors.protocol} />
-                      <Field label="Work email" id="ea-email" type="email" value={email} onChange={setEmail} placeholder="you@protocol.xyz" error={errors.email} />
+                      <Field label="Company name" id="ea-protocol" value={protocol} onChange={setProtocol} placeholder="Your company" error={errors.protocol} />
+                      <Field label="Work email" id="ea-email" type="email" value={email} onChange={setEmail} placeholder="you@company.com" error={errors.email} />
                       <Continue onClick={() => advance(0)} />
                     </>
                   )}

@@ -19,7 +19,7 @@ export const PACKAGES: Package[] = [
   { id: "launch-plus", name: "Launch+", usd: 118, gbp: 87, contacts: 10_000, credits: 40_000, emails: 100_000, inapp: 100_000, seats: 3 },
   { id: "growth", name: "Growth", usd: 349, gbp: 257, contacts: 25_000, credits: 100_000, emails: 250_000, inapp: 250_000, seats: 4 },
   { id: "growth-plus", name: "Growth+", usd: 681, gbp: 502, contacts: 50_000, credits: 200_000, emails: 500_000, inapp: 500_000, seats: 5 },
-  { id: "pro", name: "Pro", usd: 1_622, gbp: 1_197, contacts: 75_000, credits: 300_000, emails: 750_000, inapp: 1_000_000, seats: 7 },
+  { id: "pro", name: "Enterprise", usd: 1_622, gbp: 1_197, contacts: 75_000, credits: 300_000, emails: 750_000, inapp: 1_000_000, seats: 7 },
 ];
 
 /* The three levels, used for the comparison table. Prices come from suitePrice() below. */
@@ -39,8 +39,8 @@ export const LEVELS = [
   },
   {
     id: "pro",
-    name: "Pro",
-    pitch: "For your whole audience, with the largest allowances and the most seats.",
+    name: "Enterprise",
+    pitch: "For teams at global scale, as a custom deal with unlimited access, priority support and volume discounts.",
     options: ["pro"],
   },
 ];
@@ -75,19 +75,24 @@ export const CONTACT_STEPS: number[] = [
   ...Array.from({ length: 7 }, (_, i) => 100_000 + 25_000 * i),       // 100,000 to 250,000
   300_000, 400_000, 500_000,
 ];
+/* The top level is Enterprise (renamed from Pro, owner decision 6 Oct 2026), priced as a custom deal.
+   Its internal id stays "pro" so the SSOT curve and multiplier still apply in code. */
+export const PRO_TERMS: string[] = ["Unlimited access to the whole platform", "Priority support from our team", "Volume discounts as you grow", "A contract and terms agreed with you"];
 export const LEVEL_INFO: { id: LevelId; name: string; band: string; ref: number }[] = [
   { id: "launch", name: "Launch", band: "2,500 to 24,999 contacts", ref: 2_500 },
   { id: "growth", name: "Growth", band: "25,000 to 74,999 contacts", ref: 25_000 },
-  { id: "pro", name: "Pro", band: "75,000 contacts and up", ref: 75_000 },
+  { id: "pro", name: "Enterprise", band: "75,000 contacts and up", ref: 75_000 },
 ];
 /* What usage beyond the allowance costs, at list. */
-export const METERS: { item: string; unit: string; price: string }[] = [
-  { item: "Emails", unit: "per 1,000 sent", price: "$1.00" },
-  { item: "In-app messages", unit: "per 1,000 delivered", price: "$1.00" },
-  { item: "Wallet-data credits", unit: "per 10,000 (a full enrichment uses 4)", price: "$10.00" },
-  { item: "ONS+ list checks", unit: "per 1,000 addresses", price: "$10.00" },
-  { item: "AI actions", unit: "per 1,000", price: "$6.00" },
+export const METERS: { item: string; unit: string; price: string; send: Cell }[] = [
+  { item: "Emails", unit: "per 1,000 sent", price: "$1.00", send: "$1.00" },
+  { item: "In-app messages", unit: "per 1,000 delivered", price: "$1.00", send: false },
+  { item: "Wallet-data credits", unit: "per 10,000 (a full enrichment uses 4)", price: "$10.00", send: false },
+  { item: "ONS+ list checks", unit: "per 1,000 addresses", price: "$10.00", send: false },
+  { item: "AI actions", unit: "per 1,000", price: "$6.00", send: "$6.00" },
 ];
+
+export type Cell = string | boolean;
 
 export const SEND_BASE = 6;
 export const SEND_PER_1K = 3.95;
@@ -97,19 +102,18 @@ export const EXTRA_CREDITS = { usd: 10, credits: 10_000, perEnrichment: 4 };
 
 /* Add-ons from the Finance SSOT: seats $10 each above the included count, credits $10 per
    10,000, Concierge sold by the hour and never bundled. */
-export const ADDONS: { item: string; detail: string; price: string }[] = [
-  { item: "Extra team seats", detail: "Each seat above the ones your contact count includes, up to 50", price: "$10 a month" },
-  { item: "+10,000 wallet-data credits", detail: "Enough to fully enrich 2,500 more wallets", price: "$10" },
-  { item: "+100,000 wallet-data credits", detail: "Enough to fully enrich 25,000 more wallets", price: "$100" },
-  { item: "Concierge", detail: "Our team plans and runs lifecycle work with you, scoped in advance", price: "$150 an hour" },
+export const ADDONS: { item: string; detail: string; price: string; send: Cell }[] = [
+  { item: "Extra team seats", detail: "Each seat above the ones your contact count includes, up to 50", price: "$10 a month", send: "Ask us" },
+  { item: "+10,000 wallet-data credits", detail: "Enough to fully enrich 2,500 more wallets", price: "$10", send: false },
+  { item: "+100,000 wallet-data credits", detail: "Enough to fully enrich 25,000 more wallets", price: "$100", send: false },
+  { item: "Concierge", detail: "Our team plans and runs lifecycle work with you, scoped in advance", price: "$150 an hour", send: "$150 an hour" },
 ];
 
 export const fmt = (n: number) => n.toLocaleString("en-US");
 export const usd = (n: number) => "$" + (Number.isInteger(n) ? fmt(n) : n.toFixed(2));
 
 /* Comparison table. A row is either a capacity number per package or a yes/no per level. */
-type Cell = string | boolean;
-export type Row = { label: string; note?: string; cells: Cell[]; span?: boolean }; // span: one value for every level
+export type Row = { label: string; note?: string; cells: Cell[]; span?: boolean; send: Cell }; // span: one value for every Suite level; send: the Send column
 export type Group = { title: string; rows: Row[] };
 
 const all = (v: Cell = true): Cell[] => [v, v, v];
@@ -118,61 +122,69 @@ export const COMPARE_GROUPS: Group[] = [
   {
     title: "Capacity",
     rows: [
-      { label: "Contacts", note: "Your level follows from how many contacts you import.", cells: ["2,500 to 24,999", "25,000 to 74,999", "75,000 and up"] },
-      { label: "Wallet-data credits", note: "A full enrichment pass of every contact, at 4 credits each.", cells: ["4 per contact", "4 per contact", "4 per contact"] },
-      { label: "Emails a month", cells: ["10 per contact, at least 50,000", "10 per contact", "10 per contact"] },
-      { label: "In-app messages a month", cells: ["10 per contact", "10 per contact", "About 13 per contact"] },
-      { label: "ONS+ list checks", cells: ["1 per contact", "1 per contact", "1 per contact"] },
-      { label: "Team seats included", note: "Extra seats are $10 a month each, up to 50.", cells: ["2, or 3 from 10,000 contacts", "4, or 5 from 50,000 contacts", "7"] },
+      { label: "Contacts", note: "Your level follows from how many contacts you import.", cells: ["2,500 to 24,999", "25,000 to 74,999", "75,000 and up"], send: "Priced per subscriber" },
+      { label: "Wallet-data credits", note: "A full enrichment pass of every contact, at 4 credits each.", cells: ["4 per contact", "4 per contact", "Custom"], send: false },
+      { label: "Emails a month", cells: ["10 per contact, at least 50,000", "10 per contact", "Custom"], send: "10 per subscriber" },
+      { label: "In-app messages a month", cells: ["10 per contact", "10 per contact", "Custom"], send: false },
+      { label: "ONS+ list checks", cells: ["1 per contact", "1 per contact", "Custom"], send: false },
+      { label: "Team seats included", note: "Extra seats are $10 a month each, up to 50.", cells: ["2, or 3 from 10,000 contacts", "4, or 5 from 50,000 contacts", "Custom"], send: "Ask us" },
     ],
   },
   {
     title: "Customer data",
     rows: [
-      { label: "One record per customer across your app and your contracts", cells: all() },
-      { label: "Contract events turned into actions such as deposits and withdrawals", cells: all() },
-      { label: "Contract history back to the first block, from Atlas", cells: all() },
-      { label: "Lifecycle stages and health scores", cells: all() },
-      { label: "Contacts that exist with only a wallet", cells: all() },
+      { label: "One record per customer across your app and your contracts", cells: all(), send: "Your app only" },
+      { label: "Contract events turned into actions such as deposits and withdrawals", cells: all(), send: false },
+      { label: "Contract history back to the first block, from Atlas", cells: all(), send: false },
+      { label: "Lifecycle stages and health scores", cells: all(), send: true },
+      { label: "Contacts that exist with only a wallet", cells: all(), send: false },
     ],
   },
   {
     title: "Audiences and sending",
     rows: [
-      { label: "Segments, including people who have not done something", cells: all() },
-      { label: "Campaigns by email and in-app", cells: all() },
-      { label: "Loops, started by on-chain and off-chain triggers", cells: all() },
-      { label: "Holdouts on every campaign and Loop", cells: all() },
-      { label: "Forms", cells: all() },
-      { label: "Dedicated sending IP", note: "Provisioned once you send more than 100,000 emails a month.", cells: all() },
+      { label: "Segments, including people who have not done something", cells: all(), send: true },
+      { label: "Campaigns by email and in-app", cells: all(), send: "Email" },
+      { label: "Loops, started by on-chain and off-chain triggers", cells: all(), send: "Off-chain triggers" },
+      { label: "Holdouts on every campaign and Loop", cells: all(), send: true },
+      { label: "Forms", cells: all(), send: true },
+      { label: "Dedicated sending IP", note: "Provisioned once you send more than 100,000 emails a month.", cells: all(), send: false },
     ],
   },
   {
     title: "Intelligence and developers",
     rows: [
-      { label: "Intelligence MCP, questions in plain English", cells: all() },
-      { label: "In-app SDK", cells: all() },
-      { label: "REST API and webhooks", cells: all() },
+      { label: "Intelligence MCP, questions in plain English", cells: all(), send: true },
+      { label: "In-app SDK", cells: all(), send: false },
+      { label: "REST API and webhooks", cells: all(), send: true },
     ],
   },
   {
-    title: "Add-ons, the same price at every level",
-    rows: ADDONS.map((a) => ({ label: a.item, note: a.detail, cells: [a.price], span: true })),
+    title: "Support and terms",
+    rows: [
+      { label: "Priority support", cells: [false, false, true], send: false },
+      { label: "Volume discounts", cells: [false, false, true], send: false },
+      { label: "Custom contract and pricing", cells: [false, false, true], send: false },
+    ],
+  },
+  {
+    title: "Add-ons",
+    rows: ADDONS.map((a) => ({ label: a.item, note: a.detail, cells: [a.price], span: true, send: a.send })),
   },
   {
     title: "Usage beyond your allowance",
-    rows: METERS.map((m) => ({ label: m.item, note: m.unit, cells: [m.price], span: true })),
+    rows: METERS.map((m) => ({ label: m.item, note: m.unit, cells: [m.price], span: true, send: m.send })),
   },
 ];
 
 export const PRICING_FAQ = [
   {
-    q: "What is the difference between Suite and Send?",
-    a: "Suite reads both lanes, what customers do in your app and what their wallets do on-chain, and sends by email and in-app. Send reads your product data and email results, runs campaigns and Loops by email and includes AI, but leaves out Suite's blockchain data features. It is priced on the size of your list.",
+    q: "What is the difference between the Suite and Send plans?",
+    a: "On the Suite plan we read both lanes, what customers do in your app and what their wallets do on-chain, and you send by email and in-app. On the Send plan we read your product data and email results, and you run campaigns and Loops by email with AI, but without blockchain data. The Send plan is priced on the size of your list.",
   },
   {
     q: "How do I choose a package?",
-    a: "Set the number of contacts you plan to import and the price follows. Your level comes from that number: Launch up to 24,999 contacts, Growth from 25,000 and Pro from 75,000. Many companies start with one customer group rather than every wallet that has touched their contracts.",
+    a: "Set the number of contacts you plan to import and the price follows. Your level comes from that number: Launch up to 24,999 contacts and Growth from 25,000. From 75,000 contacts, Enterprise is priced as a custom deal with unlimited access, priority support and volume discounts. Many companies start with one customer group rather than every wallet that has touched their contracts.",
   },
   {
     q: "What counts as a contact?",
@@ -183,12 +195,12 @@ export const PRICING_FAQ = [
     a: "Credits pay for reading and enriching wallets on the chain. A full wallet enrichment uses four credits. Every package includes a monthly allowance, and you can buy another 10,000 credits for $10 whenever you need them.",
   },
   {
-    q: "How is Send priced?",
-    a: "Send is $6 a month plus $3.95 per 1,000 subscribers. That is $15.88 a month at 2,500 subscribers, $45.50 at 10,000 and $104.75 at 25,000.",
+    q: "How is the Send plan priced?",
+    a: "The Send plan is $6 a month plus $3.95 per 1,000 subscribers. That is $15.88 a month at 2,500 subscribers, $45.50 at 10,000 and $104.75 at 25,000.",
   },
   {
-    q: "Can I pay in pounds?",
-    a: "Yes. Suite is priced in both US dollars and pounds sterling, and the prices on this page show both.",
+    q: "Can I see prices in pounds?",
+    a: "Yes. We charge in US dollars, and the pricing page can show every Suite price in pounds sterling as a guide.",
   },
   {
     q: "Is there a free plan?",

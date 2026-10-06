@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s · OnchainSuite",
   },
   description:
-    "OnchainSuite joins what your customers do in your app with what their wallets do on-chain, so blockchain companies know who needs a message and can send it by email or in-app.",
+    "OnchainSuite joins what customers do in your app with what their wallets do on-chain, so your team knows who needs a message and can send it.",
   applicationName: "OnchainSuite",
   keywords: [
     "Web3 retention",
@@ -116,7 +116,7 @@ export default function RootLayout({
                     "@type": "Offer",
                     price: "6",
                     priceCurrency: "USD",
-                    description: "Send from $6 a month plus $3.95 per 1,000 subscribers; Suite from $39 a month (Launch) to $1,622 a month (Pro).",
+                    description: "Send plan from $6 a month plus $3.95 per 1,000 subscribers; Suite plan from $39 a month, priced by contacts.",
                   },
                 },
               ],

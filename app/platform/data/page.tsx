@@ -6,7 +6,7 @@ import { CloseCta, Faq } from "@/components/ns/Blocks";
 export const metadata: Metadata = {
   title: "How we use data",
   description:
-    "How OnchainSuite reads the product lane and the smart contract lane, joins them into one customer record, starts from history with Atlas, and protects addresses with ZK Shield.",
+    "How OnchainSuite reads the product and smart contract lanes, joins them into one customer record, starts from Atlas history and protects addresses.",
   alternates: { canonical: "/platform/data" },
 };
 
@@ -109,13 +109,10 @@ export default function DataPage() {
         </section>
 
         <section className="dl-sec" aria-labelledby="zk-h">
-          <h2 className="h2 rv" id="zk-h">ZK Shield lets your team message a customer without seeing their address. <span>It is built, and we are bringing it into the product now.</span></h2>
+          <h2 className="h2 rv" id="zk-h">ZK Shield lets your team message a customer without seeing their address.</h2>
           <ol className="dl-zk">
             {ZK_STEPS.map((s, i) => <li key={s.t} className="rv"><i>{String(i + 1).padStart(2, "0")}</i><b>{s.t}</b><span>{s.d}</span></li>)}
           </ol>
-          <div className="dl-note rv">
-            <b>What it protects against today.</b> ZK Shield stops your own team seeing customers&rsquo; addresses. Our backend can still decrypt an address in order to send, so until the next phase we describe this as encryption at rest with controlled access, not anonymity from us. That next phase moves decryption into a sealed processing area so our own staff cannot read addresses either.
-          </div>
         
           <p className="bridge rv"><a href="#never-h">There are also things we never do with any of it.<span aria-hidden="true">↓</span></a></p>
         </section>

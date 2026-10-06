@@ -9,7 +9,7 @@ import WalletChurnRateCalc from "@/components/WalletChurnRateCalc";
 export const metadata: Metadata = {
   title: "Wallet churn rate calculator",
   description:
-    "Churn measured on wallets, not accounts. Enter one period and see what it compounds to over a year, the average wallet lifespan, and lifetime value. Free, no signup.",
+    "Churn measured on wallets, not accounts. See what one period compounds to over a year, the average wallet lifespan and lifetime value. Free.",
   alternates: { canonical: "/tools/wallet-churn-rate" },
   openGraph: { title: "Wallet churn rate calculator · OnchainSuite", description: "See what a period's wallet churn compounds to over a year.", url: "/tools/wallet-churn-rate", type: "website" },
 };
@@ -19,7 +19,7 @@ const wrap = { maxWidth: 1200, margin: "0 auto" };
 
 const ARTICLE = [
   { h: "Why wallet churn is not customer churn", p1: "A customer cancels; a wallet just stops. There is no cancellation event to count, so churn has to be defined as an absence of activity over a window you choose, and that choice changes the number more than anything else on this page.", p2: "Pick the window from your natural usage cycle. If a healthy wallet transacts weekly, a 30-day silence is a strong sign it has churned. If it stakes and waits, 30 days is nothing and you will scare yourself with a number that means very little." },
-  { h: "The compounding is what hurts", p1: "A 6 percent monthly churn rate sounds survivable. Compounded, it means half your active base is gone in eleven months and 53 percent is gone within a year.", p2: "That is why the annual figure sits next to the monthly one above. Teams that only look at the monthly rate consistently underestimate how much acquisition they need to hold flat." },
+  { h: "The compounding is what hurts", p1: "A 6 percent monthly churn rate sounds survivable. Compounded, it means half your active base is gone in eleven months and 52 percent is gone within a year.", p2: "That is why the annual figure sits next to the monthly one above. Teams that only look at the monthly rate consistently underestimate how much acquisition they need to hold flat." },
   { h: "Churn and value are not evenly distributed", p1: "Wallet churn is usually worst in the long tail and mildest among your largest holders, which means a blended rate can look alarming while revenue barely moves, or look calm while your best cohort quietly leaves.", p2: "Run this per cohort: by size, by acquisition channel, by first action. The cohort with the worst churn and the highest revenue per wallet is where retention work pays for itself first." },
 ];
 const BENCHMARKS = [
@@ -75,7 +75,7 @@ export default function WalletChurnRatePage() {
           </div>
 
           <aside className="ocs-article-side" style={{ background: "#FFFFFF", border: "1px solid #DEE0E3", borderRadius: 6, padding: 22 }}>
-            <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: ".1em", textTransform: "uppercase", color: "#767B83", marginBottom: 14 }}>Monthly churn benchmarks</div>
+            <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: ".1em", textTransform: "uppercase", color: "#767B83", marginBottom: 14 }}>Example figures</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {BENCHMARKS.map((b) => (
                 <div key={b.label}>
@@ -89,7 +89,7 @@ export default function WalletChurnRatePage() {
                 </div>
               ))}
             </div>
-            <p style={{ margin: "16px 0 0", fontSize: 12.5, lineHeight: 1.55, color: "#767B83" }}>Median monthly wallet churn by category, rolling 90 days.</p>
+            <p style={{ margin: "16px 0 0", fontSize: 12.5, lineHeight: 1.55, color: "#767B83" }}>Example figures to compare against, not measured data.</p>
           </aside>
         </div>
       </section>

@@ -21,7 +21,7 @@ const p = { margin: "14px 0 0", fontSize: 16, lineHeight: 1.7, color: "#3D4A63" 
 const FAQ = [
   { q: "What is wallet churn?", a: "Wallet churn is the share of active wallets that stop coming back over a period. Measured against your active base, it shows how much of your traction you give back each month." },
   { q: "How is churn rate calculated?", a: "Churn rate is the wallets lost in a period divided by the wallets active at the start, times 100. Start a month with 5,000 active wallets and lose 400, and monthly churn is 8%." },
-  { q: "What is a good churn rate?", a: "It depends on your model and the value of a wallet. Crypto swings harder than SaaS, so churn runs higher, and 8% a month compounds to about 63% a year. Read it next to lifetime value." },
+  { q: "What is a good churn rate?", a: "It depends on your model and the value of a wallet. Wallet activity moves with the market, so churn can change faster than in subscription software, and 8% a month compounds to about 63% a year. Read it next to lifetime value." },
 ];
 
 export default function ChurnCalculatorPage() {
@@ -61,8 +61,8 @@ export default function ChurnCalculatorPage() {
 
         <h2 style={h2}>What counts as a good churn rate?</h2>
         <p style={p}>
-          It depends on your model and the value of a wallet. Crypto swings harder than SaaS, so wallet churn tends to
-          run higher. The trap is compounding: 8% a month feels small, but works out near 63% over a year. Read churn
+          It depends on your model and the value of a wallet. Wallet activity moves with the market, so churn can
+          change faster than in subscription software. The trap is compounding: 8% a month feels small, but works out near 63% over a year. Read churn
           next to lifetime value, not on its own.
         </p>
 

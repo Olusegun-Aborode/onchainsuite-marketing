@@ -1,6 +1,13 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "onchainsuite",
+  // The marketing site, served as static assets from a Worker on the OnchainSuite Cloudflare
+  // account (b839212181b7cbf64336ba5a93622046). `npm run deploy` builds ./out and uploads it.
+  "name": "onchainsuitewebdemo",
+  "account_id": "b839212181b7cbf64336ba5a93622046",
   "compatibility_date": "2026-06-01",
-  "pages_build_output_dir": "./out"
+  "assets": {
+    "directory": "./out",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
 }

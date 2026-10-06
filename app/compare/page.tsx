@@ -7,7 +7,7 @@ import { COMPETITORS, MATRIX_CAPS, OCS_MATRIX } from "@/lib/compare";
 export const metadata: Metadata = {
   title: "Compare OnchainSuite",
   description:
-    "Fair, current comparisons between OnchainSuite and the email, lifecycle and on-chain tools blockchain companies weigh it against, with the cases where the other tool is the better call.",
+    "Fair comparisons between OnchainSuite and the email, lifecycle and on-chain tools teams weigh it against, including when the other tool is the better call.",
   alternates: { canonical: "/compare" },
 };
 

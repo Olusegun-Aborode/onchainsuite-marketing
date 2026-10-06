@@ -67,7 +67,7 @@ export default function CpaPage() {
             ))}
           </div>
           <aside className="ocs-article-side" style={{ background: "#FFFFFF", border: "1px solid #DEE0E3", borderRadius: 6, padding: 22 }}>
-            <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: ".1em", textTransform: "uppercase", color: "#767B83", marginBottom: 14 }}>CPA benchmarks</div>
+            <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: ".1em", textTransform: "uppercase", color: "#767B83", marginBottom: 14 }}>Example figures</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {BENCHMARKS.map((b) => (
                 <div key={b.label}>
@@ -81,7 +81,7 @@ export default function CpaPage() {
                 </div>
               ))}
             </div>
-            <p style={{ margin: "16px 0 0", fontSize: 12.5, lineHeight: 1.55, color: "#767B83" }}>Median cost per transacting wallet by channel.</p>
+            <p style={{ margin: "16px 0 0", fontSize: 12.5, lineHeight: 1.55, color: "#767B83" }}>Example figures to compare against, not measured data.</p>
           </aside>
         </div>
       </section>

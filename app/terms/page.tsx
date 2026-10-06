@@ -33,8 +33,8 @@ export default function TermsPage() {
 
       <h2>3. The service and early access</h2>
       <p>
-        OnchainSuite provides behaviour-triggered retention tooling for Web3 teams: it reads public on-chain activity,
-        normalises it, and lets you trigger in-app and email messaging. During the early-access period the service is
+        OnchainSuite provides lifecycle marketing tooling for blockchain and mainstream companies: it reads the product
+        data you bring in and, on the Suite plan, public on-chain activity, and lets you send email and in-app messages. During the early-access period the service is
         provided on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis, may change or be discontinued, and may
         contain features that are incomplete or evolving. Founding rates offered during early access apply on the terms
         communicated to you at sign-up.
@@ -60,8 +60,8 @@ export default function TermsPage() {
 
       <h2>6. Fees</h2>
       <p>
-        We offer two lines: Suite (four tiers, PAYG, Launch, Growth and Pro) and Send (email only, priced per
-        subscriber). Your plan is billed monthly as described at sign-up or in an order, and usage above a plan&rsquo;s
+        We offer two plans: Suite, priced by the number of contacts with Launch, Growth and Enterprise levels, and Send, priced
+        per subscriber. Fees are charged in US dollars. Your plan is billed monthly as described at sign-up or in an order, and usage above a plan&rsquo;s
         allowance bills at list price. Fees are exclusive of VAT and other taxes, which you are responsible for. During
         early access, pricing may be discounted or waived and is subject to the founding-rate terms provided to you.
       </p>

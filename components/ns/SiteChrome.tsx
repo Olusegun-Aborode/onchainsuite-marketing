@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { APP_URL, COMPANY, DOCS_URL } from "@/lib/data";
+import CalBooking from "./CalBooking";
 import Sprite from "./Sprite";
 import MobileMenu from "./MobileMenu";
 import NavMenu from "./NavMenu";
@@ -27,7 +28,7 @@ const FOOT: { title: string; items: FootLink[] }[][] = [
       { label: "Intelligence MCP", href: "/platform/intelligence-mcp", tag: "New" }, { label: "How we use data", href: "/platform/data" }, { label: "Pricing", href: "/pricing" },
     ] },
     { title: "Company", items: [
-      { label: "Team", href: "/team" }, { label: "Refer a team", href: "/refer", tag: "New" }, { label: "Become an agency partner", href: "/refer#partner-h" }, { label: "Book a walkthrough", href: "/early-access" },
+      { label: "Team", href: "/team" }, { label: "Our hypothesis", href: "/hypothesis" }, { label: "Refer a team", href: "/refer", tag: "New" },
     ] },
   ],
   [
@@ -117,6 +118,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
         </div>
       </footer>
       <SiteMotion />
+      <CalBooking />
     </div>
   );
 }

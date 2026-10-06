@@ -254,7 +254,7 @@ export function initHome(){
   var NS = 'http://www.w3.org/2000/svg';
   var pills = [ { t:'Signed up', l:laneA, L:LA, f0:.44, s:0 }, { t:'Finished setup', l:laneA, L:LA, f0:.22, s:.1 }, { t:'Deposited 12,400', l:laneB, L:LB, f0:.44, s:.05 }, { t:'Withdrew 9,800', l:laneB, L:LB, f0:.22, s:.15 } ];
   pills.forEach(function(p){
-    var g = document.createElementNS(NS, 'g'), w = p.t.length * 7 + 26;
+    var g = document.createElementNS(NS, 'g'), w = p.t.length * 7.4 + 32;
     var r = document.createElementNS(NS, 'rect'); r.setAttribute('x', -w / 2); r.setAttribute('y', -14); r.setAttribute('width', w); r.setAttribute('height', 28); r.setAttribute('rx', 7); r.setAttribute('fill', '#14161B'); r.setAttribute('stroke', '#2C2F35');
     var tx = document.createElementNS(NS, 'text'); tx.setAttribute('y', 4.5); tx.setAttribute('fill', '#D8DAE0'); tx.textContent = p.t;
     g.appendChild(r); g.appendChild(tx); pillsG.appendChild(g); p.g = g;

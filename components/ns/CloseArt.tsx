@@ -20,9 +20,9 @@ const PEOPLE_ROWS = [
 ];
 
 const STEPS = [
-  { x: 28, w: 100, label: "Health below 40", fill: "#FFF1EA", stroke: "#FFD2BD", color: O },
-  { x: 140, w: 92, label: "Email + in-app", fill: "#EEF0FF", stroke: "#C9D0FF", color: B },
-  { x: 244, w: 160, label: "Stops when they deposit", fill: "#E9F7F0", stroke: "#BFE8D3", color: G },
+  { x: 28, w: 96, label: "Health below 40", fill: "#FFF1EA", stroke: "#FFD2BD", color: O },
+  { x: 134, w: 90, label: "Email + in-app", fill: "#EEF0FF", stroke: "#C9D0FF", color: B },
+  { x: 234, w: 174, label: "Stops when they deposit", fill: "#E9F7F0", stroke: "#BFE8D3", color: G },
 ];
 
 export default function CloseArt({ mainstream = false }: { mainstream?: boolean }) {

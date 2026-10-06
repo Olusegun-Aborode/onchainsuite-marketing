@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && wrangler pages deploy ./out --project-name onchainsuite --commit-dirty=true"
+    "deploy": "next build && wrangler deploy"
   },
   "dependencies": {
     "next": "^15",

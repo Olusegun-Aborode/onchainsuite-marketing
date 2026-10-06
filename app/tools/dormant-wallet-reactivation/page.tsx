@@ -9,7 +9,7 @@ import DormantReactivationCalc from "@/components/DormantReactivationCalc";
 export const metadata: Metadata = {
   title: "Dormant wallet reactivation calculator",
   description:
-    "Put a number on the revenue recoverable from wallets that went quiet. Reachable share, reactivation rate, revenue per wallet, months retained, campaign cost. Free, no signup.",
+    "Put a number on the revenue you could recover from wallets that went quiet, from reach, reactivation rate and revenue per wallet. Free, no signup.",
   alternates: { canonical: "/tools/dormant-wallet-reactivation" },
   openGraph: { title: "Dormant wallet reactivation calculator · OnchainSuite", description: "Revenue recoverable from wallets that stopped showing up.", url: "/tools/dormant-wallet-reactivation", type: "website" },
 };
@@ -20,7 +20,7 @@ const mono = "'JetBrains Mono',monospace";
 
 const ARTICLE = [
   { h: "What counts as a dormant wallet?", p1: "A wallet is dormant when it has interacted with your contracts at least once and then gone quiet for longer than your natural usage cycle. For a perps venue that might be 14 days. For a staking protocol it might be a quarter. Ninety days is a reasonable default if you have no cycle in mind.", p2: "The distinction that matters is dormant versus lost. A lost wallet has withdrawn its balance and moved on. A dormant wallet often still holds a position, which is exactly why it is worth a message." },
-  { h: "Why reachability decides the number", p1: "Teams tend to argue about reactivation rate. It is the wrong lever. Move the rate from 8% to 12% and the result shifts modestly; move reachability from 30% to 60% and it doubles.", p2: "Reachability is a collection problem, not a messaging problem. Every touchpoint where a wallet connects is an opportunity to ask for one durable channel, and the ones that ask early collect two to three times more than the ones that ask at churn." },
+  { h: "Why reachability decides the number", p1: "Teams tend to argue about reactivation rate. It is the wrong lever. Move the rate from 8% to 12% and the result shifts modestly; move reachability from 30% to 60% and it doubles.", p2: "Reachability is a collection problem, not a messaging problem. Every touchpoint where a wallet connects is an opportunity to ask for one durable channel, and asking early gives you more chances to collect one than asking when a customer is already leaving." },
   { h: "Reactivation revenue is not one payment", p1: "The mistake in most back-of-envelope versions of this maths is treating a reactivated wallet as a single transaction. It is a cohort that resumes contributing at roughly the rate of your existing active base, then decays again.", p2: "That is why the months-retained input exists. Set it to what your data says rather than to the number you would like. A reactivated wallet that stays seven months is worth more than four times one that stays one month and leaves." },
 ];
 const BENCHMARKS = [
@@ -30,8 +30,8 @@ const BENCHMARKS = [
 ];
 const TACTICS = [
   { n: "01", h: "Ask for a channel at connect, not at churn", p: "The cheapest reachability gain is a single optional field at wallet connect. Wallets that give you an address at their first session are the ones still interested enough to answer." },
-  { n: "02", h: "Trigger on the drift, not the departure", p: "Dormancy is visible weeks before it is complete: fewer sessions, smaller positions, a bridge out. Start the message on the leading signal and reactivation rates roughly double against a 90-day sweep." },
-  { n: "03", h: "Say what happened while they were gone", p: "The highest-performing reactivation message is specific and unflattering to send: what changed, what their position did, what they missed. Generic we-miss-you sends underperform by a wide margin." },
+  { n: "02", h: "Trigger on the drift, not the departure", p: "Dormancy is visible weeks before it is complete: fewer sessions, smaller positions, a bridge out. Start the message on the leading signal rather than waiting for a 90-day sweep." },
+  { n: "03", h: "Say what happened while they were gone", p: "The highest-performing reactivation message is specific and unflattering to send: what changed, what their position did, what they missed. A generic we-miss-you message gives them nothing to act on." },
   { n: "04", h: "Segment by why they left", p: "Wallets that left after a fee change need different copy from wallets that left after a failed transaction. One segment, one reason, one message." },
   { n: "05", h: "Price the incentive against retained months", p: "An incentive that buys one transaction is a cost. One that buys seven months of activity is an investment. Model the incentive against the months-retained figure above before you set it." },
 ];
@@ -53,7 +53,7 @@ export default function DormantPage() {
           <span style={{ color: "#42464D" }}>Dormant wallet reactivation</span>
         </nav>
         <h1 style={{ margin: "20px 0 0", fontSize: "clamp(38px,5vw,56px)", lineHeight: 1.04, letterSpacing: "-1px", fontWeight: 600, maxWidth: "20ch", color: "#010F31" }}>Dormant wallet reactivation calculator</h1>
-        <p style={{ margin: "20px 0 0", maxWidth: "58ch", fontSize: 17, lineHeight: 1.65, color: "#585D65" }}>Most protocols hold more value in the wallets that stopped showing up than in the ones they are still acquiring. This puts a number on that.</p>
+        <p style={{ margin: "20px 0 0", maxWidth: "58ch", fontSize: 17, lineHeight: 1.65, color: "#585D65" }}>The wallets that stopped showing up can still hold a lot of value. This puts a number on it.</p>
         <ToolArt kind="dormant" className="hero-art" />
       </section>
 
@@ -73,7 +73,7 @@ export default function DormantPage() {
             ))}
           </div>
           <aside className="ocs-article-side" style={{ background: "#FFFFFF", border: "1px solid #DEE0E3", borderRadius: 6, padding: 22 }}>
-            <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: ".1em", textTransform: "uppercase", color: "#767B83", marginBottom: 14 }}>Reactivation benchmarks</div>
+            <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: ".1em", textTransform: "uppercase", color: "#767B83", marginBottom: 14 }}>Example figures</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {BENCHMARKS.map((b) => (
                 <div key={b.label}>
@@ -87,7 +87,7 @@ export default function DormantPage() {
                 </div>
               ))}
             </div>
-            <p style={{ margin: "16px 0 0", fontSize: 12.5, lineHeight: 1.55, color: "#767B83" }}>Median across protocols onboarded last quarter.</p>
+            <p style={{ margin: "16px 0 0", fontSize: 12.5, lineHeight: 1.55, color: "#767B83" }}>Example figures to compare against, not measured data.</p>
           </aside>
         </div>
       </section>

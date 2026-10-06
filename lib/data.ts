@@ -12,6 +12,9 @@ export const SITE_URL = "https://www.onchainsuite.com";
 // External destinations
 export const DOCS_URL = "https://docs.onchainsuite.com";
 export const APP_URL = "https://app.onchainsuite.com";
+// Cal.com 15-minute booking; the site opens it as a popup from any /early-access link.
+export const CAL_LINK = "onchainsuite/15min";
+export const CAL_URL = `https://cal.com/${CAL_LINK}`;
 export const CONTACT_EMAIL = "info@onchainsuite.com";
 
 // Company + legal facts. Verified against Companies House (company 17370357).

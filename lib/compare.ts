@@ -23,7 +23,7 @@ export const MATRIX_CAPS = [
 ] as const;
 
 export const OCS_MATRIX: string[] = [
-  "From $39 to $1,622 a month",
+  "From $39 a month, priced by contacts",
   "Yes",
   "Yes",
   "Yes",
@@ -118,8 +118,8 @@ export const COMPETITORS: Competitor[] = [
     them: ["Contact sales", "No", "No", "Yes", "Yes", "Web2 profiles", "No", "Yes", "Partial", "Yes", "No", "Yes", "Yes", "No"],
     faqs: [
       { q: "Can Braze message wallets?", a: "Not on its own. Braze targets known users on channels tied to Web2 identifiers. OnchainSuite reaches wallets directly with in-app push." },
-      { q: "Is OnchainSuite cheaper?", a: "Usually. Suite starts at $39 a month on Launch, with no enterprise minimum, against Braze's contact-sales model." },
-      { q: "Does it scale for large protocols?", a: "Yes. Pricing scales with the contacts you bring in, from Launch to Pro." },
+      { q: "Is OnchainSuite cheaper?", a: "Usually. The Suite plan starts at $39 a month on Launch, with no enterprise minimum, against Braze's contact-sales model." },
+      { q: "Does it scale for large protocols?", a: "Yes. Pricing scales with the contacts you bring in, from Launch to Enterprise." },
       { q: "How is on-chain data handled?", a: "We read cross-chain activity into clean events and segments, so you skip the data engineering." },
     ],
   },
@@ -157,7 +157,7 @@ export const COMPETITORS: Competitor[] = [
     faqs: [
       { q: "Can EmailOctopus trigger on behaviour?", a: "Only basic list automations. There is no product-event or on-chain triggering." },
       { q: "Is OnchainSuite overkill next to it?", a: "If you only send newsletters, EmailOctopus is fine. If you want to retain wallets on on-chain behaviour, the two are not comparable." },
-      { q: "Does it cost a lot more?", a: "Suite starts at $39 a month, more than a newsletter tool because it reads your contracts as well as your list. For email only, Send is $6 a month plus $3.95 per 1,000 subscribers." },
+      { q: "Does it cost a lot more?", a: "The Suite plan starts at $39 a month, more than a newsletter tool because we read your contracts as well as your list. Without blockchain data, the Send plan is $6 a month plus $3.95 per 1,000 subscribers." },
     ],
   },
   {

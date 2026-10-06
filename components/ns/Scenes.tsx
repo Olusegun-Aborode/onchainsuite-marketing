@@ -42,7 +42,7 @@ export function SegmentScene() {
               <div><p className="u-label">Describe your audience</p><div className="u-desc"><svg><use href="#a-spark" /></svg><span className="t" data-type="Base wallets over 10 ETH that have not staked in 30 days"></span><span className="u-btn p" data-gen><svg><use href="#a-spark" /></svg>Generate</span></div>
                 <p style={{ margin: "6px 0 0", fontSize: "11.5px", color: "#767B83" }}>The prompt becomes editable rules below, so you can tweak anything by hand.</p></div>
               <div className="u-rule" data-rule><span>Where</span><span className="u-sel">Wallet balance</span><span className="u-sel">is greater than</span><span className="u-sel v">10</span><span style={{ color: "#767B83" }}>✕</span></div>
-              <div className="u-rule" data-rule><span>And</span><span className="u-sel">Staked</span><span className="u-sel hot">has NOT done</span><span className="u-sel">in the last 30 days</span><span style={{ color: "#767B83" }}>✕</span></div>
+              <div className="u-rule" data-rule><span>And</span><span className="u-sel">Staked</span><span className="u-sel hot">has NOT done</span><span className="u-sel">last 30 days</span><span style={{ color: "#767B83" }}>✕</span></div>
               <div style={{ display: "flex", gap: "14px", fontSize: "12px", color: "#585D65" }}><span>+ Add rule</span><span>+ Add group</span></div>
             </div>
             <div className="u-card"><div style={{ fontWeight: "600", fontSize: "14px" }}>Live preview</div>

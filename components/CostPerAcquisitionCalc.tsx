@@ -55,7 +55,7 @@ export default function CostPerAcquisitionCalc() {
 
   return (
     <div className="ocs-cpa-grid" style={{ alignItems: "start" }}>
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16, minWidth: 0 }}>
         <div style={{ background: "#FFFFFF", border: "1px solid #DEE0E3", borderRadius: 6, padding: 20, overflowX: "auto" }}>
           <table style={{ width: "100%", minWidth: 620, borderCollapse: "collapse" }}>
             <thead>
@@ -156,7 +156,7 @@ export default function CostPerAcquisitionCalc() {
         .ocs-calc-side { position:sticky; top:88px; }
         .ocs-cpa-input:focus { border-color:#FF6828 !important; box-shadow:0 0 0 3px rgba(255,104,40,0.28); }
         .ocs-v2-input:focus { border-color:#FF6828 !important; box-shadow:0 0 0 3px rgba(255,104,40,0.28); }
-        @media (max-width:1024px){ .ocs-cpa-grid { grid-template-columns:1fr; } .ocs-calc-side { position:static; } }
+        @media (max-width:1024px){ .ocs-cpa-grid { grid-template-columns:minmax(0,1fr); } .ocs-calc-side { position:static; } }
       `}</style>
     </div>
   );

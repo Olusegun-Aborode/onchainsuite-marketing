@@ -7,7 +7,7 @@ import ToolArt, { type ToolKind } from "@/components/ns/ToolArt";
 export const metadata: Metadata = {
   title: "Free tools",
   description:
-    "Free calculators for growth teams at blockchain companies: dormant wallet reactivation, cost per acquisition, wallet reachability, churn rate, churn cost and lifetime value. No signup.",
+    "Free calculators for growth teams: dormant wallet reactivation, cost per acquisition, wallet reachability, churn and lifetime value. No signup.",
   alternates: { canonical: "/tools" },
 };
 

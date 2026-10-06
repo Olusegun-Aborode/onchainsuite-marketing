@@ -127,7 +127,7 @@ export default function ReachabilityScoreCalc() {
         .ocs-calc-grid { display:grid; grid-template-columns:minmax(0,1fr) 400px; gap:16px; }
         .ocs-calc-side { position:sticky; top:88px; }
         .ocs-v2-input:focus { border-color:#FF6828 !important; box-shadow:0 0 0 3px rgba(255,104,40,0.28); }
-        @media (max-width:1024px){ .ocs-calc-grid { grid-template-columns:1fr; } .ocs-calc-side { position:static; } }
+        @media (max-width:1024px){ .ocs-calc-grid { grid-template-columns:minmax(0,1fr); } .ocs-calc-side { position:static; } }
       `}</style>
     </div>
   );

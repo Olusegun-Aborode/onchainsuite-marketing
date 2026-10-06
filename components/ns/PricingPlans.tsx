@@ -2,17 +2,17 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePricingLine } from "./PricingLine";
 import {
-  CONTACT_STEPS, EXTRA_SEAT_USD, FX_GBP, LEVEL_INFO, allowances, byId, fmt, levelFor, sendPrice, suitePrice, usd, SEND_BASE, SEND_PER_1K,
+  CONTACT_STEPS, EXTRA_SEAT_USD, PRO_TERMS, FX_GBP, LEVEL_INFO, allowances, byId, fmt, levelFor, sendPrice, suitePrice, usd, SEND_BASE, SEND_PER_1K,
 } from "@/lib/pricing";
 
-type Line = "suite" | "send";
 type Cur = "usd" | "gbp";
 
 const SEND_STOPS = [500, 1_000, 2_500, 5_000, 10_000, 25_000, 50_000, 100_000, 250_000];
 
 export default function PricingPlans() {
-  const [line, setLine] = useState<Line>("suite");
+  const { line, setLine } = usePricingLine();
   const [cur, setCur] = useState<Cur>("usd");
   const [stop, setStop] = useState(4);
   const subs = SEND_STOPS[stop];
@@ -33,8 +33,8 @@ export default function PricingPlans() {
       </div>
       <p className="pp-line">
         {line === "suite"
-          ? "Suite reads what customers do in your app and on-chain, and sends by email and in-app."
-          : "Send is campaigns, Loops and AI over your product and email data, without Suite's blockchain data, priced on your list size."}
+          ? "On the Suite plan, we read what customers do in your app and on-chain, and you send by email and in-app."
+          : "On the Send plan, you get campaigns, Loops and AI over your product and email data, without blockchain data, priced on your list size."}
       </p>
 
       {line === "suite" ? (
@@ -59,7 +59,7 @@ export default function PricingPlans() {
               <li>Segments of your list</li>
               <li>AI that answers questions and builds segments in plain English</li>
             </ul>
-            <p className="upsell">Need to see what your customers do on-chain or reach a wallet in-app? That is Suite, from {usd(byId("launch").usd)} a month.</p>
+            <p className="upsell">Need to see what your customers do on-chain or reach a wallet in-app? That is the Suite plan, from {usd(byId("launch").usd)} a month.</p>
             <Link className="btn solid lg" href="/early-access">Book a walkthrough</Link>
           </div>
         </div>
@@ -80,6 +80,7 @@ function SuiteConfigurator({ cur }: { cur: Cur }) {
   const [extra, setExtra] = useState(0);
 
   const level = levelFor(contacts);
+  const custom = level === "pro"; // Enterprise (id "pro") is sold as a custom deal
   const al = allowances(contacts);
   const suiteUsd = suitePrice(contacts);
   const seatsUsd = extra * EXTRA_SEAT_USD;
@@ -115,39 +116,50 @@ function SuiteConfigurator({ cur }: { cur: Cur }) {
         <div className="cfg-row">
           <div>
             <label htmlFor="cfgSeats"><b>Team seats</b></label>
-            <span>{al.seats} are included at this size, and each extra seat is {seatPrice} a month.</span>
+            <span>{custom ? "Seats on Enterprise are agreed with you as part of the deal." : <>{al.seats} are included at this size, and each extra seat is {seatPrice} a month.</>}</span>
           </div>
-          <div className="step">
+          {!custom && <div className="step">
             <button type="button" onClick={() => setExtra(Math.max(0, extra - 1))} disabled={extra === 0} aria-label="Fewer seats">−</button>
             <output id="cfgSeats" aria-live="polite">{al.seats + extra}</output>
             <button type="button" onClick={() => setExtra(Math.min(MAX_EXTRA_SEATS, extra + 1))} disabled={extra >= MAX_EXTRA_SEATS} aria-label="More seats">+</button>
-          </div>
+          </div>}
         </div>
         <div className="cfg-levels" role="group" aria-label="Level, set by your contacts">
           {LEVEL_INFO.map((l) => (
             <button key={l.id} type="button" aria-pressed={level === l.id} onClick={() => setContacts(l.ref)}>
-              <b>{l.name}</b><span>{l.band}</span><em>from {money(suitePrice(l.ref))} a month</em>
+              <b>{l.name}</b><span>{l.band}</span><em>{l.id === "pro" ? "Custom pricing" : <>from {money(suitePrice(l.ref))} a month</>}</em>
             </button>
           ))}
         </div>
-        <p className="cfg-note">Your level follows from your contacts, and every level includes the whole platform. More than {fmt(MAX_C)} contacts? Book a walkthrough and we will price it with you.</p>
+        <p className="cfg-note">Your level follows from your contacts, and every level includes the whole platform. From 75,000 contacts, Enterprise is priced as a custom deal with you.</p>
       </div>
 
       <div className="cfg-sum">
         <p className="cfg-lv">{LEVEL_INFO.find((l) => l.id === level)!.name}</p>
-        <p className="price"><b>{total}</b><span>a month</span></p>
-        <ul className="cfg-break">
-          <li><span>Suite for {fmt(contacts)} contacts</span><b>{money(suiteUsd)}</b></li>
-          {extra > 0 && <li><span>{extra} extra {extra === 1 ? "seat" : "seats"}</span><b>{money(seatsUsd)}</b></li>}
-        </ul>
-        <p className="cfg-h">Included every month</p>
-        <ul className="cfg-al">
-          <li><span>Wallet-data credits</span><b>{fmt(al.credits)}</b></li>
-          <li><span>ONS+ list checks</span><b>{fmt(al.ons)}</b></li>
-          <li><span>Emails</span><b>{fmt(al.emails)}</b></li>
-          <li><span>In-app messages</span><b>{fmt(al.inapp)}</b></li>
-        </ul>
-        <Link className="btn solid lg" href="/early-access">Book a walkthrough</Link>
+        {custom ? (
+          <>
+            <p className="price"><b>Custom</b><span>pricing</span></p>
+            <p className="cfg-h">For teams at global scale</p>
+            <ul className="checks cfg-pro">{PRO_TERMS.map((t) => <li key={t}>{t}</li>)}</ul>
+            <Link className="btn solid lg" href="/early-access">Talk to sales</Link>
+          </>
+        ) : (
+          <>
+            <p className="price"><b>{total}</b><span>a month</span></p>
+            <ul className="cfg-break">
+              <li><span>Suite plan for {fmt(contacts)} contacts</span><b>{money(suiteUsd)}</b></li>
+              {extra > 0 && <li><span>{extra} extra {extra === 1 ? "seat" : "seats"}</span><b>{money(seatsUsd)}</b></li>}
+            </ul>
+            <p className="cfg-h">Included every month</p>
+            <ul className="cfg-al">
+              <li><span>Wallet-data credits</span><b>{fmt(al.credits)}</b></li>
+              <li><span>ONS+ list checks</span><b>{fmt(al.ons)}</b></li>
+              <li><span>Emails</span><b>{fmt(al.emails)}</b></li>
+              <li><span>In-app messages</span><b>{fmt(al.inapp)}</b></li>
+            </ul>
+            <Link className="btn solid lg" href="/early-access">Book a walkthrough</Link>
+          </>
+        )}
       </div>
     </div>
   );

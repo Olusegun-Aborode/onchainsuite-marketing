@@ -5,7 +5,7 @@ import { LegalShell } from "@/components/Legal";
 export const metadata: Metadata = {
   title: "Sub-processors",
   description:
-    "The categories of third-party sub-processor OnchainSuite uses to provide the service, their purpose, location, and transfer safeguards. Named vendors available on request.",
+    "The categories of sub-processor OnchainSuite uses, with their purpose, location and transfer safeguards. Named vendors are available on request.",
   alternates: { canonical: "/subprocessors" },
 };
 

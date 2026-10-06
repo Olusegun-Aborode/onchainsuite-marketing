@@ -1,45 +1,26 @@
-# Deploying OnchainSuite to Cloudflare
+# Deploying the OnchainSuite marketing site
 
-The site is a **static export** (`next.config.mjs` → `output: "export"`), so it ships
-as plain static files and runs great on **Cloudflare Pages**. No server/runtime, no backend.
+The site is a **static export** (`next.config.mjs` → `output: "export"`), served as static assets
+from a Cloudflare Worker named `onchainsuitewebdemo` on the **OnchainSuite Cloudflare account**
+(onchainsuite@gmail.com, account ID `b839212181b7cbf64336ba5a93622046`). The account ID is pinned
+in `wrangler.jsonc`, so a deploy cannot land on the personal or Datum Labs account by mistake.
 
-## One-time setup
-
-```bash
-cd "onchainsuite"
-
-# 1. Authenticate Wrangler with your Cloudflare account (opens a browser)
-npx wrangler login
-
-# 2. (first deploy only) create the Pages project
-npx wrangler pages project create onchainsuite --production-branch main
-```
+Live at: https://onchainsuitewebdemo.onchainsuite.workers.dev
 
 ## Deploy
 
 ```bash
-npm run deploy
+npx wrangler login   # once, as onchainsuite@gmail.com
+npm run deploy       # next build, then wrangler deploy (uploads ./out)
 ```
 
-This runs `next build` (writing static files to `./out`) and
-`wrangler pages deploy ./out --project-name onchainsuite`.
-Your site goes live at `https://onchainsuite.pages.dev`.
-
-## Point onchainsuite.com at it
-
-Requires `onchainsuite.com` to be a zone in the **same** Cloudflare account.
-(If it isn't yet: Cloudflare dashboard → Add a site → update your registrar's nameservers.)
-
-Then: **Cloudflare dashboard → Workers & Pages → onchainsuite → Custom domains →
-Set up a custom domain →** enter `onchainsuite.com` (and `www.onchainsuite.com` if you want
-the redirect). Cloudflare creates the DNS records automatically because the zone lives there.
+Stop `npm run dev` first: building while the dev server runs breaks the dev server's `.next` folder.
 
 ## Notes
 
-- `npm run dev` still works for local development.
-- To preview the production build locally: `npx serve out` (or any static server).
-- There is **no backend** — the early-access form's submit is a client-side success
-  state. Wire it to a CRM / Cal.com / webhook when ready (one handler in
-  `components/EarlyAccessForm.tsx`).
-- CI alternative to `wrangler login`: set `CLOUDFLARE_API_TOKEN` (Pages:Edit scope)
-  as an env var and run `npm run deploy`.
+- `public/_headers` sets the content type of `/opengraph-image`, which is exported without an extension.
+- Booking buttons link to `/early-access`; `components/ns/CalBooking.tsx` opens the Cal.com popup
+  (`onchainsuite/15min`) instead. The link is set in `lib/data.ts` (`CAL_LINK`).
+- onchainsuite.com is still served by Vercel (personal account) with DNS at GoDaddy. Pointing the
+  domain here means adding it to this Cloudflare account and moving the records, including the
+  Microsoft 365 email records and the `docs` CNAME to Mintlify.

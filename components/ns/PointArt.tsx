@@ -30,16 +30,22 @@ const ART: Record<string, () => React.ReactElement> = {
     <path d="M118 46 C160 46 160 80 196 80 M118 106 C160 106 160 80 196 80" fill="none" stroke="#C9D0FF" strokeWidth={1.5} className="ta-dash" />
     <Card x={196} y={52} w={112} h={56}><Avatar x={218} y={80} /><text x={236} y={77} fontSize={12} fontWeight={600} fill={N}>Josh</text><text x={236} y={92} fontSize={10} fill={T} style={mono}>one record</text></Card>
   </g>),
+  lanesYou: () => (<g style={f}>
+    <Chip x={14} y={22} w={104} label="Signed up" cls="ta-pop" delay={0} /><Chip x={14} y={54} w={104} label="Finished setup" cls="ta-pop" delay={0.15} />
+    <Chip x={14} y={94} w={104} label="Deposited" fill="#EEF0FF" stroke="#C9D0FF" color={B} cls="ta-pop" delay={0.3} /><Chip x={14} y={126} w={104} label="Withdrew" fill="#EEF0FF" stroke="#C9D0FF" color={B} cls="ta-pop" delay={0.45} />
+    <path d="M118 46 C160 46 160 80 196 80 M118 106 C160 106 160 80 196 80" fill="none" stroke="#C9D0FF" strokeWidth={1.5} className="ta-dash" />
+    <Card x={196} y={52} w={112} h={56}><Avatar x={218} y={80} t="U" c="#585D65" /><text x={236} y={77} fontSize={12} fontWeight={600} fill={N}>Your user</text><text x={236} y={92} fontSize={10} fill={T} style={mono}>one record</text></Card>
+  </g>),
   walletOnly: () => (<g style={f}>
     <Card x={16} y={24} w={150} h={104}>
       <text x={30} y={46} fontSize={10} fill={T} style={mono}>0x9a2e…e41</text>
       <rect x={30} y={58} width={122} height={24} rx={6} fill={P} /><text x={40} y={74} fontSize={11.5} fill="#9DA1A8">No email</text><Cross x={136} y={66} />
       <rect x={30} y={90} width={122} height={24} rx={6} fill="#E9F7F0" /><text x={40} y={106} fontSize={11.5} fill={G}>In-app</text><Check x={134} y={100} />
     </Card>
-    <path d="M166 76 H196" stroke={L} strokeWidth={1.5} strokeDasharray="3 3" />
-    <g className="ta-float"><rect x={198} y={42} width={110} height={72} rx={12} fill={N} /><rect x={208} y={54} width={22} height={22} rx={6} fill={B} />
-      <text x={238} y={63} fontSize={10.5} fill="#fff" fontWeight={600}>212 USDC</text><text x={238} y={76} fontSize={9.5} fill="#9DA1A8">rewards waiting</text>
-      <rect x={208} y={88} width={64} height={16} rx={5} fill="#fff" /><text x={214} y={100} fontSize={9.5} fill={N} fontWeight={600}>Claim</text></g>
+    <path d="M166 76 H188" stroke={L} strokeWidth={1.5} strokeDasharray="3 3" />
+    <g className="ta-float"><rect x={190} y={42} width={124} height={72} rx={12} fill={N} /><rect x={200} y={54} width={22} height={22} rx={6} fill={B} />
+      <text x={230} y={63} fontSize={10.5} fill="#fff" fontWeight={600}>212 USDC</text><text x={230} y={76} fontSize={9.5} fill="#9DA1A8">rewards waiting</text>
+      <rect x={200} y={88} width={64} height={16} rx={5} fill="#fff" /><text x={206} y={100} fontSize={9.5} fill={N} fontWeight={600}>Claim</text></g>
   </g>),
   reach: () => (<g style={f}>
     {[{ y: 22, n: "Josh", e: true, i: true }, { y: 64, n: "0x9a2e…", e: false, i: true }, { y: 106, n: "Sarah", e: true, i: false }].map((r, k) => (
@@ -127,16 +133,16 @@ const ART: Record<string, () => React.ReactElement> = {
   /* ---------------- Loops ---------------- */
   chainTrigger: () => (<g style={f}>
     {[0, 1, 2].map((i) => <g key={i}><rect x={16 + i * 46} y={58} width={38} height={38} rx={8} fill={i === 2 ? B : "#fff"} stroke={i === 2 ? B : L} /><text x={35 + i * 46} y={82} fontSize={9.5} fill={i === 2 ? "#fff" : T} textAnchor="middle" style={mono}>#{1024 + i}</text>{i < 2 && <line x1={54 + i * 46} x2={62 + i * 46} y1={77} y2={77} stroke={L} strokeWidth={2} />}</g>)}
-    <path d="M146 77 H196" stroke={B} strokeWidth={1.5} className="ta-dash" /><path d="M188 72 l8 5 -8 5" fill="none" stroke={B} strokeWidth={1.5} />
-    <rect x={198} y={52} width={110} height={50} rx={10} fill="#fff" stroke={B} className="ta-glow" />
-    <rect x={208} y={64} width={22} height={22} rx={6} fill="#FFE4D6" /><path d="M221 67 l-6 9 h5 l-1 7 6-9 h-5z" fill={O} />
-    <text x={238} y={73} fontSize={9.5} fill={T}>TRIGGER</text><text x={238} y={88} fontSize={11.5} fill={N} fontWeight={600}>Goes dormant</text>
+    <path d="M150 77 H172" stroke={B} strokeWidth={1.5} className="ta-dash" /><path d="M165 72 l8 5 -8 5" fill="none" stroke={B} strokeWidth={1.5} />
+    <rect x={176} y={52} width={132} height={50} rx={10} fill="#fff" stroke={B} className="ta-glow" />
+    <rect x={188} y={66} width={22} height={22} rx={6} fill="#FFE4D6" /><path d="M201 69 l-6 9 h5 l-1 7 6-9 h-5z" fill={O} />
+    <text x={220} y={73} fontSize={9.5} fill={T}>Trigger</text><text x={220} y={89} fontSize={11.5} fill={N} fontWeight={600}>Goes dormant</text>
   </g>),
   stopsWhenActs: () => (<g style={f}>
     <path d="M20 78 H300" stroke={L} strokeWidth={2} />
-    {[["Email", 60], ["Wait 3d", 140], ["In-app", 220]].map(([l, x]) => <g key={l as string}><rect x={(x as number) - 28} y={66} width={56} height={24} rx={6} fill="#fff" stroke={L} /><text x={x as number} y={82} fontSize={10.5} fill={N} textAnchor="middle">{l as string}</text></g>)}
     <circle r={6} fill={B}><animateMotion dur="3.2s" repeatCount="indefinite" path="M20 78 H178" keyTimes="0;1" /></circle>
-    <g className="ta-pop" style={{ animationDelay: ".6s" }}><rect x={138} y={104} width={150} height={28} rx={14} fill="#E9F7F0" /><Check x={150} y={114} /><text x={168} y={122} fontSize={11} fill={G} fontWeight={600}>Deposit recorded, stop</text></g>
+    {[["Email", 60], ["Wait 3d", 140], ["In-app", 220]].map(([l, x]) => <g key={l as string}><rect x={(x as number) - 28} y={66} width={56} height={24} rx={6} fill="#fff" stroke={L} /><text x={x as number} y={82} fontSize={10.5} fill={N} textAnchor="middle">{l as string}</text></g>)}
+    <g className="ta-pop" style={{ animationDelay: ".6s" }}><rect x={134} y={104} width={164} height={28} rx={14} fill="#E9F7F0" /><Check x={146} y={114} /><text x={164} y={122} fontSize={11} fill={G} fontWeight={600}>Deposit recorded, stop</text></g>
     <line x1={180} x2={180} y1={92} y2={104} stroke={G} strokeWidth={1.5} strokeDasharray="2 2" />
   </g>),
   emailInapp: () => (<g style={f}>
@@ -174,7 +180,7 @@ const ART: Record<string, () => React.ReactElement> = {
 
   /* ---------------- Intelligence MCP ---------------- */
   question: () => (<g style={f}>
-    <rect x={104} y={14} width={204} height={30} rx={10} fill={B} /><text x={116} y={33} fontSize={11} fill="#fff" className="ta-type">Who traded in the final, then stopped?</text>
+    <rect x={68} y={14} width={240} height={30} rx={10} fill={B} /><text x={80} y={33} fontSize={11} fill="#fff" className="ta-type">Who traded in the final, then stopped?</text>
     <g className="ta-pop" style={{ animationDelay: "1.3s" }}>
       <rect x={16} y={56} width={292} height={86} rx={10} fill="#fff" stroke={L} />
       <text x={28} y={76} fontSize={20} fontWeight={600} fill={N}>1,284</text><text x={92} y={76} fontSize={10.5} fill={T}>customers match</text>
@@ -205,11 +211,11 @@ const ART: Record<string, () => React.ReactElement> = {
     </Card>
   </g>),
   mcpTools: () => (<g style={f}>
+    {[["AI assistant", 22, 22], ["Code editor", 22, 112], ["Team chat", 222, 22], ["Notebook", 222, 112]].map(([l, x, y], i) => (
+      <g key={l as string}><path d={`M162 77 L${(x as number) + 40} ${(y as number) + 12}`} stroke="#C9D0FF" strokeWidth={1.4} className="ta-dash" />
+        <circle r={3} fill={B}><animateMotion dur="2s" repeatCount="indefinite" begin={`${i * 0.4}s`} path={`M162 77 L${(x as number) + 40} ${(y as number) + 12}`} /></circle>
+        <Chip x={x as number} y={y as number} w={80} label={l as string} /></g>))}
     <rect x={124} y={56} width={76} height={42} rx={12} fill="url(#paGrad)" /><text x={162} y={81} fontSize={11.5} fill="#fff" textAnchor="middle" fontWeight={600}>MCP</text>
-    {[["AI assistant", 30, 22], ["Code editor", 30, 112], ["Team chat", 222, 22], ["Notebook", 222, 112]].map(([l, x, y], i) => (
-      <g key={l as string}><path d={`M162 77 L${(x as number) + 36} ${(y as number) + 12}`} stroke="#C9D0FF" strokeWidth={1.4} className="ta-dash" />
-        <circle r={3} fill={B}><animateMotion dur="2s" repeatCount="indefinite" begin={`${i * 0.4}s`} path={`M162 77 L${(x as number) + 36} ${(y as number) + 12}`} /></circle>
-        <Chip x={x as number} y={y as number} w={72} label={l as string} /></g>))}
   </g>),
   bothLanesQ: () => (<g style={f}>
     <Chip x={14} y={30} w={140} label="Contract: no deposit" fill="#EEF0FF" stroke="#C9D0FF" color={B} cls="ta-pop" />
@@ -243,8 +249,8 @@ const ART: Record<string, () => React.ReactElement> = {
   </g>),
   mLoop: () => (<g style={f}>
     <path d="M20 78 H300" stroke={L} strokeWidth={2} />
-    {[["Email", 60], ["Wait 3d", 140], ["Email", 220]].map(([l, x], i) => <g key={i}><rect x={(x as number) - 28} y={66} width={56} height={24} rx={6} fill="#fff" stroke={L} /><text x={x as number} y={82} fontSize={10.5} fill={N} textAnchor="middle">{l as string}</text></g>)}
     <circle r={6} fill={B}><animateMotion dur="3.2s" repeatCount="indefinite" path="M20 78 H178" keyTimes="0;1" /></circle>
+    {[["Email", 60], ["Wait 3d", 140], ["Email", 220]].map(([l, x], i) => <g key={i}><rect x={(x as number) - 28} y={66} width={56} height={24} rx={6} fill="#fff" stroke={L} /><text x={x as number} y={82} fontSize={10.5} fill={N} textAnchor="middle">{l as string}</text></g>)}
     <g className="ta-pop" style={{ animationDelay: ".6s" }}><rect x={138} y={104} width={150} height={28} rx={14} fill="#E9F7F0" /><Check x={150} y={114} /><text x={168} y={122} fontSize={11} fill={G} fontWeight={600}>Finished setup, stop</text></g>
     <line x1={180} x2={180} y1={92} y2={104} stroke={G} strokeWidth={1.5} strokeDasharray="2 2" />
   </g>),
@@ -255,6 +261,53 @@ const ART: Record<string, () => React.ReactElement> = {
       <text x={28} y={76} fontSize={20} fontWeight={600} fill={N}>642</text><text x={74} y={76} fontSize={10.5} fill={T}>customers match</text>
       {[["Olivia Hughes", "Opened 2 Sep"], ["Daniel Price", "Opened 2 Sep"], ["Megan Ward", "Opened 1 Sep"]].map(([a, b], i) => <g key={a}><line x1={28} x2={296} y1={86 + i * 18} y2={86 + i * 18} stroke="#ECEDEF" /><text x={28} y={99 + i * 18} fontSize={10.5} fill={N}>{a}</text><text x={296} y={99 + i * 18} fontSize={10.5} fill={T} textAnchor="end">{b}</text></g>)}
     </g>
+  </g>),
+
+  /* ---------------- Our hypothesis: the four generations ---------------- */
+  genEmail: () => (<g style={f}>
+    <rect x={40} y={18} width={244} height={120} rx={12} fill="#fff" stroke={L} />
+    <text x={56} y={42} fontSize={12} fontWeight={600} fill={N}>Spring newsletter</text>
+    <text x={56} y={59} fontSize={10.5} fill={T}>To 12,480 subscribers</text>
+    <line x1={56} x2={268} y1={70} y2={70} stroke="#ECEDEF" />
+    {[["Opens", "24%", 56], ["Clicks", "3.1%", 166]].map(([a, b, x], i) => (
+      <g key={a as string} className="ta-pop" style={{ animationDelay: `${0.2 + i * 0.15}s` }}>
+        <rect x={x as number} y={80} width={102} height={46} rx={8} fill={P} />
+        <text x={(x as number) + 10} y={97} fontSize={10} fill={T}>{a as string}</text>
+        <text x={(x as number) + 10} y={117} fontSize={16} fontWeight={600} fill={N}>{b as string}</text>
+      </g>))}
+  </g>),
+  genAuto: () => (<g style={f}>
+    {[["Welcome email", 14, 96], ["Wait 3 days", 126, 82], ["No reply?", 224, 86]].map(([l, x, w], i) => (
+      <g key={l as string} className="ta-pop" style={{ animationDelay: `${i * 0.15}s` }}>
+        <rect x={x as number} y={40} width={w as number} height={28} rx={7} fill={i === 2 ? "#FFF1EA" : "#fff"} stroke={i === 2 ? "#FFD2BD" : L} />
+        <text x={(x as number) + (w as number) / 2} y={58} fontSize={11} fill={i === 2 ? O : N} textAnchor="middle">{l as string}</text>
+      </g>))}
+    <path d="M110 54 H126 M208 54 H224" stroke={L} strokeWidth={1.5} />
+    <path d="M267 68 V100" stroke="#C9D0FF" strokeWidth={1.5} className="ta-dash" /><path d="M262 94 l5 6 5-6" fill="none" stroke="#C9D0FF" strokeWidth={1.5} />
+    <g className="ta-pop" style={{ animationDelay: ".55s" }}><rect x={196} y={104} width={114} height={28} rx={7} fill={B} /><text x={253} y={122} fontSize={11} fill="#fff" fontWeight={600} textAnchor="middle">Send follow-up</text></g>
+  </g>),
+  genEvents: () => (<g style={f}>
+    {[["Viewed product", 26], ["Added to cart", 64], ["Purchased", 102]].map(([l, y], i) => (
+      <g key={l as string} className="ta-pop" style={{ animationDelay: `${i * 0.15}s` }}>
+        <rect x={14} y={y as number} width={120} height={28} rx={7} fill="#fff" stroke={L} />
+        <circle cx={28} cy={(y as number) + 14} r={3.5} fill={i === 2 ? G : S} />
+        <text x={38} y={(y as number) + 18} fontSize={11} fill={N}>{l as string}</text>
+        <path d={`M134 ${(y as number) + 14} C162 ${(y as number) + 14} 164 78 186 78`} fill="none" stroke="#C9D0FF" strokeWidth={1.4} className="ta-dash" />
+      </g>))}
+    <g className="ta-float"><rect x={186} y={50} width={128} height={56} rx={12} fill={N} />
+      <text x={200} y={74} fontSize={11} fill="#fff" fontWeight={600}>Thank-you email</text><text x={200} y={91} fontSize={9.5} fill="#9DA1A8">sent two minutes later</text></g>
+  </g>),
+  genChain: () => (<g style={f}>
+    {[["Deposited 12,400 USDC", 22], ["Staked 2 ETH", 60], ["Voted on proposal 41", 98]].map(([l, y], i) => (
+      <g key={l as string} className="ta-pop" style={{ animationDelay: `${i * 0.15}s` }}>
+        <rect x={14} y={y as number} width={164} height={28} rx={7} fill="#EEF0FF" stroke="#C9D0FF" />
+        <rect x={22} y={(y as number) + 8} width={12} height={12} rx={3} fill={B} />
+        <text x={42} y={(y as number) + 18} fontSize={11} fill={B}>{l as string}</text>
+        <path d={`M178 ${(y as number) + 14} C196 ${(y as number) + 14} 194 78 206 78`} fill="none" stroke="#C9D0FF" strokeWidth={1.4} className="ta-dash" />
+      </g>))}
+    <rect x={206} y={46} width={106} height={64} rx={12} fill="#F7F8FF" stroke={B} strokeDasharray="4 4" className="pa-pulse" />
+    <text x={259} y={74} fontSize={11.5} fill={B} fontWeight={600} textAnchor="middle">Lifecycle layer</text>
+    <text x={259} y={92} fontSize={10} fill={T} textAnchor="middle">still open</text>
   </g>),
 };
 

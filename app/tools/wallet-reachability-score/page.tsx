@@ -19,9 +19,9 @@ const wrap = { maxWidth: 1200, margin: "0 auto" };
 const mono = "'JetBrains Mono',monospace";
 
 const NOTES = [
-  { n: "01", h: "Ask at the moment of value, not the moment of exit", p: "Wallets that connect for the first time convert on a channel request two to three times better than wallets asked during an offboarding or win-back flow." },
-  { n: "02", h: "Overlap is higher than teams assume", p: "The same engaged wallet tends to opt into everything. If you have not measured overlap, 25 to 35 percent is the usual range, and pretending it is zero inflates your score badly." },
-  { n: "03", h: "Push decays without you noticing", p: "Push tokens go stale at roughly 4 percent a month through reinstalls and permission resets. Score push on tokens that delivered in the last 90 days, not on lifetime opt-ins." },
+  { n: "01", h: "Ask at the moment of value, not the moment of exit", p: "A wallet that has just got value from your product is more likely to share a channel than one asked during an offboarding flow." },
+  { n: "02", h: "Overlap is higher than teams assume", p: "The same engaged wallet tends to opt into everything. If you have not measured overlap, assume some, because pretending it is zero inflates your score." },
+  { n: "03", h: "Push decays without you noticing", p: "Push tokens go stale over time through reinstalls and permission resets. Score push on tokens that delivered in the last 90 days, not on lifetime opt-ins." },
   { n: "04", h: "Reachability is per segment, not per base", p: "Your whales are almost always more reachable than your long tail. A base score of 40 can hide a top-decile score of 80, which changes what you should build first." },
 ];
 const WEIGHTS = [
