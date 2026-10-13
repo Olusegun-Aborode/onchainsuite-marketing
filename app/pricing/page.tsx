@@ -6,6 +6,7 @@ import CompareTable from "@/components/ns/CompareTable";
 import { PricingLineProvider } from "@/components/ns/PricingLine";
 import { CloseCta, Faq, LogoRow } from "@/components/ns/Blocks";
 import { PRICING_FAQ } from "@/lib/pricing";
+import OnrampPanel from "@/components/ns/OnrampPanel";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -25,7 +26,7 @@ export default function PricingPage() {
           <h1 className="h1 load" style={{ animationDelay: ".08s" }}>Pricing that grows with the customers you bring in.</h1>
           <p className="sub load" style={{ animationDelay: ".16s" }}>Set the contacts you plan to import and the seats your team needs, and the price follows.</p>
           <div className="load" style={{ animationDelay: ".24s" }}><PricingPlans /></div>
-          <p className="bridge rv center"><a href="#cmp-h">Not sure which package fits? Every one reads both lanes, and here is how they differ.<span aria-hidden="true">↓</span></a></p>
+          <p className="bridge rv center"><a href="#cmp-h">Not sure which level fits? Every level reads both lanes, and here is how they differ.<span aria-hidden="true">↓</span></a></p>
         </section>
 
         <LogoRow label="Trusted by blockchain companies including" />
@@ -38,6 +39,7 @@ export default function PricingPage() {
         <Faq items={PRICING_FAQ} />
         <CloseCta />
       </div>
+      <OnrampPanel />
       </PricingLineProvider>
     </SiteChrome>
   );

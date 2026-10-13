@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { COMPARE_GROUPS, LEVELS, LEVEL_INFO, SEND_BASE, fmt, suitePrice, type Cell } from "@/lib/pricing";
 import { usePricingLine } from "./PricingLine";
+import { OnrampButton } from "./OnrampPanel";
 
 /* Suite levels compared, with a Send column in front when the Send switch is on. */
 function CellView({ c }: { c: Cell }) {
+  if (typeof c === "object") return <div role="cell" className="yes yes-note"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="1.8" /></svg><span>{c.note}</span></div>;
   if (typeof c !== "boolean") return <div role="cell" className="val">{c}</div>;
   return c
     ? <div role="cell" className="yes"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="1.8" /></svg><span className="sr-only">Included</span></div>
@@ -45,10 +47,10 @@ export default function CompareTable() {
             <div className="cmp-gt" role="row"><div role="cell">{g.title}</div></div>
             {g.rows.map((r) => (
               <div key={r.label} className="cmp-row" role="row">
-                <div role="rowheader">{r.label}{r.note && <small>{r.note}</small>}</div>
+                <div role="rowheader">{r.info ? <OnrampButton className="onr-row">{r.label}<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" strokeWidth="1.3" /><path d="M8 7.2v3.6M8 5.2v.1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg></OnrampButton> : r.label}{r.note && <small>{r.note}</small>}</div>
                 {send && <CellView c={r.send} />}
                 {r.span
-                  ? <div role="cell" className="val span">{r.cells[0]}</div>
+                  ? <div role="cell" className="val span">{r.cells[0] as string}</div>
                   : r.cells.map((c, i) => <CellView key={i} c={c} />)}
               </div>
             ))}

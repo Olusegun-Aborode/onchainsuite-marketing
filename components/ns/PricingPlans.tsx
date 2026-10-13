@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePricingLine } from "./PricingLine";
+import { OnrampButton } from "./OnrampPanel";
 import {
-  CONTACT_STEPS, EXTRA_SEAT_USD, PRO_TERMS, FX_GBP, LEVEL_INFO, allowances, byId, fmt, levelFor, sendPrice, suitePrice, usd, SEND_BASE, SEND_PER_1K,
+  CONTACT_STEPS, EXTRA_SEAT_USD, ONRAMP, PRO_TERMS, FX_GBP, LEVEL_INFO, allowances, byId, fmt, levelFor, sendPrice, suitePrice, usd, SEND_BASE, SEND_PER_1K,
 } from "@/lib/pricing";
 
 type Cur = "usd" | "gbp";
@@ -68,16 +69,21 @@ export default function PricingPlans() {
   );
 }
 
-const MIN_C = CONTACT_STEPS[0];
+/* One short line per level block; seats and allowances live in the price card and the table. */
+const LEVEL_LINE: Record<string, string> = {
+  launch: "Set up yourself",
+  growth: "Onramp, $500 a month for 3 months",
+  pro: "Onramp included",
+};
 const MAX_C = CONTACT_STEPS[CONTACT_STEPS.length - 1];
 const MAX_EXTRA_SEATS = 50;
 
 /* Suite is priced by contacts on the Finance SSOT curve, plus any seats above the included count.
    The level is not chosen; it follows from the contact band. */
 function SuiteConfigurator({ cur }: { cur: Cur }) {
-  const [contacts, setContacts] = useState(25_000);
-  const [draft, setDraft] = useState<string | null>(null);
+  const [contacts, setContacts] = useState(10_000);
   const [extra, setExtra] = useState(0);
+  const [onramp, setOnramp] = useState(false);
 
   const level = levelFor(contacts);
   const custom = level === "pro"; // Enterprise (id "pro") is sold as a custom deal
@@ -86,32 +92,35 @@ function SuiteConfigurator({ cur }: { cur: Cur }) {
   const seatsUsd = extra * EXTRA_SEAT_USD;
   const money = (u: number) => (cur === "usd" ? "$" + fmt(u) : "£" + fmt(Math.round(u * FX_GBP)));
   const total = cur === "usd" ? "$" + fmt(suiteUsd + seatsUsd) : "£" + fmt(Math.round(suiteUsd * FX_GBP) + Math.round(seatsUsd * FX_GBP));
+  /* Onramp is offered on Growth only (included on Enterprise, not on Launch). */
+  const withOnramp = level === "growth" && onramp;
+  const firstMonths = cur === "usd" ? "$" + fmt(suiteUsd + seatsUsd + ONRAMP.usdPerMonth) : "£" + fmt(Math.round(suiteUsd * FX_GBP) + Math.round(seatsUsd * FX_GBP) + Math.round(ONRAMP.usdPerMonth * FX_GBP));
   const seatPrice = cur === "usd" ? "$" + EXTRA_SEAT_USD : "£" + (EXTRA_SEAT_USD * FX_GBP).toFixed(2);
 
-  const down = () => setContacts([...CONTACT_STEPS].reverse().find((s) => s < contacts) ?? MIN_C);
-  const up = () => setContacts(CONTACT_STEPS.find((s) => s > contacts) ?? MAX_C);
-  const commit = () => {
-    if (draft === null) return;
-    const n = parseInt(draft.replace(/[^0-9]/g, ""), 10);
-    if (!Number.isNaN(n)) setContacts(Math.min(MAX_C, Math.max(MIN_C, n)));
-    setDraft(null);
-  };
+  const idx = Math.max(0, CONTACT_STEPS.indexOf(contacts));
+  const last = CONTACT_STEPS.length - 1;
+  const pct = (c: number) => (CONTACT_STEPS.indexOf(c) / last) * 100;
+  const gStart = pct(25_000), eStart = pct(75_000);
 
   return (
     <div className="cfg">
       <div className="cfg-set">
-        <div className="cfg-row">
-          <div>
-            <label htmlFor="cfgContacts"><b>Contacts</b></label>
-            <span>Each email address, wallet or social handle you import counts as one.</span>
+        <div className="cfg-slider">
+          <div className="cfg-slider-h">
+            <label htmlFor="cfgContacts">How many contacts do you have?</label>
+            <output htmlFor="cfgContacts">{fmt(contacts)}{contacts >= MAX_C ? "+" : ""}</output>
           </div>
-          <div className="step">
-            <button type="button" onClick={down} disabled={contacts <= MIN_C} aria-label="Fewer contacts">−</button>
-            <input id="cfgContacts" inputMode="numeric" value={draft ?? fmt(contacts)}
-              onChange={(e) => setDraft(e.target.value)} onBlur={commit}
-              onKeyDown={(e) => e.key === "Enter" && (e.currentTarget as HTMLInputElement).blur()} />
-            <button type="button" onClick={up} disabled={contacts >= MAX_C} aria-label="More contacts">+</button>
+          <div className="cfg-track" style={{ ["--fill" as string]: `${(idx / last) * 100}%`, ["--g" as string]: `${gStart}%`, ["--e" as string]: `${eStart}%` }}>
+            <input id="cfgContacts" type="range" min={0} max={last} step={1} value={idx}
+              onChange={(e) => setContacts(CONTACT_STEPS[+e.target.value])}
+              aria-valuetext={`${fmt(contacts)} contacts, ${LEVEL_INFO.find((l) => l.id === level)!.name}`} />
           </div>
+          <div className="cfg-bands" aria-hidden="true">
+            <span style={{ left: 0, width: `${gStart}%` }} className={level === "launch" ? "on" : ""}>Launch</span>
+            <span style={{ left: `${gStart}%`, width: `${eStart - gStart}%` }} className={level === "growth" ? "on" : ""}>Growth</span>
+            <span style={{ left: `${eStart}%`, width: `${100 - eStart}%` }} className={level === "pro" ? "on" : ""}>Enterprise</span>
+          </div>
+          <p className="cfg-note">Your level follows your list size. Pick <OnrampButton>Onramp</OnrampButton> if you want us to build it with you.</p>
         </div>
         <div className="cfg-row">
           <div>
@@ -124,14 +133,14 @@ function SuiteConfigurator({ cur }: { cur: Cur }) {
             <button type="button" onClick={() => setExtra(Math.min(MAX_EXTRA_SEATS, extra + 1))} disabled={extra >= MAX_EXTRA_SEATS} aria-label="More seats">+</button>
           </div>}
         </div>
-        <div className="cfg-levels" role="group" aria-label="Level, set by your contacts">
+        <div className="cfg-levels" role="group" aria-label="Levels">
           {LEVEL_INFO.map((l) => (
             <button key={l.id} type="button" aria-pressed={level === l.id} onClick={() => setContacts(l.ref)}>
-              <b>{l.name}</b><span>{l.band}</span><em>{l.id === "pro" ? "Custom pricing" : <>from {money(suitePrice(l.ref))} a month</>}</em>
+              <b>{l.name}</b>
+              <span>{LEVEL_LINE[l.id].replace("$500", money(ONRAMP.usdPerMonth))}</span>
             </button>
           ))}
         </div>
-        <p className="cfg-note">Your level follows from your contacts, and every level includes the whole platform. From 75,000 contacts, Enterprise is priced as a custom deal with you.</p>
       </div>
 
       <div className="cfg-sum">
@@ -145,11 +154,22 @@ function SuiteConfigurator({ cur }: { cur: Cur }) {
           </>
         ) : (
           <>
-            <p className="price"><b>{total}</b><span>a month</span></p>
+            {withOnramp
+              ? <p className="price"><b>{firstMonths}</b><span>a month for months one to three, then {total}</span></p>
+              : <p className="price"><b>{total}</b><span>a month</span></p>}
             <ul className="cfg-break">
               <li><span>Suite plan for {fmt(contacts)} contacts</span><b>{money(suiteUsd)}</b></li>
               {extra > 0 && <li><span>{extra} extra {extra === 1 ? "seat" : "seats"}</span><b>{money(seatsUsd)}</b></li>}
+              {withOnramp && <li><span>Onramp, months one to three</span><b>{money(ONRAMP.usdPerMonth)}</b></li>}
             </ul>
+            {level === "growth" ? (
+              <label className="cfg-onramp">
+                <input type="checkbox" checked={onramp} onChange={(e) => setOnramp(e.target.checked)} />
+                <span><b>Add Onramp</b>{money(ONRAMP.usdPerMonth)} a month for three months. <OnrampButton>What&rsquo;s included</OnrampButton></span>
+              </label>
+            ) : (
+              <p className="cfg-onramp-note">On Launch you set it up yourself, with the Intelligence MCP and a walkthrough call. <OnrampButton>Onramp</OnrampButton> starts on Growth.</p>
+            )}
             <p className="cfg-h">Included every month</p>
             <ul className="cfg-al">
               <li><span>Wallet-data credits</span><b>{fmt(al.credits)}</b></li>

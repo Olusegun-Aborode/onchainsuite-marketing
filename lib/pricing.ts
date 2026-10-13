@@ -40,7 +40,7 @@ export const LEVELS = [
   {
     id: "pro",
     name: "Enterprise",
-    pitch: "For teams at global scale, as a custom deal with unlimited access, priority support and volume discounts.",
+    pitch: "For teams at global scale, as a custom annual contract with Onramp, migration and a named person included.",
     options: ["pro"],
   },
 ];
@@ -77,7 +77,27 @@ export const CONTACT_STEPS: number[] = [
 ];
 /* The top level is Enterprise (renamed from Pro, owner decision 6 Oct 2026), priced as a custom deal.
    Its internal id stays "pro" so the SSOT curve and multiplier still apply in code. */
-export const PRO_TERMS: string[] = ["Unlimited access to the whole platform", "Priority support from our team", "Volume discounts as you grow", "A contract and terms agreed with you"];
+export const PRO_TERMS: string[] = [
+  "Unlimited access to the whole platform",
+  "Onramp included, plus migration from your current tool",
+  "A named person for an hour a week, with quarterly reviews",
+  "A compliance register check for your jurisdiction",
+  "Priority support from our team",
+  "A custom annual contract",
+];
+
+/* Onramp: the 90-day done-with-you programme (decided 13 Oct 2026, "Software plus service" doc).
+   Not offered on Launch, optional on Growth at $500 a month for the first three months, included on
+   Enterprise. 20 hours; time beyond that is Concierge at $150 an hour. Capacity: three starts a month. */
+export const ONRAMP = { usdPerMonth: 500, months: 3, hours: 20 };
+export const ONRAMP_STEPS: { when: string; what: string }[] = [
+  { when: "Weeks 1 to 2", what: "Your data connected and your audience built" },
+  { when: "Week 3", what: "Your segments set up" },
+  { when: "Weeks 4 to 6", what: "Three Loops live" },
+  { when: "Weeks 7 to 8", what: "Your first campaign sent, and the results read with you" },
+  { when: "Every two weeks", what: "A 30-minute call with our team" },
+  { when: "Week 12", what: "Handover and a plan for the next quarter" },
+];
 export const LEVEL_INFO: { id: LevelId; name: string; band: string; ref: number }[] = [
   { id: "launch", name: "Launch", band: "2,500 to 24,999 contacts", ref: 2_500 },
   { id: "growth", name: "Growth", band: "25,000 to 74,999 contacts", ref: 25_000 },
@@ -92,7 +112,7 @@ export const METERS: { item: string; unit: string; price: string; send: Cell }[]
   { item: "AI actions", unit: "per 1,000", price: "$6.00", send: "$6.00" },
 ];
 
-export type Cell = string | boolean;
+export type Cell = string | boolean | { yes: true; note: string };
 
 export const SEND_BASE = 6;
 export const SEND_PER_1K = 3.95;
@@ -106,14 +126,13 @@ export const ADDONS: { item: string; detail: string; price: string; send: Cell }
   { item: "Extra team seats", detail: "Each seat above the ones your contact count includes, up to 50", price: "$10 a month", send: "Ask us" },
   { item: "+10,000 wallet-data credits", detail: "Enough to fully enrich 2,500 more wallets", price: "$10", send: false },
   { item: "+100,000 wallet-data credits", detail: "Enough to fully enrich 25,000 more wallets", price: "$100", send: false },
-  { item: "Concierge", detail: "Our team plans and runs lifecycle work with you, scoped in advance", price: "$150 an hour", send: "$150 an hour" },
 ];
 
 export const fmt = (n: number) => n.toLocaleString("en-US");
 export const usd = (n: number) => "$" + (Number.isInteger(n) ? fmt(n) : n.toFixed(2));
 
 /* Comparison table. A row is either a capacity number per package or a yes/no per level. */
-export type Row = { label: string; note?: string; cells: Cell[]; span?: boolean; send: Cell }; // span: one value for every Suite level; send: the Send column
+export type Row = { label: string; note?: string; info?: "onramp"; cells: Cell[]; span?: boolean; send: Cell }; // span: one value for every Suite level; send: the Send column
 export type Group = { title: string; rows: Row[] };
 
 const all = (v: Cell = true): Cell[] => [v, v, v];
@@ -162,9 +181,12 @@ export const COMPARE_GROUPS: Group[] = [
   {
     title: "Support and terms",
     rows: [
+      { label: "Onramp", info: "onramp", note: "90 days with our team, from your data to your first campaign.", cells: [false, { yes: true, note: "$500 a month for 3 months" }, { yes: true, note: "Included" }], send: "Ask us" },
+      { label: "Migration from your current tool", cells: [false, false, true], send: false },
+      { label: "A named person and quarterly reviews", cells: [false, false, true], send: false },
+      { label: "Compliance register check for your jurisdiction", cells: [false, false, true], send: false },
       { label: "Priority support", cells: [false, false, true], send: false },
-      { label: "Volume discounts", cells: [false, false, true], send: false },
-      { label: "Custom contract and pricing", cells: [false, false, true], send: false },
+      { label: "Custom annual contract", cells: [false, false, true], send: false },
     ],
   },
   {
@@ -184,7 +206,11 @@ export const PRICING_FAQ = [
   },
   {
     q: "How do I choose a package?",
-    a: "Set the number of contacts you plan to import and the price follows. Your level comes from that number: Launch up to 24,999 contacts and Growth from 25,000. From 75,000 contacts, Enterprise is priced as a custom deal with unlimited access, priority support and volume discounts. Many companies start with one customer group rather than every wallet that has touched their contracts.",
+    a: "Set the number of contacts you plan to import and the price follows. Your level comes from that number: Launch up to 24,999 contacts and Growth from 25,000. From 75,000 contacts, Enterprise is a custom annual contract with Onramp, migration from your current tool and a named person included. Many companies start with one customer group rather than every wallet that has touched their contracts.",
+  },
+  {
+    q: "What is Onramp?",
+    a: "A 90-day programme in which our team spends 20 hours with yours. We connect your data and build your audience, set up your segments, put three Loops live and send your first campaign with you, with a call every two weeks and a handover plan at the end. It is $500 a month for the first three months on Growth, included on Enterprise and not offered on Launch, and we start three a month. Time beyond the 20 hours is Concierge, at $150 an hour.",
   },
   {
     q: "What counts as a contact?",
