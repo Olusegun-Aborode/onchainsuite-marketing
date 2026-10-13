@@ -81,7 +81,7 @@ const MAX_EXTRA_SEATS = 50;
 /* Suite is priced by contacts on the Finance SSOT curve, plus any seats above the included count.
    The level is not chosen; it follows from the contact band. */
 function SuiteConfigurator({ cur }: { cur: Cur }) {
-  const [contacts, setContacts] = useState(10_000);
+  const [contacts, setContacts] = useState(5_000);
   const [extra, setExtra] = useState(0);
   const [onramp, setOnramp] = useState(false);
 

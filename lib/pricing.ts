@@ -132,7 +132,7 @@ export const fmt = (n: number) => n.toLocaleString("en-US");
 export const usd = (n: number) => "$" + (Number.isInteger(n) ? fmt(n) : n.toFixed(2));
 
 /* Comparison table. A row is either a capacity number per package or a yes/no per level. */
-export type Row = { label: string; note?: string; info?: "onramp"; cells: Cell[]; span?: boolean; send: Cell }; // span: one value for every Suite level; send: the Send column
+export type Row = { label: string; note?: string; info?: "onramp" | "usage"; cells: Cell[]; span?: boolean; send: Cell }; // span: one value for every Suite level; send: the Send column
 export type Group = { title: string; rows: Row[] };
 
 const all = (v: Cell = true): Cell[] => [v, v, v];
@@ -191,11 +191,10 @@ export const COMPARE_GROUPS: Group[] = [
   },
   {
     title: "Add-ons",
-    rows: ADDONS.map((a) => ({ label: a.item, note: a.detail, cells: [a.price], span: true, send: a.send })),
-  },
-  {
-    title: "Usage beyond your allowance",
-    rows: METERS.map((m) => ({ label: m.item, note: m.unit, cells: [m.price], span: true, send: m.send })),
+    rows: [
+      ...ADDONS.map((a) => ({ label: a.item, note: a.detail, cells: [a.price], span: true, send: a.send })),
+      { label: "Usage beyond your allowance", info: "usage" as const, note: "Emails, in-app messages, credits, list checks and AI actions above your monthly allowance.", cells: ["From $1 per 1,000"], span: true, send: "From $1 per 1,000" },
+    ],
   },
 ];
 
@@ -210,7 +209,7 @@ export const PRICING_FAQ = [
   },
   {
     q: "What is Onramp?",
-    a: "A 90-day programme in which our team spends 20 hours with yours. We connect your data and build your audience, set up your segments, put three Loops live and send your first campaign with you, with a call every two weeks and a handover plan at the end. It is $500 a month for the first three months on Growth, included on Enterprise and not offered on Launch, and we start three a month. Time beyond the 20 hours is Concierge, at $150 an hour.",
+    a: "A 90-day programme in which our team spends 20 hours with yours. We connect your data and build your audience, set up your segments, put three Loops live and send your first campaign with you, with a call every two weeks and a handover plan at the end. It is $500 a month for the first three months on Growth, included on Enterprise and not offered on Launch, and we start three a month.",
   },
   {
     q: "What counts as a contact?",

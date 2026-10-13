@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { COMPARE_GROUPS, LEVELS, LEVEL_INFO, SEND_BASE, fmt, suitePrice, type Cell } from "@/lib/pricing";
 import { usePricingLine } from "./PricingLine";
-import { OnrampButton } from "./OnrampPanel";
+import { InfoButton } from "./OnrampPanel";
 
 /* Suite levels compared, with a Send column in front when the Send switch is on. */
 function CellView({ c }: { c: Cell }) {
@@ -47,7 +47,7 @@ export default function CompareTable() {
             <div className="cmp-gt" role="row"><div role="cell">{g.title}</div></div>
             {g.rows.map((r) => (
               <div key={r.label} className="cmp-row" role="row">
-                <div role="rowheader">{r.info ? <OnrampButton className="onr-row">{r.label}<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" strokeWidth="1.3" /><path d="M8 7.2v3.6M8 5.2v.1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg></OnrampButton> : r.label}{r.note && <small>{r.note}</small>}</div>
+                <div role="rowheader">{r.info ? <InfoButton kind={r.info} className="onr-row">{r.label}<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" strokeWidth="1.3" /><path d="M8 7.2v3.6M8 5.2v.1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg></InfoButton> : r.label}{r.note && <small>{r.note}</small>}</div>
                 {send && <CellView c={r.send} />}
                 {r.span
                   ? <div role="cell" className="val span">{r.cells[0] as string}</div>
