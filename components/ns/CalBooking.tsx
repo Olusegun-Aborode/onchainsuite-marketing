@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { CAL_LINK } from "@/lib/data";
 
-/* Every "Book a walkthrough" and "Book a call" button links to /early-access. This loads Cal.com's
+/* Every "Book a walkthrough" button links to /early-access. This loads Cal.com's
    element-click embed once and opens the booking popup for any of those links instead. If the embed
    has not loaded, the click falls through to /early-access, which links to the Cal.com page. */
 
