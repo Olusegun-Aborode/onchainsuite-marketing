@@ -29,7 +29,7 @@ export default function PricingPage() {
           <p className="bridge rv center"><a href="#cmp-h">Not sure which level fits? Every level reads both lanes, and here is how they differ.<span aria-hidden="true">↓</span></a></p>
         </section>
 
-        <LogoRow label="Trusted by blockchain companies including" />
+        <LogoRow />
 
         <section className="cmp" aria-labelledby="cmp-h">
           <CompareTable />

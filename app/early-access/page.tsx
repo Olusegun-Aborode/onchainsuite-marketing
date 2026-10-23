@@ -33,7 +33,7 @@ export default function EarlyAccessPage() {
           </div>
           <div className="book-r load" style={{ animationDelay: ".2s" }}><CloseArt /></div>
         </section>
-        <LogoRow label="Trusted by blockchain companies including" />
+        <LogoRow />
       </div>
     </SiteChrome>
   );

@@ -1,6 +1,7 @@
 /* Homepage content. The live product scenes are recreated from OnchainSuite v2.7 with its demo
    data; HomeMotion plays them as they scroll into view. Converted from the approved preview. */
 import CloseArt from "./CloseArt";
+import { LogoRow } from "./Blocks";
 
 export default function HomeBody() {
   return (
@@ -57,9 +58,7 @@ export default function HomeBody() {
     </div>
   </section>
 
-  <div className="logos" aria-label="Paying customers">
-    <div className="rv"><img src="/logos/predict-street.png" alt="" />Predict Street</div><div className="rv"><img src="/logos/yauga.jpg" alt="" />Yauga</div><div className="rv"><img src="/logos/rehitage.svg" alt="" />Rehitage</div><div className="rv"><img src="/logos/surgence.jpg" alt="" />Surgence Labs</div>
-  </div>
+  <LogoRow />
 
   <section className="state" id="platform" aria-labelledby="platform-h">
     <h2 className="h2 rv" id="platform-h">The customer record your email tool never had. <span>OnchainSuite reads your app and your contracts, places every customer in a lifecycle stage, and shows you who needs a message before they leave.</span></h2>

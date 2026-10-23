@@ -3,23 +3,43 @@ import CloseArt from "./CloseArt";
 
 /* Sections shared across the redesigned subpages, so every page closes the same way. */
 
-const CUSTOMERS = [
+/* Customers first, then the infrastructure OnchainSuite runs on, in one grid of five per row. */
+/* A wordmark already spells the name, so it is shown on its own instead of icon plus name. */
+const LOGOS: { name: string; logo: string; wordmark?: boolean }[] = [
   { name: "Predict Street", logo: "/logos/predict-street.png" },
   { name: "Yauga", logo: "/logos/yauga.jpg" },
   { name: "Rehitage", logo: "/logos/rehitage.svg" },
   { name: "Surgence Labs", logo: "/logos/surgence.jpg" },
+  { name: "Sovren", logo: "/logos/sovren.png" },
+  { name: "TraderComps", logo: "/logos/tradercomps.svg" },
+  { name: "The Sweat Equity Club", logo: "/logos/sweat-equity-club.png", wordmark: true },
+  { name: "Vault777", logo: "/logos/vault777.jpg" },
+  { name: "DigitalOcean", logo: "/integrations/digitalocean.svg" },
+  { name: "Amazon SES", logo: "/integrations/aws-ses.svg" },
+  { name: "Azure ACS", logo: "/integrations/azure.svg" },
 ];
 
-export function LogoRow({ label }: { label?: string }) {
+/* Blank cells close the last row: enough for five columns on desktop, and the mobile CSS hides any
+   beyond what two columns need. */
+const FILL = (5 - (LOGOS.length % 5)) % 5;
+const FILL_MOBILE = LOGOS.length % 2;
+
+/* Used on the homepage under the hero and on the pricing, team and early-access pages. */
+export function LogoRow() {
   return (
     <div className="logorow">
-      {label && <p className="logorow-l">{label}</p>}
-      <div className="logos" aria-label="Paying customers">
-        {CUSTOMERS.map((c) => (
+      <p className="logorow-l">Trusted and supported by</p>
+      <div className="logos" aria-label="Trusted and supported by">
+        {LOGOS.map((c) => (
           <div key={c.name} className="rv">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={c.logo} alt="" width={28} height={28} />{c.name}
+            {c.wordmark
+              ? <img className="wm" src={c.logo} alt={c.name} width={459} height={66} />
+              : <><img src={c.logo} alt="" width={28} height={28} /><span>{c.name}</span></>}
           </div>
+        ))}
+        {Array.from({ length: FILL }, (_, i) => (
+          <div key={i} className={"fill" + (i < FILL_MOBILE ? "" : " desk")} aria-hidden="true" />
         ))}
       </div>
     </div>

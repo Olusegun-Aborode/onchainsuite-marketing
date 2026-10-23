@@ -42,7 +42,7 @@ export default function TeamPage() {
             </article>
           ))}
         </section>
-        <LogoRow label="Trusted by blockchain companies including" />
+        <LogoRow />
         <section className="facts">
           {FACTS.map(([k, v]) => <div key={k} className="rv"><small>{k}</small><b>{v}</b></div>)}
         </section>

@@ -66,11 +66,16 @@ img{ max-width:100%; display:block; }
 .win img{ border:1px solid var(--line); border-bottom:0; border-radius:8px 8px 0 0; width:100%; height:auto; }
 
 /* logo grid */
-.logos{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid var(--line); }
-.logos > div{ height:104px; display:flex; align-items:center; justify-content:center; gap:11px; font-weight:600; font-size:18px; letter-spacing:-.02em; border-left:1px solid var(--line); position:relative; }
+.logos{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); border-top:1px solid var(--line); }
+.logos > div:nth-child(5n+1){ border-left:0; } .logos > div:nth-child(n+6){ border-top:1px solid var(--line); }
+.logos span{ min-width:0; text-wrap:balance; line-height:1.2; }
+.logos img{ flex-shrink:0; }
+.logos > div{ height:104px; display:flex; align-items:center; justify-content:center; gap:11px; padding:0 20px; font-weight:600; font-size:18px; letter-spacing:-.02em; border-left:1px solid var(--line); position:relative; }
 .logos > div:first-child{ border-left:0; }
 .logos img{ width:28px; height:28px; border-radius:7px; object-fit:contain; }
+.logos img.wm{ width:auto; height:auto; max-width:100%; max-height:28px; border-radius:0; }
 .logos > div::after{ content:"↗"; position:absolute; right:12px; top:9px; font-size:11px; color:#BFC1C6; }
+.logos > div.fill::after{ content:none; }
 
 /* platform: statement + rail */
 .state{ padding:120px 64px 72px; border-top:1px solid var(--line); }
@@ -235,7 +240,8 @@ footer.dark{ padding:72px 0 0; }
 
 @media (max-width:1000px){
   .links{ display:none; } .stage{ padding:0 14px; }
-  .logos{ grid-template-columns:repeat(2,minmax(0,1fr)); } .logos > div:nth-child(3){ border-left:0; } .logos > div:nth-child(n+3){ border-top:1px solid var(--line); }
+  .logos > div.fill.desk{ display:none; }
+  .logos{ grid-template-columns:repeat(2,minmax(0,1fr)); } .logos > div:nth-child(even){ border-left:1px solid var(--line); } .logos > div:nth-child(odd){ border-left:0; } .logos > div:nth-child(n+3){ border-top:1px solid var(--line); }
   .state{ padding:80px 20px 48px; }
   .plat{ grid-template-columns:1fr; } .rail{ display:none; }
   .chap-h{ padding:44px 20px 28px; } .vis{ padding:28px 14px 0; } .vis.pad{ padding-bottom:28px; }
@@ -521,6 +527,11 @@ footer.dark{ padding:72px 0 0; }
 .logorow{ border-top:1px solid var(--line); }
 .logorow-l{ margin:0; padding:22px 24px 0; text-align:center; font-size:13.5px; color:var(--grey); }
 .logorow .logos{ border-top:0; }
+@media (max-width:600px){
+  .logos > div{ height:84px; font-size:15px; gap:9px; padding:0 12px; }
+  .logos img{ width:24px; height:24px; }
+  .logos img.wm{ max-width:88%; }
+}
 
 /* plan cards */
 .pp{ margin-top:40px; text-align:left; }
