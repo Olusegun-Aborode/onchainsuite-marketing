@@ -3,20 +3,17 @@ import CloseArt from "./CloseArt";
 
 /* Sections shared across the redesigned subpages, so every page closes the same way. */
 
-/* Customers first, then the infrastructure OnchainSuite runs on, in one grid of five per row. */
+/* Customers and supporters, in one grid of five per row. */
 /* A wordmark already spells the name, so it is shown on its own instead of icon plus name. */
-const LOGOS: { name: string; logo: string; wordmark?: boolean }[] = [
+const LOGOS: { name: string; logo: string; wordmark?: { w: number; h: number } }[] = [
   { name: "Predict Street", logo: "/logos/predict-street.png" },
-  { name: "Yauga", logo: "/logos/yauga.jpg" },
+  { name: "Yauga", logo: "/logos/yauga.svg", wordmark: { w: 5610, h: 1220 } },
   { name: "Rehitage", logo: "/logos/rehitage.svg" },
   { name: "Surgence Labs", logo: "/logos/surgence.jpg" },
   { name: "Sovren", logo: "/logos/sovren.png" },
   { name: "TraderComps", logo: "/logos/tradercomps.svg" },
-  { name: "The Sweat Equity Club", logo: "/logos/sweat-equity-club.png", wordmark: true },
+  { name: "The Sweat Equity Club", logo: "/logos/sweat-equity-club.png", wordmark: { w: 459, h: 66 } },
   { name: "Vault777", logo: "/logos/vault777.jpg" },
-  { name: "DigitalOcean", logo: "/integrations/digitalocean.svg" },
-  { name: "Amazon SES", logo: "/integrations/aws-ses.svg" },
-  { name: "Azure ACS", logo: "/integrations/azure.svg" },
 ];
 
 /* Blank cells close the last row: enough for five columns on desktop, and the mobile CSS hides any
@@ -34,7 +31,7 @@ export function LogoRow() {
           <div key={c.name} className="rv">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             {c.wordmark
-              ? <img className="wm" src={c.logo} alt={`${c.name} logo`} width={459} height={66} loading="lazy" />
+              ? <img className="wm" src={c.logo} alt={`${c.name} logo`} width={c.wordmark.w} height={c.wordmark.h} loading="lazy" />
               : <><img src={c.logo} alt={`${c.name} logo`} width={28} height={28} loading="lazy" /><span>{c.name}</span></>}
           </div>
         ))}

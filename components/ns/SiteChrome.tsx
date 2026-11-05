@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { APP_URL, COMPANY, DOCS_URL } from "@/lib/data";
+import { COMPANY, DOCS_URL } from "@/lib/data";
 import CalBooking from "./CalBooking";
 import Sprite, { WORDMARK_BOX } from "./Sprite";
 import MobileMenu from "./MobileMenu";
@@ -56,13 +56,11 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
   return (
     <div className="ns">
       <Sprite />
-      <div className="bar"><Link href="/#platform"><b>OnchainSuite v2.7</b> adds lifecycle stages, health scores and holdouts<span>→</span></Link></div>
       <header className="nav" id="nav">
         <div className="nav-in">
           <Logo />
           <NavMenu />
           <div className="acts">
-            <a className="btn" href={APP_URL}>Sign in</a>
             <Link className="btn solid" href="/early-access">Book a walkthrough</Link>
             <MobileMenu links={NAV_LINKS} />
           </div>

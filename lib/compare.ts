@@ -96,6 +96,29 @@ export const COMPETITORS: Competitor[] = [
       { q: "Does OnchainSuite do SMS?", a: "No. We focus on in-app push and email." },
       { q: "Can it reach wallets with no email?", a: "Yes, through in-app push, which needs only the address. Email is for wallets that opt in." },
     ],
+    description: "Klaviyo vs OnchainSuite, compared for blockchain companies. Which reads wallet activity, what switching takes, who should pick which.",
+    deep: {
+      pickThem: "If you run an online store and your customers are email addresses, Klaviyo is the stronger choice. Its flows start from orders, price drops, low inventory and birthdays, it connects to Shopify, WooCommerce and hundreds of other apps, and it is free up to 250 profiles and 500 emails a month.",
+      switching: [
+        "Export your lists and segments from Klaviyo as CSV files, with the profile properties you rely on.",
+        "Import them into Audience. Emails link to wallets where you already hold the link, and the rest stay as email contacts.",
+        "Rebuild the flows that matter as Loops, swapping store metrics such as placed order for on-chain triggers such as first deposit.",
+      ],
+      switchingTime: "Most teams move their main flows in a day.",
+      cannot: "Klaviyo flows start from a list, a segment, a metric, a date property, a price drop or low inventory, and metrics arrive from your store integrations or from events your code sends through its API. Nothing in Klaviyo reads a deposit, a withdrawal or a token transfer from the chain, so a wallet's activity only reaches it if your engineers send it there.",
+      example: {
+        scenario: "A lending protocol wants to email depositors whose collateral ratio has dropped close to liquidation.",
+        them: [
+          "An engineer watches the lending contract and calculates each depositor's collateral ratio.",
+          "A service sends a custom metric to Klaviyo for every depositor who crosses the threshold, matched to an email address.",
+          "A metric-triggered flow sends the email, and the service keeps running for as long as the flow does.",
+        ],
+        ocs: [
+          "One segment rule: collateral ratio within 10% of the liquidation level.",
+          "One Loop that emails depositors who have an address, shows an in-app message to wallets that do not, and stops when they add collateral.",
+        ],
+      },
+    },
   },
   {
     slug: "customer-io",
@@ -157,6 +180,29 @@ export const COMPETITORS: Competitor[] = [
       { q: "Does it scale for large protocols?", a: "Yes. Pricing scales with the contacts you bring in, from Launch to Enterprise." },
       { q: "How is on-chain data handled?", a: "We read cross-chain activity into clean events and segments, so you skip the data engineering." },
     ],
+    description: "Braze vs OnchainSuite, compared for blockchain companies. Which reads wallet activity, what switching takes, who should pick which.",
+    deep: {
+      pickThem: "If you run a large consumer app with an engineering team that already sends clean events, Braze is the better-proven platform. It reaches people by email, push, SMS, WhatsApp, in-app messages and content cards, and it is priced by monthly active users on a contract, with no free plan.",
+      switching: [
+        "Export your users from Braze, either from a segment's CSV export or through its user export endpoints.",
+        "Import them into Audience. External IDs and emails link to wallets where you already hold the link.",
+        "Rebuild your Canvases as Loops. Custom events your app sends today can keep coming in, and on-chain events become triggers without any SDK work.",
+      ],
+      switchingTime: "A week for most teams, mostly spent deciding which Canvases are still worth keeping.",
+      cannot: "A Braze Canvas starts on a schedule, from an action such as a custom event or a purchase, or from an API call, and every one of those events has to come from your app's SDK or your server. Braze has no way to read a deposit, a withdrawal or a staking change from the chain itself, so a wallet's on-chain activity reaches it only through a pipeline your engineers build and maintain.",
+      example: {
+        scenario: "A staking app wants to reach holders whose rewards are ready to claim but who have not opened the app in 21 days.",
+        them: [
+          "An engineer indexes the staking contract and works out each holder's unclaimed rewards.",
+          "A service sends a custom event and attribute to Braze through /users/track for every holder past the threshold.",
+          "An action-based Canvas sends a push and an email, with the indexer and the service kept running behind it.",
+        ],
+        ocs: [
+          "One segment rule: unclaimed rewards above zero, and no app session in the last 21 days.",
+          "One Loop that sends an in-app message and an email, and stops the moment the rewards are claimed.",
+        ],
+      },
+    },
   },
   {
     slug: "dotdigital",
@@ -169,13 +215,36 @@ export const COMPETITORS: Competitor[] = [
     theyLike: ["Solid email and cross-channel automation", "Ecommerce and CRM integrations", "Good deliverability tooling", "Established support and services"],
     whenThem: "You need a mature email suite for a Web2 audience.",
     together: "Run Dotdigital for existing Web2 email and OnchainSuite for wallet-native, on-chain retention.",
-    them: ["From ~£150/mo", "No", "No", "Limited", "Yes", "Web2 lists", "No", "Yes", "No", "Yes", "No", "Yes", "Yes", "No"],
+    them: ["Contact sales", "No", "No", "Limited", "Yes", "Web2 lists", "No", "Yes", "No", "Yes", "No", "Yes", "Yes", "No"],
     faqs: [
       { q: "Does Dotdigital support wallets or crypto?", a: "No. It has no blockchain source and no wallet-native channel." },
       { q: "Why pick OnchainSuite?", a: "Because your key moments are on-chain and your audience is wallets, neither of which Dotdigital can reach." },
       { q: "Can OnchainSuite send email too?", a: "Yes, to wallets that opt in, alongside in-app push for those without one." },
       { q: "Is migration hard?", a: "No. You add an SDK and we read your chains. There is no pipeline to build." },
     ],
+    description: "Dotdigital vs OnchainSuite, compared for blockchain companies. Which reads wallet activity, what switching takes, who should pick which.",
+    deep: {
+      pickThem: "If your customers shop with you online and you want one no-code suite for email, SMS, WhatsApp, push and chat, Dotdigital is the better fit. It has more than 200 integrations, including Shopify, Salesforce and Adobe Commerce, and it is sold through its sales team rather than a public price list.",
+      switching: [
+        "Export your contacts from Dotdigital (Audience, then Contacts, then Export all) as a CSV file, or export each list you use.",
+        "Import the file into Audience. Emails link to wallets where you already hold the link.",
+        "Rebuild your programs as Loops, replacing date and list-join start conditions with on-chain triggers where they fit.",
+      ],
+      switchingTime: "Most teams move their programs in a day or two.",
+      cannot: "A Dotdigital program starts on a schedule, from a date field or a segment, or from an external trigger such as an API call, an integration, a list join or a form. Product events can be imported through its API, but nothing in Dotdigital reads a deposit, a withdrawal or a token transfer from the chain, so on-chain activity only arrives if your engineers send it.",
+      example: {
+        scenario: "A tokenised fund wants to email investors whose holdings have sat untouched for 90 days before the next subscription window.",
+        them: [
+          "An engineer reads the fund contract and lists the holders who have not moved in 90 days.",
+          "A script imports those holders into Dotdigital as events or insight data, matched to email addresses.",
+          "A segment-triggered program sends the email, and the script runs again before every window.",
+        ],
+        ocs: [
+          "One segment rule: holds the fund token, and no transfer in the last 90 days.",
+          "One Loop that emails investors before the window opens and stops for anyone who subscribes.",
+        ],
+      },
+    },
   },
   {
     slug: "emailoctopus",
@@ -229,12 +298,36 @@ export const COMPETITORS: Competitor[] = [
     theyLike: ["Reliable delivery at scale", "A strong developer API", "Good deliverability tooling", "Transactional and marketing email"],
     whenThem: "You want raw sending infrastructure and will build the retention logic yourself.",
     together: "A good pairing. OnchainSuite owns the on-chain triggers, segments, and in-app push; SendGrid handles delivery.",
-    them: ["Free / usage-based", "No", "No", "No", "Delivery layer", "Limited", "No", "Basic", "No", "Via Twilio", "No", "Deliverability", "Yes", "No"],
+    them: ["From $15/mo", "No", "No", "No", "Delivery layer", "Limited", "No", "Basic", "No", "Via Twilio", "No", "Deliverability", "Yes", "No"],
     faqs: [
       { q: "Is SendGrid a competitor?", a: "Only on the delivery slice. OnchainSuite can sit on top of it and adds the triggers, segments, and in-app push SendGrid does not do." },
       { q: "Can I use SendGrid with OnchainSuite?", a: "Yes. SendGrid can be the delivery layer while OnchainSuite drives the logic." },
       { q: "Does OnchainSuite handle deliverability?", a: "We send to opted-in wallets. Teams with strict deliverability needs can pair us with their provider." },
     ],
+    description: "SendGrid vs OnchainSuite, compared for blockchain companies. Which reads wallet activity, what each one is for, who should pick which.",
+    deep: {
+      pickThem: "If you want raw email delivery and your engineers will build the targeting themselves, SendGrid is the better tool. Its Email API sends transactional and marketing mail at scale, and Marketing Campaigns adds lists, segments and simple automations from $15 a month.",
+      switchingTitle: "What adding OnchainSuite looks like",
+      switching: [
+        "Export your contacts from Marketing Campaigns (Contacts, then the list's Action menu, then Export). The CSV is ready to download for 12 hours.",
+        "Import the file into Audience. Emails link to wallets where you already hold the link.",
+        "Keep SendGrid for receipts and password resets if you like, and move the messages that depend on what customers do on-chain into Loops.",
+      ],
+      switchingTime: "There is nothing to rewire on the sending side, so most teams start the same day.",
+      cannot: "SendGrid automations send when a contact is added to a linked list or segment, and they need the Advanced Marketing Campaigns plan. They do not start from your product's own events, and SendGrid sends email only. To react to something a wallet did on the chain, your engineers would have to watch the chain and add contacts to a list themselves.",
+      example: {
+        scenario: "A DEX wants to email traders whose first swap was more than 14 days ago and who have not swapped since.",
+        them: [
+          "An engineer watches the DEX contracts and finds the traders who match.",
+          "A script adds those traders to a SendGrid list through the Contacts API, matched to email addresses.",
+          "An automation on that list sends the email, and the script runs every day to keep the list current.",
+        ],
+        ocs: [
+          "One segment rule: one swap, first seen more than 14 days ago, and no swap since.",
+          "One Loop that sends an email and an in-app message, and stops when a trader makes a second swap.",
+        ],
+      },
+    },
   },
   {
     slug: "brevo",
@@ -253,6 +346,29 @@ export const COMPETITORS: Competitor[] = [
       { q: "Why choose OnchainSuite?", a: "Because your customers are wallets and your triggers are on-chain, neither of which Brevo supports." },
       { q: "Can it fully replace Brevo?", a: "For retention at a blockchain company, yes. If you also need generic SMS marketing, keep a tool like Brevo alongside." },
     ],
+    description: "Brevo vs OnchainSuite, compared for blockchain companies. Which reads wallet activity, what switching takes, who should pick which.",
+    deep: {
+      pickThem: "If you are a small business that wants email, SMS, WhatsApp, live chat and a light CRM in one inexpensive tool, Brevo is the better fit. Its API also accepts custom events, so a developer can trigger automations from things your product does.",
+      switching: [
+        "Export your contacts from Brevo as a CSV file, filtered by list or segment.",
+        "Import the file into Audience. Emails link to wallets where you already hold the link.",
+        "Rebuild your automations as Loops. Custom events your product sends today can keep coming in, and on-chain events become triggers you do not have to build.",
+      ],
+      switchingTime: "Most teams finish in an afternoon.",
+      cannot: "Every event sent to Brevo has to name a contact by email, phone, WhatsApp number, Brevo contact ID or your own external ID. There is no wallet identifier and no reading of the chain, so a wallet that never gave you an email cannot be messaged, and a deposit only reaches Brevo if your code sends it as an event.",
+      example: {
+        scenario: "A prediction market wants to message traders who deposited but never placed a position.",
+        them: [
+          "An engineer watches the deposit contract and finds wallets with a deposit and no position.",
+          "A service sends a custom event to Brevo for each one, which only works for wallets already matched to an email.",
+          "An automation on that event sends the email, and wallets without an email are left out.",
+        ],
+        ocs: [
+          "One segment rule: deposited, and no position placed since.",
+          "One Loop that emails traders who have an address, shows an in-app message to wallets that do not, and stops when they place a position.",
+        ],
+      },
+    },
   },
   {
     slug: "formo",
@@ -356,6 +472,30 @@ export const COMPETITORS: Competitor[] = [
       { q: "Is Galxe a retention tool?", a: "It drives campaign engagement. OnchainSuite provides the always-on retention between campaigns." },
       { q: "Does OnchainSuite run quests?", a: "No. It focuses on behaviour-triggered messaging. Pair it with a quest platform like Galxe." },
     ],
+    description: "Galxe vs OnchainSuite, compared for blockchain companies. Which one runs quests, which one runs retention, and how the two fit together.",
+    deep: {
+      pickThem: "If you want to grow a community through quests, loyalty points and on-chain credentials, Galxe is built for that. Projects such as Optimism, Arbitrum and Base use it to reward people for completing tasks, and its contract-query credentials check what a wallet has done on the chain when it joins a quest.",
+      switchingTitle: "What adding OnchainSuite looks like",
+      switching: [
+        "Keep running quests and loyalty campaigns on Galxe. Nothing in your campaign setup changes.",
+        "Point OnchainSuite at your contracts and import the wallets you already know, including the ones your quests brought in.",
+        "Build Loops for the weeks between campaigns, when wallets that joined for a reward are most likely to go quiet.",
+      ],
+      switchingTime: "The two tools do different jobs, so there is nothing to migrate.",
+      cannot: "Galxe reaches people through quests and campaigns they choose to visit. We found no way in its docs for a project to email or message a wallet, or to start a journey when a wallet's on-chain activity changes. Its contract checks run when someone completes a quest, not continuously in the background.",
+      example: {
+        scenario: "A new chain ran a Galxe quest that brought in thousands of wallets, and it wants them to make a second transaction after the campaign ends.",
+        them: [
+          "Galxe records who completed the quest and can show them on a points leaderboard.",
+          "Reaching those wallets afterwards means launching another quest and waiting for them to come back to it.",
+          "Nothing reacts on its own when a wallet goes quiet between campaigns.",
+        ],
+        ocs: [
+          "One segment rule: completed the quest, and no transaction in the 14 days since.",
+          "One Loop that sends an in-app message and an email, and stops as soon as a wallet transacts again.",
+        ],
+      },
+    },
   },
 ];
 
