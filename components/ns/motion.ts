@@ -156,10 +156,14 @@ function runScenes(K){
       return function(){ var t0 = performance.now(); (function f(t){ var p = Math.min(1, (t - t0) / 1600); bar.style.setProperty('--p', ease(p)); if(p < 1) requestAnimationFrame(f); })(t0); };
     }
   };
+  /* A scene is built only when it comes within one screen of the viewport, not on page load: building
+     all of them at once was the 360 ms of blocking time PageSpeed flagged (SEO doc, hosting item 6). */
   $$('[data-scene]').forEach(function(el){
     var make = scenes[el.dataset.scene]; if(!make) return;
-    var play = make(el);
-    onView(el, play, el.classList.contains('vis') ? 0.3 : 0.5);
+    function build(){ onView(el, make(el), el.classList.contains('vis') ? 0.3 : 0.5); }
+    if(!ANIM){ build(); return; }
+    var io = observe(function(es){ es.forEach(function(e){ if(e.isIntersecting){ io.disconnect(); build(); } }); }, { rootMargin: '0px 0px 100% 0px' });
+    io.observe(el);
   });
 }
 
