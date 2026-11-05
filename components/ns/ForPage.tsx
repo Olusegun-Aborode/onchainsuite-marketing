@@ -9,8 +9,9 @@ import PointArt from "./PointArt";
 type Lane = { k: string; d: string; e: string[]; off?: string };
 type Point = { title: string; body: string; art: string };
 
-export default function ForPage({ title, sub, lanesTitle, lanes, toPoints, pointsTitle, points, toPlan, plan, faqs, mainstream }: {
-  title: string; sub: string; lanesTitle: React.ReactNode; lanes: Lane[]; toPoints: string; pointsTitle: React.ReactNode; points: Point[]; toPlan: string;
+export default function ForPage({ title, lead, sub, lanesTitle, lanes, toPoints, pointsTitle, points, toSegments, segments, toPlan, plan, faqs, mainstream }: {
+  title: string; lead?: string; sub: string; lanesTitle: React.ReactNode; lanes: Lane[]; toPoints: string; pointsTitle: React.ReactNode; points: Point[];
+  toSegments?: string; segments?: { title: string; body: string }[]; toPlan: string;
   plan: { name: string; price: string; unit: string; line: string; items: string[]; other: React.ReactNode };
   faqs: { q: string; a: string }[]; mainstream?: boolean;
 }) {
@@ -19,6 +20,7 @@ export default function ForPage({ title, sub, lanesTitle, lanes, toPoints, point
       <div className="wrap">
         <section className="prod-hero">
           <h1 className="h1 load">{title}</h1>
+          {lead && <p className="sub lead load" style={{ animationDelay: ".06s" }}>{lead}</p>}
           <p className="sub load" style={{ animationDelay: ".1s" }}>{sub}</p>
           <div className="ctas load" style={{ animationDelay: ".18s" }}>
             <Link className="btn solid lg" href="/early-access">Book a walkthrough</Link>
@@ -47,8 +49,25 @@ export default function ForPage({ title, sub, lanesTitle, lanes, toPoints, point
               <div key={p.title} className="rv"><PointArt kind={p.art} /><p className="h4">{p.title} <span>{p.body}</span></p></div>
             ))}
           </div>
-          <p className="bridge rv"><a href="#plan-h">{toPlan}<span aria-hidden="true">↓</span></a></p>
+          {segments
+            ? <p className="bridge rv"><a href="#seg-0">{toSegments}<span aria-hidden="true">↓</span></a></p>
+            : <p className="bridge rv"><a href="#plan-h">{toPlan}<span aria-hidden="true">↓</span></a></p>}
         </section>
+
+        {/* One short H2 section per kind of company the sales list targets, so the page carries their words. */}
+        {segments && (
+          <div className="dl-sec seg3">
+            <div className="seg3-grid">
+              {segments.map((g, i) => (
+                <section key={g.title} className="rv" aria-labelledby={`seg-${i}`}>
+                  <h2 className="h3" id={`seg-${i}`}>{g.title}</h2>
+                  <p>{g.body}</p>
+                </section>
+              ))}
+            </div>
+            <p className="bridge rv"><a href="#plan-h">{toPlan}<span aria-hidden="true">↓</span></a></p>
+          </div>
+        )}
 
         <section className="dl-sec" aria-labelledby="plan-h">
           <div className="sendcard rv">

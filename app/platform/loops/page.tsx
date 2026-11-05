@@ -4,7 +4,7 @@ import { LoopScene } from "@/components/ns/Scenes";
 import { DOCS } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Loops",
+  title: "Loops: win-back emails triggered by on-chain events",
   description: "OnchainSuite Loops are automated customer journeys that start from on-chain and off-chain activity, send by email or in-app, and stop when the customer acts.",
   alternates: { canonical: "/platform/loops" },
 };
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 export default function LoopsPage() {
   return (
     <ProductPage toPoints="Here is what a Loop does once it is running." toNext="When you are not sure who needs a Loop, you can ask the Intelligence MCP." href="/platform/loops" docs={DOCS.automation}
+      lead="Automated win-back and lifecycle journeys for blockchain companies. A Loop starts when something happens on the chain (a withdrawal, a wallet going dormant, a first deposit), sends by email or in-app, and stops the moment the customer acts."
       title="Journeys that start on-chain and stop the moment the customer acts."
       sub="A Loop is an automated customer journey. It waits, checks a condition, sends by email or in-app, and ends when the action is recorded on your contract."
       scene={<LoopScene />}

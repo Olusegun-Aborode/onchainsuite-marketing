@@ -52,6 +52,7 @@ export default function DataPage() {
       <div className="wrap">
         <section className="prod-hero">
           <h1 className="h1 load">How OnchainSuite uses your data.</h1>
+          <p className="sub lead load" style={{ animationDelay: ".06s" }}>What OnchainSuite reads, what it never holds, and how wallet-to-email linking stays consent-based. Read-only access to public chain data; no keys, no funds. UK GDPR compliant, registered with the ICO.</p>
           <p className="sub load" style={{ animationDelay: ".1s" }}>We read the two lanes your customers leave a record in, join them into one record per person, and never hold funds or keys.</p>
         </section>
 

@@ -63,6 +63,18 @@ export type Competitor = {
   together: string;
   them: string[]; // aligned to MATRIX_CAPS
   faqs: QA[];
+  /* Text that only makes sense for this tool (SEO doc, Fix 5): 300 to 500 unique words per page so
+     Google stops treating the compare pages as one template. Customer.io first, then Addressable,
+     EmailOctopus and Formo. */
+  description?: string;
+  deep?: {
+    pickThem: string;
+    switchingTitle?: string;
+    switching: string[];
+    switchingTime: string;
+    cannot: string;
+    example: { scenario: string; them: string[]; ocs: string[] };
+  };
 };
 
 export const COMPETITORS: Competitor[] = [
@@ -103,6 +115,29 @@ export const COMPETITORS: Competitor[] = [
       { q: "Can I message wallets with no email?", a: "Yes, by in-app push. Customer.io needs a known Web2 identifier and channel." },
       { q: "How long is setup?", a: "Point OnchainSuite at your contracts and bring in the records you already hold. We read the chain into actions for you, so there is no pipeline for your engineers to build." },
     ],
+    description: "Customer.io vs OnchainSuite, compared for blockchain companies. Which reads wallet activity, what switching takes, who should pick which.",
+    deep: {
+      pickThem: "If your product has no wallets, no contracts and a working event pipeline, Customer.io is the better-known choice with a bigger integration list. It is built for teams whose customers live entirely inside the app, and for them it does the job well.",
+      switching: [
+        "Export your people from Customer.io as a CSV file.",
+        "Import the file into Audience. Emails link to wallets where you already hold the link, so nobody is matched by guesswork.",
+        "Rebuild the two or three campaigns that matter as Loops, starting from on-chain triggers instead of custom events.",
+      ],
+      switchingTime: "One afternoon for most teams.",
+      cannot: "Customer.io triggers on events your app sends it. It has no way to read a deposit, withdrawal or token transfer from the chain unless your engineers build and maintain that feed.",
+      example: {
+        scenario: "A perp DEX wants to message traders whose open positions dropped to zero and who have not traded in 14 days.",
+        them: [
+          "An engineering ticket to watch position changes on the chain for every trader.",
+          "A service that turns those changes into custom events and sends them to Customer.io by webhook.",
+          "A segment on the custom event and a campaign on top of it, with the service kept running for as long as the campaign does.",
+        ],
+        ocs: [
+          "One segment rule: no open positions, and no trade in the last 14 days.",
+          "One Loop that sends an email, then an in-app message to traders who did not respond, and stops the moment someone opens a position.",
+        ],
+      },
+    },
   },
   {
     slug: "braze",
@@ -147,7 +182,7 @@ export const COMPETITORS: Competitor[] = [
     name: "EmailOctopus",
     kind: "Simple email",
     intro:
-      "EmailOctopus is a cheap, simple email tool built on Amazon SES. OnchainSuite sits in a different category, a retention platform for blockchain companies, but teams often weigh a basic email tool against doing retention properly.",
+      "EmailOctopus is a cheap, simple email tool, with a separate version called EmailOctopus Connect that sends through your own Amazon SES account. OnchainSuite sits in a different category, a retention platform for blockchain companies, but teams often weigh a basic email tool against doing retention properly.",
     whyChoose:
       "EmailOctopus sends broadcasts and light automations. There is no event pipeline, no wallet identity, and no sense of what happens on-chain. If retention past the newsletter matters, OnchainSuite is the better fit.",
     theyLike: ["Very affordable", "Simple and quick to use", "Good for newsletters", "A clean, no-frills UI"],
@@ -159,6 +194,29 @@ export const COMPETITORS: Competitor[] = [
       { q: "Is OnchainSuite overkill next to it?", a: "If you only send newsletters, EmailOctopus is fine. If you want to retain wallets on on-chain behaviour, the two are not comparable." },
       { q: "Does it cost a lot more?", a: "The Suite plan starts at $39 a month, more than a newsletter tool because we read your contracts as well as your list. Without blockchain data, the Send plan is $6 a month plus $3.95 per 1,000 subscribers." },
     ],
+    description: "EmailOctopus vs OnchainSuite, compared for blockchain companies. Which reads wallet activity, what switching takes, who should pick which.",
+    deep: {
+      pickThem: "If all you need is a newsletter to a list, EmailOctopus is one of the cheapest ways to send it, and it is free up to 2,500 subscribers and 10,000 emails a month. It describes itself as email marketing and nothing else, and for a team with no wallets to watch, that focus is a strength.",
+      switching: [
+        "Export each list from EmailOctopus (Actions, then Export) and choose All so every field comes with it. The file downloads as a ZIP.",
+        "Import the contacts into Audience. Tags and custom fields come across, and emails link to wallets where you already hold the link.",
+        "Rebuild your automations as Loops. Tag and date triggers become segment rules, and on-chain events become triggers you could not use before.",
+      ],
+      switchingTime: "Most teams finish in an afternoon, because there are no app events to rewire.",
+      cannot: "EmailOctopus automations start when a contact joins a list, a field or tag changes, a date comes round, or your code enrols the contact through its API. It has no way to receive a product event or read a deposit, withdrawal or wallet balance, and it sends email only, with no in-app, SMS or push.",
+      example: {
+        scenario: "A staking protocol wants to email holders who unstaked more than half their position this week.",
+        them: [
+          "A developer watches the staking contract and works out which holders unstaked.",
+          "A script matches those wallets to email addresses in EmailOctopus and adds a tag to each contact through the API.",
+          "A tag-added automation sends the email, and the script has to run every week for the campaign to keep working.",
+        ],
+        ocs: [
+          "One segment rule: unstaked more than half their position in the last 7 days.",
+          "One Loop that emails holders who have an address, shows an in-app message to wallets that do not, and stops when they stake again.",
+        ],
+      },
+    },
   },
   {
     slug: "sendgrid",
@@ -207,13 +265,37 @@ export const COMPETITORS: Competitor[] = [
     theyLike: ["Excellent onchain product analytics", "Wallet intelligence and profiles", "Offchain to onchain funnels", "SQL and natural-language querying"],
     whenThem: "Your main need is onchain analytics, funnels, and wallet intelligence.",
     together: "A natural pair. Use Formo to understand behaviour and OnchainSuite to act on it. Plenty of teams run both.",
-    them: ["Free / $199 / $499", "Analytics", "Yes", "No", "No", "Yes", "Yes", "No", "No", "No", "Attribution", "Yes", "Yes", "Yes"],
+    them: ["From $199/mo", "Analytics", "Yes", "No", "No", "Yes", "Yes", "No", "No", "No", "Attribution", "Yes", "Yes", "Yes"],
     faqs: [
       { q: "Is Formo a direct competitor?", a: "They overlap on onchain data, but Formo leans analytics and OnchainSuite leans messaging. They fit together well." },
       { q: "Can Formo message wallets?", a: "No. Formo is analytics. OnchainSuite provides the in-app push and email that acts on the insight." },
       { q: "Should we run both?", a: "Often yes. Formo for insight, OnchainSuite to act on it." },
       { q: "Does OnchainSuite have analytics?", a: "Basic dashboards for retention and campaigns. Deep product analytics is Formo's strength." },
     ],
+    description: "Formo vs OnchainSuite, compared for blockchain companies. Which one measures wallet activity, which one acts on it, and how teams run both.",
+    deep: {
+      pickThem: "If the question your team asks most is what wallets are doing, Formo is the better tool: funnels, retention cohorts, attribution and wallet profiles built for DeFi apps, with SQL and AI queries on top. It starts at $199 a month for up to 5,000 monthly active users.",
+      switchingTitle: "What adding OnchainSuite looks like",
+      switching: [
+        "Keep the Formo SDK where it is. OnchainSuite reads your contracts directly, so nothing in your app changes.",
+        "Export the wallets you care about from a Formo query as a CSV file and import them into Audience, so the people you have been studying are the people you can reach.",
+        "Build a Loop for the moment Formo was alerting you about, so nobody has to chase it by hand.",
+      ],
+      switchingTime: "Nothing is removed, so there is no cut-over day.",
+      cannot: "Formo does not send messages to your users. Its alerts go to your own team by webhook or Slack, and its docs point to Zapier for anything further. It can tell you that a high-value wallet just went quiet, but reaching that wallet is left to another tool.",
+      example: {
+        scenario: "A DEX can see in Formo that wallets which bridge in and make one swap rarely make a second.",
+        them: [
+          "Formo shows the drop-off in a funnel and can alert the team in Slack when a high-value wallet goes quiet.",
+          "Someone exports those wallets from a query and hands the list to a messaging tool.",
+          "The export is repeated every week, and wallets that swapped again in between still get the message.",
+        ],
+        ocs: [
+          "One segment rule: one swap, first seen in the last 30 days, and no swap in the last 14.",
+          "One Loop that sends an in-app message and an email, and stops as soon as a wallet makes its second swap.",
+        ],
+      },
+    },
   },
   {
     slug: "addressable",
@@ -232,6 +314,30 @@ export const COMPETITORS: Competitor[] = [
       { q: "Does Addressable send retention messages?", a: "No. It handles acquisition and attribution. OnchainSuite owns owned-channel retention." },
       { q: "Can they work together?", a: "Yes. Acquire with Addressable, retain with OnchainSuite." },
     ],
+    description: "Addressable vs OnchainSuite, compared for blockchain companies. Which one finds new wallets, which one keeps them, and how the two fit together.",
+    deep: {
+      pickThem: "If your priority is finding new users through paid ads, Addressable is built for that: it matches wallets to the people visiting your site, targets ads on X, Reddit and display networks, and ties deposits back to campaigns. It suits exchanges, trading platforms, prediction markets and iGaming operators with a paid acquisition budget.",
+      switchingTitle: "What adding OnchainSuite looks like",
+      switching: [
+        "Keep the Addressable tag and your ad campaigns running. Nothing in your acquisition setup changes.",
+        "Point OnchainSuite at your contracts and import the users you already hold, so every new depositor lands on one record.",
+        "Build Loops for the first weeks after a deposit, when users from paid campaigns are most likely to drift.",
+      ],
+      switchingTime: "The two tools sit at different ends of the funnel, so there is nothing to migrate.",
+      cannot: "Addressable does not message your existing users. Its retention product adds wallet tags to the CRM you already run, and its own page says it does not replace your existing systems, so the email or in-app message still has to come from another tool.",
+      example: {
+        scenario: "A prediction market runs an X campaign through Addressable and wants the traders it brings in to place a second position.",
+        them: [
+          "Addressable ties the first deposit to the campaign and can tag the high-value traders in your CRM.",
+          "Your team builds the follow-up in whatever CRM or email tool you already use, keyed to the tags it receives.",
+          "Nothing in that chain sees the trader's next market or second position unless the CRM is fed that data too.",
+        ],
+        ocs: [
+          "One segment rule: deposited in the last 14 days, one position, and no trade in the last 7 days.",
+          "One Loop that sends an email and an in-app message about the next market, and stops when a second position is placed.",
+        ],
+      },
+    },
   },
   {
     slug: "galxe",

@@ -2,11 +2,12 @@ import { MARK } from "./Sprite";
 
 /* OnchainSuite's mark beside a competitor's logo. Logos live in /public/compare; a brand
    without a file yet falls back to a lettered tile until its official logo is added. */
-const LOGOS: Record<string, string> = {
-  "customer-io": "/compare/customer-io.svg", braze: "/compare/braze.svg", sendgrid: "/compare/sendgrid.svg",
-  brevo: "/compare/brevo.svg", galxe: "/compare/galxe.svg", klaviyo: "/compare/klaviyo.png",
-  dotdigital: "/compare/dotdigital.png", emailoctopus: "/compare/emailoctopus.svg", formo: "/compare/formo.png",
-  addressable: "/compare/addressable.png",
+const LOGOS: Record<string, { src: string; w: number; h: number }> = {
+  "customer-io": { src: "/compare/customer-io.svg", w: 256, h: 180 }, braze: { src: "/compare/braze.svg", w: 256, h: 256 },
+  sendgrid: { src: "/compare/sendgrid.svg", w: 256, h: 256 }, brevo: { src: "/compare/brevo.svg", w: 24, h: 24 },
+  galxe: { src: "/compare/galxe.svg", w: 24, h: 24 }, klaviyo: { src: "/compare/klaviyo.png", w: 128, h: 128 },
+  dotdigital: { src: "/compare/dotdigital.png", w: 128, h: 128 }, emailoctopus: { src: "/compare/emailoctopus.svg", w: 467, h: 467 },
+  formo: { src: "/compare/formo.png", w: 128, h: 128 }, addressable: { src: "/compare/addressable.png", w: 128, h: 128 },
 };
 
 export default function VsLockup({ slug, name, size = "sm" }: { slug: string; name: string; size?: "sm" | "lg" }) {
@@ -18,7 +19,7 @@ export default function VsLockup({ slug, name, size = "sm" }: { slug: string; na
       <span className="vsl-t them">
         {logo
           // eslint-disable-next-line @next/next/no-img-element
-          ? <img src={logo} alt="" />
+          ? <img src={logo.src} alt={`${name} logo`} width={logo.w} height={logo.h} loading={size === "lg" ? "eager" : "lazy"} />
           : <b>{name.replace(/^Customer\.io$/, "C").charAt(0)}</b>}
       </span>
     </div>

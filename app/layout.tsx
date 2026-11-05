@@ -4,34 +4,28 @@ import "./ns.css";
 import Spotlight from "@/components/Spotlight";
 import { SITE_URL } from "@/lib/data";
 
+/* Head tags follow the "Dummy Site SEO Fixes" doc (Fix 1, 5 November 2026). Other pages title themselves
+   "[Page name] · OnchainSuite" through the template, under 60 characters. No keywords tag: Google ignores it. */
+const TITLE = "OnchainSuite: retention and CRM for blockchain companies";
+const DESCRIPTION =
+  "OnchainSuite is retention software for blockchain companies. It reads what your customers do in your app and on the chain, puts every wallet and email on one record, and sends email and in-app messages when someone deposits, withdraws or goes quiet. Works on Ethereum, Base, Arbitrum, Optimism, Polygon and Solana.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "OnchainSuite · Retention built on what your users do",
+    default: TITLE,
     template: "%s · OnchainSuite",
   },
-  description:
-    "Retention software built on what your users do: on-chain for blockchain companies, in your product for everyone else.",
+  description: DESCRIPTION,
   applicationName: "OnchainSuite",
-  keywords: [
-    "blockchain retention",
-    "retention software",
-    "on-chain automation",
-    "wallet analytics",
-    "crypto CRM",
-    "blockchain marketing",
-    "on-chain triggers",
-    "blockchain email marketing",
-    "protocol growth",
-  ],
   authors: [{ name: "OnchainSuite" }],
   creator: "OnchainSuite",
   publisher: "OnchainSuite",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "OnchainSuite · Retention built on what your users do",
+    title: TITLE,
     description:
-      "Retention software built on what your users do: on-chain for blockchain companies, in your product for everyone else.",
+      "Win back the customers who stopped using your protocol. OnchainSuite reads wallet activity and sends email and in-app messages when someone goes quiet.",
     url: SITE_URL,
     siteName: "OnchainSuite",
     type: "website",
@@ -39,9 +33,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "OnchainSuite · Retention built on what your users do",
+    title: "OnchainSuite: retention for blockchain companies",
     description:
-      "Retention software built on what your users do: on-chain for blockchain companies, in your product for everyone else.",
+      "When a wallet goes quiet, your win-back message sends. Email and in-app, triggered by what happens on the chain.",
+    creator: "@0nchainSuite",
   },
   robots: {
     index: true,

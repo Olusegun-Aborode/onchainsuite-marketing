@@ -22,9 +22,9 @@ export function AudienceScene() {
             <div style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: "600", fontSize: "14px" }}><svg width="15" height="15" style={{ color: "#1727E0" }}><use href="#a-at" /></svg>Wallet<span style={{ marginLeft: "auto", color: "#767B83" }}>✕</span></div>
             <span className="u-addr">0x48cc…ef8d</span>
             <div className="u-kv2"><div className="u-card"><small>Lifetime value</small><b>4.1 ETH</b></div><div className="u-card"><small>Home chain</small><b>Ethereum</b></div></div>
-            <h6>Health</h6>
+            <p className="u-h">Health</p>
             <div className="u-card u-health"><div className="sc"><b data-health>61</b><span>Watch</span><em>Activated</em></div><ul><li><span>Active 6d ago</span><span>+38</span></li><li><span>Reachable on 2 channels</span><span>+12</span></li><li><span>4.1 ETH lifetime</span><span>+11</span></li></ul></div>
-            <h6>Linked channels</h6>
+            <p className="u-h">Linked channels</p>
             <div className="u-link"><span className="ic"><svg><use href="#a-mail" /></svg></span>Email<em className="u-addr">wallet1@gmail.com</em><svg className="ok"><use href="#a-check" /></svg></div>
             <div className="u-link"><span className="ic"><svg><use href="#a-phone" /></svg></span>In-app push<em>device signed in</em><svg className="ok"><use href="#a-check" /></svg></div>
             <div className="u-link"><span className="ic"><svg><use href="#a-at" /></svg></span>X<em>not linked</em></div>
@@ -59,7 +59,7 @@ export function LoopScene() {
     <div className="vis live" data-scene="loop"><div className="stagebox"><div className="ui-pane u" style={{ background: "#FBFBFC" }} role="img" aria-label="The Loop builder for a dormant 30-day win-back: a goes dormant trigger, an email, a three-day wait and an in-app message draw in, and a customer moves through them.">
           <div className="u-top" style={{ gap: "12px" }}><span>← Loops</span><b style={{ fontSize: "14px" }}>Dormant 30d win-back</b><span className="u-chip g"><i></i>Ready</span><span>4 nodes · 0 issues</span></div>
           <div className="u-body" style={{ padding: "12px", height: "calc(100% - 44px)" }}><div className="u-flow">
-            <div className="u-card u-pal"><h6>On-chain triggers · 6</h6>
+            <div className="u-card u-pal"><p className="u-h">On-chain triggers · 6</p>
               <div className="u-trig"><i>⚡</i><div><b>On-chain event</b><small>Wallet interacts with a contract</small></div></div>
               <div className="u-trig"><i>◇</i><div><b>Holder acquired</b><small>New wallet mints or buys in</small></div></div>
               <div className="u-trig"><i>⇄</i><div><b>Swap completed</b><small>DEX trade or token exchange</small></div></div>

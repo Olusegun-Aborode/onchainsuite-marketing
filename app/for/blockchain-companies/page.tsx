@@ -3,7 +3,7 @@ import Link from "next/link";
 import ForPage from "@/components/ns/ForPage";
 
 export const metadata: Metadata = {
-  title: "OnchainSuite for blockchain companies",
+  title: "Retention for blockchain companies",
   description:
     "OnchainSuite reads what customers do in your app and what their wallets do on-chain, adds how they respond to your messages, and answers in plain English.",
   alternates: { canonical: "/for/blockchain-companies" },
@@ -16,6 +16,7 @@ export default function BlockchainCompanies() {
   return (
     <ForPage
       title="OnchainSuite for blockchain companies."
+      lead="Retention and CRM software built for protocols, prediction markets, perp DEXes and real-world-asset platforms. Read what wallets do, see who is slipping, and bring them back by email and in-app message."
       sub="Our software reads what your customers do in your app and what their wallets do on-chain, adds how they respond to what you send, and puts it on one record your growth team can act on."
       lanesTitle={<>Your customers leave a record in two places. <span>We read both, add the results of every message you send, and join them into one record per customer.</span></>}
       lanes={[
@@ -30,6 +31,12 @@ export default function BlockchainCompanies() {
         { title: "Start a Loop from something that happened on-chain.", body: "A deposit, a withdrawal or a wallet going quiet can start a Loop, and the Loop stops as soon as the customer acts.", art: "chainTrigger" },
         { title: "See who is slipping before they leave.", body: "Every customer has a lifecycle stage and a health score worked out from what they did in both lanes.", art: "health" },
         { title: "Ask both lanes a question in plain English.", body: "The Intelligence MCP answers from your app and contract data together, and turns the answer into a segment you can message.", art: "bothLanesQ" },
+      ]}
+      toSegments="The same record works whichever kind of blockchain product you run."
+      segments={[
+        { title: "For prediction markets", body: "Traders arrive for one market and drift away once it resolves. OnchainSuite sees who stopped placing positions and brings them back for the next market by email and in-app message." },
+        { title: "For perp DEXes", body: "A trader whose open positions fall to zero and who has not traded for two weeks is on the way out. OnchainSuite spots that on the chain and starts a Loop that stops the moment they trade again." },
+        { title: "For RWA platforms", body: "Investors deposit into tokenised funds and then go quiet for months between subscriptions and redemptions. OnchainSuite tracks deposits, redemptions and dormant wallets, so your team can reach investors before they move their money elsewhere." },
       ]}
       toPlan="All of this comes with the Suite plan, priced by the contacts you bring in."
       plan={{

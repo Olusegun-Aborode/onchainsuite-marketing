@@ -74,7 +74,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
           <nav className="ft-cols" aria-label="Footer">
             {FOOT.map((g) => (
               <div key={g.title}>
-                <h6>{g.title}</h6>
+                <p className="ft-h">{g.title}</p>
                 {g.items.map((l) => {
                   const inner = <>{l.label}{l.tag && <em className="foot-tag">{l.tag}</em>}</>;
                   return l.href.startsWith("http")

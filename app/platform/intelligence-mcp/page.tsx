@@ -4,7 +4,7 @@ import { McpScene } from "@/components/ns/Scenes";
 import { DOCS } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Intelligence MCP",
+  title: "Intelligence MCP: ask your on-chain data in plain English",
   description: "Ask OnchainSuite's Intelligence MCP a question in plain English and get a table, a chart and the SQL behind it, across your app and your contracts.",
   alternates: { canonical: "/platform/intelligence-mcp" },
 };
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 export default function McpPage() {
   return (
     <ProductPage toPoints="Here is what you can do with an answer." toNext="Every answer comes from the same record, the same segments and the same Loops." href="/platform/intelligence-mcp" docs={DOCS.intelligence}
+      lead={"Ask questions about your customers in plain English and get a table, a chart and the SQL behind it. \"Which wallets opened our last email but never clicked?\" becomes a segment or a campaign in one click."}
       title="Ask your app and contract data a question in plain English."
       sub="The Intelligence MCP turns your question into a query across both lanes, so nobody on your team has to write SQL to find out who to talk to."
       scene={<McpScene />}

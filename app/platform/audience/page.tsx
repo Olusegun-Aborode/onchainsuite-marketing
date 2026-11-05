@@ -4,7 +4,7 @@ import { AudienceScene } from "@/components/ns/Scenes";
 import { DOCS } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Audience",
+  title: "Audience: one CRM record per wallet",
   description: "OnchainSuite Audience puts every wallet, email and app account on one customer record, with the channels that reach each person and their lifecycle stage.",
   alternates: { canonical: "/platform/audience" },
 };
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 export default function AudiencePage() {
   return (
     <ProductPage toPoints="Here is what one record changes for your growth team." toNext="Once everyone is on one record, the next step is choosing who to talk to." href="/platform/audience" docs={DOCS.audience}
+      lead="A CRM for blockchain companies where a contact can be a wallet, an email, an app account, or all three on one record. See every deposit, withdrawal and login for each customer in one place, and which channels can reach them."
       title="Every wallet, email and app account on one customer record."
       sub="Audience brings your lists, your product and your contracts together, so each person has one record that shows what they did and how you can reach them."
       scene={<AudienceScene />}

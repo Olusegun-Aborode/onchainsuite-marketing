@@ -4,7 +4,7 @@ import { SegmentScene } from "@/components/ns/Scenes";
 import { DOCS } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Segments",
+  title: "Segments: find wallets that went quiet",
   description: "Build OnchainSuite segments from what customers did and from what they have not done, by describing the audience in a sentence and seeing a live count.",
   alternates: { canonical: "/platform/segments" },
 };
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 export default function SegmentsPage() {
   return (
     <ProductPage toPoints="Here is what you can build with it." toNext="A segment on its own sends nothing. Loops and campaigns are what put it to work." href="/platform/segments" docs={DOCS.audience}
+      lead={"Find the customers you need to talk to. Describe them in a sentence (\"holds more than 10 ETH and has not staked in 30 days\") and get a live list of matching wallets. This is how you find inactive wallets before they are gone."}
       title="Describe an audience in a sentence and get the rules back."
       sub="Segments turn what customers did in your app and on-chain into an audience you can send to, with a live count while you edit."
       scene={<SegmentScene />}

@@ -14,8 +14,8 @@ export const PRODUCTS = [
 
 type Point = { title: string; body: string; art?: string };
 
-export default function ProductPage({ href, title, sub, scene, points, faqs, docs, toPoints, toNext }: {
-  href: string; title: string; sub: string; scene: React.ReactNode; points: Point[]; faqs: { q: string; a: string }[]; docs?: string; toPoints: string; toNext: string;
+export default function ProductPage({ href, title, lead, sub, scene, points, faqs, docs, toPoints, toNext }: {
+  href: string; title: string; lead?: string; sub: string; scene: React.ReactNode; points: Point[]; faqs: { q: string; a: string }[]; docs?: string; toPoints: string; toNext: string;
 }) {
   const others = PRODUCTS.filter((p) => p.href !== href);
   return (
@@ -23,6 +23,7 @@ export default function ProductPage({ href, title, sub, scene, points, faqs, doc
       <div className="wrap">
         <section className="prod-hero">
           <h1 className="h1 load">{title}</h1>
+          {lead && <p className="sub lead load" style={{ animationDelay: ".06s" }}>{lead}</p>}
           <p className="sub load" style={{ animationDelay: ".1s" }}>{sub}</p>
           <div className="ctas load" style={{ animationDelay: ".18s" }}>
             <Link className="btn solid lg" href="/early-access">Book a walkthrough</Link>

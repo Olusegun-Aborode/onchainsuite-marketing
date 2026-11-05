@@ -16,11 +16,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const c = competitorBySlug(slug);
   if (!c) return {};
+  /* The other tool's name first, because that is what the searcher typed. "absolute" keeps the layout's
+     " · OnchainSuite" template from being added a second time. */
+  const title = `${c.name} vs OnchainSuite for blockchain companies`;
   return {
-    title: `OnchainSuite and ${c.name} compared`,
-    description: `${c.name} and OnchainSuite for blockchain companies: feature by feature, when ${c.name} is the better call, and how to run both.`,
+    title: { absolute: title },
+    description: c.description ?? `${c.name} and OnchainSuite for blockchain companies: feature by feature, when ${c.name} is the better call, and how to run both.`,
     alternates: { canonical: `/compare/${c.slug}` },
-    openGraph: { title: `OnchainSuite and ${c.name} compared`, url: `/compare/${c.slug}`, type: "website",
+    openGraph: { title, url: `/compare/${c.slug}`, type: "website",
       description: `How OnchainSuite compares with ${c.name} for lifecycle and retention marketing at blockchain companies.` },
   };
 }
@@ -84,6 +87,35 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
             <div className="rv"><p className="h4">Running both. <span>{c.together}</span></p></div>
           </div>
         </section>
+
+        {c.deep && (
+          <section className="vs-deep" aria-labelledby="deep-h">
+            <h2 className="h2 rv" id="deep-h">{c.name} or OnchainSuite: how to decide.</h2>
+            <div className="vs-deep-grid">
+              <div className="rv">
+                <h3 className="h4">Who should pick {c.name}</h3>
+                <p>{c.deep.pickThem}</p>
+              </div>
+              <div className="rv">
+                <h3 className="h4">The one thing {c.name} cannot do</h3>
+                <p>{c.deep.cannot}</p>
+              </div>
+              <div className="rv">
+                <h3 className="h4">{c.deep.switchingTitle ?? "What switching looks like"}</h3>
+                <ol>{c.deep.switching.map((s) => <li key={s}>{s}</li>)}</ol>
+                <p>{c.deep.switchingTime}</p>
+              </div>
+              <div className="rv">
+                <h3 className="h4">A worked example</h3>
+                <p>{c.deep.example.scenario}</p>
+                <div className="vs-ex">
+                  <div><b>With {c.name}</b><ol>{c.deep.example.them.map((s) => <li key={s}>{s}</li>)}</ol></div>
+                  <div><b>With OnchainSuite</b><ol>{c.deep.example.ocs.map((s) => <li key={s}>{s}</li>)}</ol></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="vs-steps">
           <div className="cmp-intro" style={{ paddingBottom: 0 }}><h2 className="h2 rv">You give up nothing you have already set up.</h2></div>

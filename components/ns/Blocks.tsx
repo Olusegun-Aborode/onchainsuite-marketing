@@ -34,8 +34,8 @@ export function LogoRow() {
           <div key={c.name} className="rv">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             {c.wordmark
-              ? <img className="wm" src={c.logo} alt={c.name} width={459} height={66} />
-              : <><img src={c.logo} alt="" width={28} height={28} /><span>{c.name}</span></>}
+              ? <img className="wm" src={c.logo} alt={`${c.name} logo`} width={459} height={66} loading="lazy" />
+              : <><img src={c.logo} alt={`${c.name} logo`} width={28} height={28} loading="lazy" /><span>{c.name}</span></>}
           </div>
         ))}
         {Array.from({ length: FILL }, (_, i) => (
@@ -53,7 +53,7 @@ export function Faq({ items, title = "Questions we get asked" }: { items: { q: s
       <div className="faq-list">
         {items.map((f) => (
           <details key={f.q} className="rv">
-            <summary>{f.q}<span aria-hidden="true">+</span></summary>
+            <summary><h3 className="faq-q">{f.q}</h3><span aria-hidden="true">+</span></summary>
             <p>{f.a}</p>
           </details>
         ))}
@@ -67,7 +67,7 @@ export function CloseCta({ mainstream = false }: { mainstream?: boolean } = {}) 
     <section className="close" id="cta" aria-labelledby="cta-h">
       <div className="close-grid">
         <div>
-          <h2 className="h2 rv" id="cta-h">Find out which of your customers are about to leave. <span>Book a fifteen-minute call with our team.</span></h2>
+          <div className="h2 rv"><h2 className="ht" id="cta-h">See which of your customers are about to leave.</h2> <p className="ht"><span>Book a fifteen-minute call with our team.</span></p></div>
           <div className="ctas rv"><Link className="btn solid lg" href="/early-access">Book a walkthrough</Link><Link className="btn lg" href="/pricing">See pricing</Link></div>
         </div>
         <CloseArt mainstream={mainstream} />
